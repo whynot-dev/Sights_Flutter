@@ -1,0 +1,4 @@
+enum StoryButtonType {
+  url,
+  catalog,
+}
