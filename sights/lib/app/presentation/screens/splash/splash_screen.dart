@@ -33,7 +33,7 @@ class SplashScreen extends BaseBlocStatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Assets.images.bigAppLogo.image(width: 175, height: 175),
+                 // Assets.images.bigAppLogo.image(width: 175, height: 175),
                   const SizedBox(height: 4),
                   Container(height: 1, width: 32, color: AppColors.white40),
                   const SizedBox(height: 16),

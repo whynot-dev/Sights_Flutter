@@ -7,7 +7,6 @@ import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:sights/app/presentation/screens/splash/bloc/splash_bloc.dart';
 import 'package:sights/app/presentation/screens/splash/splash_screen.dart';
-import 'package:sights/app/widgets/toasts/notification_toast.dart';
 import 'package:sights/core/ui/widgets/base_body.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/di/injection.dart';

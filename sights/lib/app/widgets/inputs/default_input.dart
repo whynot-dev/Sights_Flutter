@@ -245,7 +245,7 @@ class _DefaultInputState extends State<DefaultInput> {
 
   Widget _buildErrorMessage() => Row(
         children: [
-          SvgPicture.asset(Assets.images.error, height: 16, width: 16),
+         // SvgPicture.asset(Assets.images.error, height: 16, width: 16),
           const SizedBox(width: 8),
           Text(
             widget.error!,

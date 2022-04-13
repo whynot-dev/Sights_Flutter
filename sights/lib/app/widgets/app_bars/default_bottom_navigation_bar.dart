@@ -72,9 +72,7 @@ class DefaultBottomNavigationBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                  width: iconSize,
-                  height: iconSize,
-                  child: isSelected ? items[index].activeIcon ?? items[index].icon : items[index].icon),
+                  width: iconSize, height: iconSize, child: isSelected ? items[index].activeIcon : items[index].icon),
               isSelected
                   ? showSelectedLabels ?? true
                       ? SizedBox(height: heightBetweenIconAndLabel)

@@ -147,27 +147,27 @@ class EnterPinCodeScreen extends BaseBlocStatelessWidget<EnterPinCodeBloc> {
               if (state.code.length > 0) {
                 getBloc(context).add(EnterPinCodeEvent.backspaceClicked());
               } else if (state.biometricType != null) {
-                getBloc(context).add(EnterPinCodeEvent.enterUsingBiometricClicked());
+
               }
             },
             onLeftKeyPressed: () {
               getBloc(context).add(EnterPinCodeEvent.exitClicked());
             },
-            rightKey: SvgPicture.asset(
-              (state.code.length == 0 && state.biometricType == null) || state.code.length > 0
-                  ? Assets.images.backspace
-                  : (state.biometricType == BiometricType.face)
-                      ? Assets.images.faceId2
-                      : Assets.images.touchId2,
-              color: state.code.length == 0
-                  ? state.biometricType == null
-                      ? AppColors.gray3
-                      : AppColors.brightAcid2
-                  : AppColors.brightAcid,
-              width: 32,
-              height: 32,
-              fit: BoxFit.cover,
-            ),
+            // rightKey: SvgPicture.asset(
+            //   (state.code.length == 0 && state.biometricType == null) || state.code.length > 0
+            //       ? Assets.images.backspace
+            //       : (state.biometricType == BiometricType.face)
+            //           ? Assets.images.faceId2
+            //           : Assets.images.touchId2,
+            //   color: state.code.length == 0
+            //       ? state.biometricType == null
+            //           ? AppColors.gray3
+            //           : AppColors.brightAcid2
+            //       : AppColors.brightAcid,
+            //   width: 32,
+            //   height: 32,
+            //   fit: BoxFit.cover,
+            // ),
             leftKey: state.enterCodeType == EnterCodeType.enter
                 ? Text(
                     AppLocalizations.of(context).exit,

@@ -34,7 +34,6 @@ class EnterPinCodeBloc extends Bloc<EnterPinCodeEvent, EnterPinCodeState> {
     on<Init>(_init);
     on<DigitClicked>(_onDigitClicked);
     on<BackspaceClicked>(_onBackspaceClicked);
-    on<EnterUsingBiometricClicked>(_onEnterUsingBiometricClicked);
     on<ContinueClicked>(_onContinueClicked);
     on<ExitClicked>(_onExitClicked);
     this.add(EnterPinCodeEvent.init());
@@ -130,134 +129,7 @@ class EnterPinCodeBloc extends Bloc<EnterPinCodeEvent, EnterPinCodeState> {
 
   Future<void> _navigateToNextScreen(Emitter<EnterPinCodeState> emit) async {
     emit(state.copyWith(action: null));
-    if (state.enterCodeType == EnterCodeType.create) {
-      bool canCheckBiometrics;
-      try {
-        canCheckBiometrics = await localAuth.canCheckBiometrics;
-      } catch (e) {
-        canCheckBiometrics = false;
-      }
-      List<BiometricType> availableBiometrics;
-      try {
-        availableBiometrics = await localAuth.getAvailableBiometrics();
-      } catch (e) {
-        availableBiometrics = [];
-      }
-      if (canCheckBiometrics) {
-        if (Platform.isIOS) {
-          if (availableBiometrics.contains(BiometricType.face)) {
-            emit(state.copyWith(
-                action: NavigateToEnableBiometricAuth(NavigateType.push, biometricType: BiometricType.face)));
-          } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
-            emit(state.copyWith(
-                action: NavigateToEnableBiometricAuth(NavigateType.push, biometricType: BiometricType.fingerprint)));
-          } else {
-            emit(state.copyWith(action: NavigateToConfirmAccount(NavigateType.push)));
-          }
-        } else {
-          if (availableBiometrics.contains(BiometricType.fingerprint)) {
-            emit(state.copyWith(
-                action: NavigateToEnableBiometricAuth(NavigateType.push, biometricType: BiometricType.fingerprint)));
-          } else {
-            emit(state.copyWith(action: NavigateToConfirmAccount(NavigateType.push)));
-          }
-        }
-      } else {
-        emit(state.copyWith(action: NavigateToConfirmAccount(NavigateType.push)));
-      }
-    } else {
-      emit(state.copyWith(action: NavigateToNavigation(NavigateType.pushReplacement)));
-    }
-  }
 
-  FutureOr<void> _onEnterUsingBiometricClicked(
-    EnterUsingBiometricClicked event,
-    Emitter<EnterPinCodeState> emit,
-  ) async {
-    bool authenticated;
-    try {
-      authenticated = await localAuth.authenticate(
-        localizedReason: state.biometricType == BiometricType.fingerprint
-            ? localization.pleaseLogInToBeAbleToUseYourFingerprints
-            : localization.pleaseLogInToBeAbleToUseFaceId,
-        biometricOnly: true,
-        androidAuthStrings: AndroidAuthMessages(
-          biometricHint: localization.verifyIdentity,
-          biometricNotRecognized: '2',
-          biometricRequiredTitle: '3',
-          biometricSuccess: '4',
-          cancelButton: localization.cancel,
-          deviceCredentialsRequiredTitle: '6',
-          deviceCredentialsSetupDescription: '7',
-          goToSettingsButton: localization.settings,
-          goToSettingsDescription: '9',
-          signInTitle: localization.authorizationRequired,
-        ),
-        iOSAuthStrings: IOSAuthMessages(
-          lockOut: '1',
-          goToSettingsButton: localization.settings,
-          goToSettingsDescription: '',
-          cancelButton: localization.cancel,
-        ),
-        useErrorDialogs: true,
-        stickyAuth: true,
-      );
-    } on PlatformException catch (e) {
-      authenticated = false;
-      _amountTrying++;
-      if (e.code == notEnrolled) {
-        emit(
-          state.copyWith(
-            action: ShowMessage(
-              messageType: MessageType.customMessage,
-              title: localization.error,
-              message: localization.noFingerprintsRegistered,
-            ),
-          ),
-        );
-      }
-      if (e.code == notAvailable) {
-        emit(
-          state.copyWith(
-            action: ShowMessage(
-              messageType: MessageType.customMessage,
-              title: localization.error,
-              message: localization.biometricAuthIsNotSupportedByPlatform,
-            ),
-          ),
-        );
-      }
-      if (e.code == lockedOut) {
-        emit(
-          state.copyWith(
-            action: ShowMessage(
-              messageType: MessageType.customMessage,
-              title: localization.error,
-              message: localization.tryAgainLaterTooManyFailedAttempts,
-            ),
-          ),
-        );
-      }
-      if (e.code == permanentlyLockedOut) {
-        emit(
-          state.copyWith(
-            action: ShowMessage(
-              messageType: MessageType.customMessage,
-              title: localization.error,
-              message: localization.tryAgainLaterTooManyFailedAttempts,
-            ),
-          ),
-        );
-      }
-      if (_amountTrying > 1) {
-        _amountTrying = 0;
-        emit(state.copyWith(biometricType: null));
-      }
-    }
-
-    if (authenticated) {
-      preferencesLocalGateway.setBiometricAuthConfirmedStatus(true);
-      emit(state.copyWith(action: NavigateToConfirmAccount(NavigateType.push)));
-    }
+    //emit(state.copyWith(action: NavigateToNavigation(NavigateType.pushReplacement)));
   }
 }

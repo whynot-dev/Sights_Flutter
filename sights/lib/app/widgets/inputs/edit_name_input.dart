@@ -142,7 +142,7 @@ class _EditNameInputState extends State<EditNameInput> {
             widget.onChanged?.call(_controller.text);
             setState(() {});
           },
-          child: SvgPicture.asset(Assets.images.inputClearCircle),
+          //child: SvgPicture.asset(Assets.images.inputClearCircle),
         ),
       );
 }

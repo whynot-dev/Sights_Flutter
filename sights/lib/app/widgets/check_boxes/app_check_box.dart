@@ -20,11 +20,11 @@ class AppCheckBox extends StatelessWidget {
         ),
         child: coincide
             ? Center(
-                child: SvgPicture.asset(
-                  Assets.images.checkmark,
-                  height: 10,
-                  width: 16,
-                ),
+                // child: SvgPicture.asset(
+                //   Assets.images.checkmark,
+                //   height: 10,
+                //   width: 16,
+                // ),
               )
             : null,
       );

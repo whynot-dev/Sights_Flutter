@@ -78,7 +78,7 @@ class _EnterNumberScreenState extends BaseBlocState<EnterNumberScreen, EnterNumb
 
   Widget _buildLogo() => Padding(
         padding: const EdgeInsets.only(top: 75),
-        child: Assets.images.logo.image(height: 150, width: 150),
+        //child: Assets.images.logo.image(height: 150, width: 150),
         // child: Image.asset('', height: 120, width: 110),
       );
 

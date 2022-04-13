@@ -63,12 +63,12 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
         behavior: HitTestBehavior.opaque,
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: SvgPicture.asset(
-            Assets.images.backArrow,
-            height: 32,
-            width: 32,
-            color: backButtonColor,
-          ),
+          // child: SvgPicture.asset(
+          //   Assets.images.backArrow,
+          //   height: 32,
+          //   width: 32,
+          //   color: backButtonColor,
+          // ),
         ),
       );
 

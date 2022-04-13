@@ -30,10 +30,6 @@ class _$EnterPinCodeEventTearOff {
     return BackspaceClicked();
   }
 
-  EnterUsingBiometricClicked enterUsingBiometricClicked() {
-    return EnterUsingBiometricClicked();
-  }
-
   ContinueClicked continueClicked() {
     return ContinueClicked();
   }
@@ -53,7 +49,6 @@ mixin _$EnterPinCodeEvent {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) =>
@@ -63,7 +58,6 @@ mixin _$EnterPinCodeEvent {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -74,8 +68,6 @@ mixin _$EnterPinCodeEvent {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) =>
@@ -85,8 +77,6 @@ mixin _$EnterPinCodeEvent {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),
@@ -151,7 +141,6 @@ class _$Init implements Init {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) {
@@ -164,7 +153,6 @@ class _$Init implements Init {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -181,8 +169,6 @@ class _$Init implements Init {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) {
@@ -195,8 +181,6 @@ class _$Init implements Init {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),
@@ -280,7 +264,6 @@ class _$DigitClicked implements DigitClicked {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) {
@@ -293,7 +276,6 @@ class _$DigitClicked implements DigitClicked {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -310,8 +292,6 @@ class _$DigitClicked implements DigitClicked {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) {
@@ -324,8 +304,6 @@ class _$DigitClicked implements DigitClicked {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),
@@ -389,7 +367,6 @@ class _$BackspaceClicked implements BackspaceClicked {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) {
@@ -402,7 +379,6 @@ class _$BackspaceClicked implements BackspaceClicked {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -419,8 +395,6 @@ class _$BackspaceClicked implements BackspaceClicked {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) {
@@ -433,8 +407,6 @@ class _$BackspaceClicked implements BackspaceClicked {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),
@@ -448,111 +420,6 @@ class _$BackspaceClicked implements BackspaceClicked {
 
 abstract class BackspaceClicked implements EnterPinCodeEvent {
   factory BackspaceClicked() = _$BackspaceClicked;
-}
-
-/// @nodoc
-abstract class $EnterUsingBiometricClickedCopyWith<$Res> {
-  factory $EnterUsingBiometricClickedCopyWith(EnterUsingBiometricClicked value,
-          $Res Function(EnterUsingBiometricClicked) then) =
-      _$EnterUsingBiometricClickedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$EnterUsingBiometricClickedCopyWithImpl<$Res>
-    extends _$EnterPinCodeEventCopyWithImpl<$Res>
-    implements $EnterUsingBiometricClickedCopyWith<$Res> {
-  _$EnterUsingBiometricClickedCopyWithImpl(EnterUsingBiometricClicked _value,
-      $Res Function(EnterUsingBiometricClicked) _then)
-      : super(_value, (v) => _then(v as EnterUsingBiometricClicked));
-
-  @override
-  EnterUsingBiometricClicked get _value =>
-      super._value as EnterUsingBiometricClicked;
-}
-
-/// @nodoc
-
-class _$EnterUsingBiometricClicked implements EnterUsingBiometricClicked {
-  _$EnterUsingBiometricClicked();
-
-  @override
-  String toString() {
-    return 'EnterPinCodeEvent.enterUsingBiometricClicked()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is EnterUsingBiometricClicked);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String digit) digitClicked,
-    required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
-    required TResult Function() continueClicked,
-    required TResult Function() exitClicked,
-  }) {
-    return enterUsingBiometricClicked();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String digit)? digitClicked,
-    TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
-    TResult Function()? continueClicked,
-    TResult Function()? exitClicked,
-    required TResult orElse(),
-  }) {
-    if (enterUsingBiometricClicked != null) {
-      return enterUsingBiometricClicked();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Init value) init,
-    required TResult Function(DigitClicked value) digitClicked,
-    required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
-    required TResult Function(ContinueClicked value) continueClicked,
-    required TResult Function(ExitClicked value) exitClicked,
-  }) {
-    return enterUsingBiometricClicked(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Init value)? init,
-    TResult Function(DigitClicked value)? digitClicked,
-    TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
-    TResult Function(ContinueClicked value)? continueClicked,
-    TResult Function(ExitClicked value)? exitClicked,
-    required TResult orElse(),
-  }) {
-    if (enterUsingBiometricClicked != null) {
-      return enterUsingBiometricClicked(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class EnterUsingBiometricClicked implements EnterPinCodeEvent {
-  factory EnterUsingBiometricClicked() = _$EnterUsingBiometricClicked;
 }
 
 /// @nodoc
@@ -598,7 +465,6 @@ class _$ContinueClicked implements ContinueClicked {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) {
@@ -611,7 +477,6 @@ class _$ContinueClicked implements ContinueClicked {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -628,8 +493,6 @@ class _$ContinueClicked implements ContinueClicked {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) {
@@ -642,8 +505,6 @@ class _$ContinueClicked implements ContinueClicked {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),
@@ -702,7 +563,6 @@ class _$ExitClicked implements ExitClicked {
     required TResult Function() init,
     required TResult Function(String digit) digitClicked,
     required TResult Function() backspaceClicked,
-    required TResult Function() enterUsingBiometricClicked,
     required TResult Function() continueClicked,
     required TResult Function() exitClicked,
   }) {
@@ -715,7 +575,6 @@ class _$ExitClicked implements ExitClicked {
     TResult Function()? init,
     TResult Function(String digit)? digitClicked,
     TResult Function()? backspaceClicked,
-    TResult Function()? enterUsingBiometricClicked,
     TResult Function()? continueClicked,
     TResult Function()? exitClicked,
     required TResult orElse(),
@@ -732,8 +591,6 @@ class _$ExitClicked implements ExitClicked {
     required TResult Function(Init value) init,
     required TResult Function(DigitClicked value) digitClicked,
     required TResult Function(BackspaceClicked value) backspaceClicked,
-    required TResult Function(EnterUsingBiometricClicked value)
-        enterUsingBiometricClicked,
     required TResult Function(ContinueClicked value) continueClicked,
     required TResult Function(ExitClicked value) exitClicked,
   }) {
@@ -746,8 +603,6 @@ class _$ExitClicked implements ExitClicked {
     TResult Function(Init value)? init,
     TResult Function(DigitClicked value)? digitClicked,
     TResult Function(BackspaceClicked value)? backspaceClicked,
-    TResult Function(EnterUsingBiometricClicked value)?
-        enterUsingBiometricClicked,
     TResult Function(ContinueClicked value)? continueClicked,
     TResult Function(ExitClicked value)? exitClicked,
     required TResult orElse(),

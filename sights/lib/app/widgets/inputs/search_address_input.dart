@@ -135,7 +135,7 @@ class _SearchAddressInputState extends State<SearchAddressInput> {
         widget.onChanged?.call(_controller.text);
         setState(() {});
       },
-      child: SvgPicture.asset(Assets.images.inputClearCircle),
+      //child: SvgPicture.asset(Assets.images.inputClearCircle),
     ),
   );
 }
