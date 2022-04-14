@@ -15,17 +15,16 @@ class NavigateAction with _$NavigateAction implements BlocAction {
 
   const factory NavigateAction.navigateToEnterPhoneNumber(NavigateType navigateType) = NavigateToEnterPhoneNumber;
 
-  const factory NavigateAction.navigateToEnterPinCode(NavigateType navigateType, {
+  const factory NavigateAction.navigateToEnterPinCode(
+    NavigateType navigateType, {
     required EnterCodeType enterCodeType,
   }) = NavigateToEnterPinCode;
 
-
-  const factory NavigateAction.navigateToConfirmPhone(NavigateType navigateType, {
+  const factory NavigateAction.navigateToConfirmPhone(
+    NavigateType navigateType, {
     required String phoneNumber,
   }) = NavigateToConfirmPhone;
 
-
+  const factory NavigateAction.navigateToNavigation(NavigateType navigateType) = NavigateToNavigation;
 //factory NavigateAction.navigateToNavigation(NavigateType navigateType) = NavigateToNavigation;
 }
-
-

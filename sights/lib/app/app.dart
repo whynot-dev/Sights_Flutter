@@ -44,67 +44,6 @@ class _AppState extends State<App> {
     // _setupNotifications();
   }
 
-  void _setupNotifications() async {
-    messaging = FirebaseMessaging.instance;
-    await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-    messaging.onTokenRefresh.listen((String firebaseToken) async {
-      String? token = await preferencesLocalGateway.getToken();
-      bool rememberMe = await preferencesLocalGateway.getRememberMeStatus();
-
-      if (token != null && rememberMe) {
-        // var newTokenResponse = await authorizationRemoteGateway.sendDeviceToken(
-        //   token: token,
-        //   body: DeviceTokenBody(
-        //     deviceToken: firebaseToken ?? '',
-        //   ),
-        // );
-      }
-    });
-    messaging.getToken().then((value) async {
-      String? token = await preferencesLocalGateway.getToken();
-      bool rememberMe = await preferencesLocalGateway.getRememberMeStatus();
-
-      // if (token != null && rememberMe) {
-      //   var newTokenResponse = await authorizationRemoteGateway.sendDeviceToken(
-      //     token: token,
-      //     body: DeviceTokenBody(
-      //       deviceToken: value ?? '',
-      //     ),
-      //   );
-      // }
-    });
-    FirebaseMessaging.onMessage.listen((RemoteMessage event) {
-      print("message recieved");
-      // if (event.notification != null && event.data.isNotEmpty) {
-      //   showOverlayNotification(
-      //         (context) {
-      //       return SafeArea(
-      //           child: Material(
-      //               color: Colors.transparent,
-      //               child: NotificationToast(
-      //                 title: event.notification!.title!,
-      //                 message: event.notification!.body!,
-      //                 type: event.,
-      //               )));
-      //     },
-      //     duration: Duration(seconds: 2),
-      //   );
-        // FlutterRingtonePlayer.playNotification();
-      // }
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Message clicked!');
-    });
-  }
-
   @override
   void dispose() {
     super.dispose();

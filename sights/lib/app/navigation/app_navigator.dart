@@ -3,13 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import 'package:sights/app/presentation/screens/confirm_phone/bloc/confirm_phone_bloc.dart';
 import 'package:sights/app/presentation/screens/confirm_phone/confirm_phone_screen.dart';
 import 'package:sights/app/presentation/screens/enter_number/bloc/enter_number_bloc.dart';
 import 'package:sights/app/presentation/screens/enter_number/enter_number_screen.dart';
 import 'package:sights/app/presentation/screens/enter_pin_code/bloc/enter_pin_code_bloc.dart';
 import 'package:sights/app/presentation/screens/enter_pin_code/enter_pin_code_screen.dart';
+import 'package:sights/app/presentation/screens/navigation/bloc/navigation_bloc.dart';
+import 'package:sights/app/presentation/screens/navigation/navigation_screen.dart';
 import 'package:sights/app/widgets/routes/default_page_route_without_animation.dart';
 import 'package:sights/di/injection.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
@@ -35,7 +36,7 @@ class AppNavigator {
       navigateBack: (dynamic result) {},
       navigateToEnterPhoneNumber: (NavigateType type) {
         navigateType = type;
-        route = DefaultPageRouteWithoutAnimation(
+        route = PageRouteWithoutAnimation(
           settings: RouteSettings(name: routeName),
           builder: (BuildContext context) => BlocProvider(
             create: (context) => EnterNumberBloc(
@@ -44,11 +45,11 @@ class AppNavigator {
             ),
             child: EnterNumberScreen(),
           ),
-        ) as Route<D>;
+        );
       },
       navigateToEnterPinCode: (NavigateType type, EnterCodeType enterCodeType) {
         navigateType = type;
-        route = DefaultPageRouteWithoutAnimation(
+        route = PageRouteWithoutAnimation(
           settings: RouteSettings(name: routeName),
           builder: (BuildContext context) => BlocProvider(
             create: (context) => EnterPinCodeBloc(
@@ -60,11 +61,11 @@ class AppNavigator {
             ),
             child: EnterPinCodeScreen(),
           ),
-        ) as Route<D>;
+        );
       },
       navigateToConfirmPhone: (NavigateType type, String phoneNumber) {
         navigateType = type;
-        route = DefaultPageRouteWithoutAnimation(
+        route = PageRouteWithoutAnimation(
           settings: RouteSettings(name: routeName),
           builder: (BuildContext context) => BlocProvider(
             create: (context) => ConfirmPhoneBloc(
@@ -75,7 +76,21 @@ class AppNavigator {
             ),
             child: ConfirmPhoneScreen(),
           ),
-        ) as Route<D>;
+        );
+      },
+      navigateToNavigation: (NavigateType type) {
+        NavigationBloc _navigationBloc = NavigationBloc(
+          preferencesLocalGateway: injection(),
+        );
+
+        navigateType = type;
+        route = PageRouteWithoutAnimation(
+          settings: RouteSettings(name: routeName),
+          builder: (BuildContext context) => BlocProvider(
+            create: (context) => _navigationBloc,
+            child: NavigationScreen(),
+          ),
+        );
       },
     );
     switch (navigateType) {

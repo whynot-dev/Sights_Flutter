@@ -11,10 +11,19 @@ class $AssetsI18nGen {
   String get ru => 'assets/i18n/ru.json';
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  String get map => 'assets/images/map.svg';
+  String get navigationProfile => 'assets/images/navigation_profile.svg';
+  String get navigationRoutes => 'assets/images/navigation_routes.svg';
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsI18nGen i18n = $AssetsI18nGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage extends AssetImage {

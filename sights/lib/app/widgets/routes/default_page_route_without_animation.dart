@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DefaultPageRouteWithoutAnimation<T> extends MaterialPageRoute {
-  DefaultPageRouteWithoutAnimation({
+class PageRouteWithoutAnimation<T> extends MaterialPageRoute<T> {
+  PageRouteWithoutAnimation({
     required WidgetBuilder builder,
     RouteSettings? settings,
   }) : super(builder: builder, settings: settings);

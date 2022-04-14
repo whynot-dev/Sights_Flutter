@@ -190,7 +190,7 @@ class AppLocalizations {
   String get main  => _localizedStrings['main'] ?? '';
   String get catalog  => _localizedStrings['catalog'] ?? '';
   String get blog  => _localizedStrings['blog'] ?? '';
-  String get profile  => _localizedStrings['profile'] ?? '';
+
   String get okay  => _localizedStrings['okay'] ?? '';
   String get wrongEmailFormat  => _localizedStrings['wrongEmailFormat'] ?? '';
   String get enterName  => _localizedStrings['enterName'] ?? '';
@@ -258,6 +258,20 @@ class AppLocalizations {
   String get enterAddress => _localizedStrings['enterAddress'] ?? '';
   String get myAddresses => _localizedStrings['myAddresses'] ?? '';
   String get addNewAddress => _localizedStrings['addNewAddress'] ?? '';
+
+
+
+
+
+
+
+
+
+
+
+  String get profile  => _localizedStrings['profile'] ?? '';
+  String get routes  => _localizedStrings['routes'] ?? '';
+  String get map  => _localizedStrings['map'] ?? '';
 
 }
 

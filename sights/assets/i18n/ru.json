@@ -102,7 +102,6 @@
   "main": "Главная",
   "catalog": "Каталог",
   "blog": "Блог",
-  "profile": "Профиль",
   "okay": "Хорошо",
   "youCantRentYet": "Вы пока не можете арендовать",
   "wrongEmailFormat": "Неправильный формат почты",
@@ -167,9 +166,14 @@
   "youDontHaveAnyNotificationsYet": "У вас пока нет уведомлений",
   "subscriptionYOUZ": "Подписка YOUZ",
   "subscriptionDescription" : "Оформите подписку и экономьте каждый месяц на шаринге",
-  "howToRentProductsInYouz" : "Как арендовать товары в YOUZ?",
   "enterAddress": "Введите адрес",
   "myAddresses": "Мои адреса",
-  "addNewAddress": "Добавить новый адрес"
+  "addNewAddress": "Добавить новый адрес",
 
+
+
+
+  "profile": "Профиль",
+  "routes": "Маршруты",
+  "map": "Карта"
 }

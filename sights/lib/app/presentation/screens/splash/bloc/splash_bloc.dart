@@ -17,29 +17,20 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc({
     required this.preferencesLocalGateway,
   }) : super(SplashState()) {
-    this.add(SplashEvent.checkAuthorizationStatus());
+    on<CheckAuthorizationStatus>(_checkAuthorizationStatus);
   }
 
   PreferencesLocalGateway preferencesLocalGateway;
 
-  @override
-  Stream<SplashState> mapEventToState(
-    SplashEvent event,
-  ) async* {
-    if (event is CheckAuthorizationStatus) {
-     // await preferencesLocalGateway.setPinCode('1398');
-//      await preferencesLocalGateway.setPhoneNumber('1398');
-//      await preferencesLocalGateway.setBiometricAuthType(BiometricType.fingerprint);
-      String? token = await preferencesLocalGateway.getToken();
-      String? phoneNumber = await preferencesLocalGateway.getPhoneNumber();
-      String? pinCode = await preferencesLocalGateway.getPinCode();
-        if (token != null && pinCode != null && phoneNumber != null) {
-          yield state.copyWith(action: NavigateToEnterPinCode(NavigateType.pushReplacement, enterCodeType: EnterCodeType.enter));
-        } else {
-          yield state.copyWith(action: NavigateToEnterPhoneNumber(NavigateType.pushReplacement));
-        }
-      //yield state.copyWith(action:NavigateAction.navigateToNavigation(NavigateType.pushReplacement));
-      // yield state.copyWith(action:NavigateAction.navigateToProduct(NavigateType.pushReplacement));
-    }
+
+  FutureOr<void> _checkAuthorizationStatus(CheckAuthorizationStatus event, Emitter<SplashState> emit) async {
+    emit(state.copyWith(action: null));
+    emit(state.copyWith(action:NavigateAction.navigateToNavigation(NavigateType.pushReplacement)));
+    // String? token = await preferencesLocalGateway.getToken();
+    // if (token != null ) {
+    //   emit(state.copyWith(action: NavigateToEnterPhoneNumber(NavigateType.pushReplacement)));
+    // }
+
   }
+
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:sights/app/navigation/app_navigator.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/app/resources/app_colors.dart';
@@ -19,23 +18,16 @@ class ConfirmPhoneScreen extends StatefulWidget {
   _ConfirmPhoneScreenState createState() => _ConfirmPhoneScreenState();
 }
 
-class _ConfirmPhoneScreenState extends BaseBlocState<ConfirmPhoneScreen, ConfirmPhoneBloc> with CodeAutoFill {
-
-  @override
-  void codeUpdated() {
-    getBloc(context).add(ConfirmPhoneEvent.codeUpdated(code!));
-  }
+class _ConfirmPhoneScreenState extends BaseBlocState<ConfirmPhoneScreen, ConfirmPhoneBloc>  {
 
   @override
   void initState() {
     super.initState();
-    listenForCode();
   }
 
   @override
   void dispose() {
-    cancel();
-    unregisterListener();
+
     super.dispose();
   }
 

@@ -15,10 +15,6 @@ import 'package:sights/localization/app_localizations.dart';
 
 GetIt injection = GetIt.I;
 
-Future<void> setUpLocatorWithContext(BuildContext context) async {
-  injection.registerSingleton<AppLocalizations>(AppLocalizations.of(context));
-}
-
 Future setUpLocator() async {
   injection.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
   injection.registerSingleton<LocalAuthentication>(LocalAuthentication());
