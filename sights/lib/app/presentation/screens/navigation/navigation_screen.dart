@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sights/app/presentation/screens/map/map_screen.dart';
+import 'package:sights/app/presentation/screens/profile/profile_screen.dart';
+import 'package:sights/app/presentation/screens/routes/routes_screen.dart';
 import 'package:sights/app/resources/app_colors.dart';
 import 'package:sights/app/widgets/app_bars/default_bottom_navigation_bar.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
@@ -23,9 +26,9 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationBloc> with WidgetsBindingObserver {
   List<Widget> _screensList = [
-    SizedBox(),
-    SizedBox(),
-    SizedBox(),
+    RoutesScreen(),
+    MapScreen(),
+    ProfileScreen(),
   ];
 
   Map<int, GlobalKey<NavigatorState>> _navKeys = {};
@@ -67,7 +70,7 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
                     bottom: Platform.isIOS ? false : true,
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      padding: EdgeInsets.only(left: 8, right: 8, bottom: Platform.isIOS ? 40 : 20),
+                      padding: EdgeInsets.only(left: 8, right: 8, bottom: 20),
                       child: _buildBottomNavigationBar(),
                     ),
                   ),

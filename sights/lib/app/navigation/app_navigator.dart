@@ -9,8 +9,11 @@ import 'package:sights/app/presentation/screens/enter_number/bloc/enter_number_b
 import 'package:sights/app/presentation/screens/enter_number/enter_number_screen.dart';
 import 'package:sights/app/presentation/screens/enter_pin_code/bloc/enter_pin_code_bloc.dart';
 import 'package:sights/app/presentation/screens/enter_pin_code/enter_pin_code_screen.dart';
+import 'package:sights/app/presentation/screens/map/bloc/map_bloc.dart';
 import 'package:sights/app/presentation/screens/navigation/bloc/navigation_bloc.dart';
 import 'package:sights/app/presentation/screens/navigation/navigation_screen.dart';
+import 'package:sights/app/presentation/screens/profile/bloc/profile_bloc.dart';
+import 'package:sights/app/presentation/screens/routes/bloc/routes_bloc.dart';
 import 'package:sights/app/widgets/routes/default_page_route_without_animation.dart';
 import 'package:sights/di/injection.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
@@ -86,9 +89,16 @@ class AppNavigator {
         navigateType = type;
         route = PageRouteWithoutAnimation(
           settings: RouteSettings(name: routeName),
-          builder: (BuildContext context) => BlocProvider(
-            create: (context) => _navigationBloc,
-            child: NavigationScreen(),
+          builder: (BuildContext context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => RoutesBloc()),
+              BlocProvider(create: (context) => MapBloc()),
+              BlocProvider(create: (context) => ProfileBloc()),
+            ],
+            child: BlocProvider(
+              create: (context) => _navigationBloc,
+              child: NavigationScreen(),
+            ),
           ),
         );
       },
