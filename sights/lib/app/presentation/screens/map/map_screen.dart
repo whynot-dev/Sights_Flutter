@@ -57,6 +57,16 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
               getBloc(context).add(MapEvent.onMapTap());
             },
             markers: snapshot.data ?? {},
+            polylines: {
+              Polyline(
+                polylineId: PolylineId('1'),
+                points: [
+                  LatLng(39.705013, 47.224373),
+                  LatLng(39.709621, 47.222324),
+                  LatLng(39.716797, 47.225601),
+                ],
+              ),
+            },
             mapType: MapType.normal,
             compassEnabled: true,
             mapToolbarEnabled: false,
