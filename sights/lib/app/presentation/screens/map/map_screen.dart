@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/app/navigation/app_navigator.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
+import 'package:sights/app/resources/app_colors.dart';
+import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
-import 'package:sights/core/ui/widgets/base_bloc_stateless_widget.dart';
-import 'package:sights/gen/assets.gen.dart';
 
 import 'bloc/map_bloc.dart';
 
@@ -21,9 +21,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: _buildBody(context),
-        ),
+        body: _buildBody(context),
       );
 
   Widget _buildBody(BuildContext context) => BlocListener<MapBloc, MapState>(
@@ -37,6 +35,8 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
         child: Stack(
           children: [
             Positioned.fill(child: _buildMap()),
+            Positioned.fill(child: Align(alignment: Alignment.centerRight, child: _buildZoomButtons())),
+            Positioned(child: Align(alignment: Alignment.bottomCenter, child: _buildBottomButtons())),
           ],
         ),
       );
@@ -60,10 +60,11 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             polylines: {
               Polyline(
                 polylineId: PolylineId('1'),
+                color: Colors.red,
                 points: [
-                  LatLng(39.705013, 47.224373),
-                  LatLng(39.709621, 47.222324),
-                  LatLng(39.716797, 47.225601),
+                  LatLng(47.224373, 39.705013),
+                  LatLng(47.222324, 39.709621),
+                  LatLng(47.225601, 39.716797),
                 ],
               ),
             },
@@ -103,4 +104,26 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
   }
 
   Widget _buildMyLocationButton() => SizedBox();
+
+  Widget _buildCircleButton({required String icon, VoidCallback? onTap}) => InkWell(
+        highlightColor: AppColors.black,
+        hoverColor: AppColors.black,
+        child: GestureDetector(
+          onTap: () {
+            onTap?.call();
+          },
+          behavior: HitTestBehavior.translucent,
+          child: Container(
+            height: 40,
+            width: 40,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              shape: BoxShape.circle,
+              boxShadow: [BoxShadow(offset: Offset(0, 4), blurRadius: 16, color: AppColors.black.withOpacity(0.15))],
+            ),
+            child: SvgPicture.asset(icon),
+          ),
+        ),
+      );
 }

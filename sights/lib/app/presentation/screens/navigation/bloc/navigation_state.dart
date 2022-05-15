@@ -4,6 +4,6 @@ part of 'navigation_bloc.dart';
 class NavigationState with _$NavigationState {
   factory NavigationState({
     BlocAction? action,
-    @Default(0) int selectedTabIndex,
+    @Default(1) int selectedTabIndex,
   }) = _NavigationState;
 }
