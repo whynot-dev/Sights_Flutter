@@ -138,9 +138,6 @@ dependencies:
   #https://pub.dev/packages/async
   async: ^2.8.2
 
-  #https://pub.dev/packages/firebase_messaging
-  firebase_messaging: ^11.2.5
-
   firebase_core: ^1.11.0
 
   overlay_support: ^1.2.1
@@ -187,6 +184,7 @@ dependencies:
   google_maps_flutter: ^2.1.3
 
   flutter_polyline_points: ^1.0.0
+
 
 dev_dependencies:
   retrofit_generator: ^2.0.0

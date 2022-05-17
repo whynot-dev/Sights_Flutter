@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sights/core/network/network_info.dart';
-import 'package:sights/domain/entities/network/response/error_body.dart';
+import 'package:sights/domain/entities/error_body.dart';
+
 
 import '../failures.dart';
 

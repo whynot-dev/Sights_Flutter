@@ -9,10 +9,10 @@ import 'package:sights/app/presentation/screens/enter_number/enter_number_screen
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/data/gateways/remote/authorization_remote_gateway.dart';
 import 'package:sights/di/injection.dart';
-import 'package:sights/domain/entities/network/response/refresh_token_response.dart';
+
 
 class DioHelper {
-  static const baseUrl = '';
+  static const baseUrl = 'https://api.opentripmap.com/0.1/';
 
   static const filesPath = '/files/';
   static const timeout = 30000;
@@ -36,7 +36,6 @@ class DioHelper {
 
   static Dio getDio({
     required PreferencesLocalGateway preferencesLocalGateway,
-    required AuthorizationRemoteGateway authorizationRemoteGateway,
     required GlobalKey<NavigatorState> navigatorKey,
   }) {
     Dio dio = Dio()
@@ -69,13 +68,13 @@ class DioHelper {
                 NavigateAction.navigateToEnterPhoneNumber(NavigateType.pushReplacement).runtimeType.toString();
             if (refreshToken != null) {
               try {
-                HttpResponse<RefreshTokenResponse> newTokenResponse = await authorizationRemoteGateway.refreshToken(
-                  refreshToken: refreshToken,
-                );
-                String newToken = newTokenResponse.data.token;
-                String newRefreshToken = newTokenResponse.data.refresh;
-                await preferencesLocalGateway.setToken(newToken);
-                await preferencesLocalGateway.setRefreshToken(newRefreshToken);
+                // HttpResponse<RefreshTokenResponse> newTokenResponse = await authorizationRemoteGateway.refreshToken(
+                //   refreshToken: refreshToken,
+                // );
+                // String newToken = newTokenResponse.data.token;
+                // String newRefreshToken = newTokenResponse.data.refresh;
+                // await preferencesLocalGateway.setToken(newToken);
+                // await preferencesLocalGateway.setRefreshToken(newRefreshToken);
                 Options options = Options(
                   method: error.requestOptions.method,
                   headers: error.requestOptions.headers,
@@ -92,7 +91,6 @@ class DioHelper {
                       settings: RouteSettings(name: routeName),
                       builder: (BuildContext context) => BlocProvider(
                         create: (BuildContext context) => EnterNumberBloc(
-                          authorizationRepository: injection(),
                           preferencesLocalGateway: injection(),
                         ),
                         child: EnterNumberScreen(),
@@ -107,7 +105,7 @@ class DioHelper {
                   settings: RouteSettings(name: routeName),
                   builder: (BuildContext context) => BlocProvider(
                     create: (BuildContext context) => EnterNumberBloc(
-                      authorizationRepository: injection(),
+                      //authorizationRepository: injection(),
                       preferencesLocalGateway: injection(),
                     ),
                     child: EnterNumberScreen(),

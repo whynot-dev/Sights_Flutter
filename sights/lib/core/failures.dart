@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:sights/domain/entities/network/response/error_body.dart';
+import 'package:sights/domain/entities/error_body.dart';
+
+
+
 
 class Failure {
   Failure._();

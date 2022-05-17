@@ -15,8 +15,11 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   String get map => 'assets/images/map.svg';
+  AssetGenImage get marker => const AssetGenImage('assets/images/marker.png');
+  AssetGenImage get marker2 => const AssetGenImage('assets/images/marker2.png');
   String get navigationProfile => 'assets/images/navigation_profile.svg';
   String get navigationRoutes => 'assets/images/navigation_routes.svg';
+  String get send => 'assets/images/send.svg';
 }
 
 class Assets {

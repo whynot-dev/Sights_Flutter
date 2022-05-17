@@ -28,7 +28,7 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
   List<Widget> _screensList = [
     RoutesScreen(),
     MapScreen(),
-    ProfileScreen(),
+    //ProfileScreen(),
   ];
 
   Map<int, GlobalKey<NavigatorState>> _navKeys = {};
@@ -70,7 +70,7 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
                     bottom: Platform.isIOS ? false : true,
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      padding: EdgeInsets.only(left: 8, right: 8, bottom: 20),
+                      //padding: EdgeInsets.only(left: 8, right: 8, bottom: 20),
                       child: _buildBottomNavigationBar(),
                     ),
                   ),
@@ -86,7 +86,7 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
         builder: (context, state) => Container(
           height: 64,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            //borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 color: AppColors.black5.withOpacity(0.3),
@@ -97,7 +97,7 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             child: BackdropFilter(
               filter: ImageFilter.blur(
                 sigmaX: 32,
@@ -125,12 +125,12 @@ class _NavigationScreenState extends BaseBlocState<NavigationScreen, NavigationB
                     activeIcon: SvgPicture.asset(Assets.images.map, width: 24, height: 24),
                     label: AppLocalizations.of(context).map,
                   ),
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset(Assets.images.navigationProfile,
-                        width: 24, height: 24, color: AppColors.gray9),
-                    activeIcon: SvgPicture.asset(Assets.images.navigationProfile, width: 24, height: 24),
-                    label: AppLocalizations.of(context).profile,
-                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: SvgPicture.asset(Assets.images.navigationProfile,
+                  //       width: 24, height: 24, color: AppColors.gray9),
+                  //   activeIcon: SvgPicture.asset(Assets.images.navigationProfile, width: 24, height: 24),
+                  //   label: AppLocalizations.of(context).profile,
+                  // ),
                 ],
                 currentIndex: state.selectedTabIndex,
                 onPressed: (newSelectedTab) {

@@ -12,7 +12,7 @@ import 'package:sights/app/navigation/navigation_type.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/core/enums/message_type.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
-import 'package:sights/data/repositories/authorization_repository.dart';
+
 import 'package:sights/domain/enums/enter_code_type.dart';
 import 'package:sights/localization/app_localizations.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -28,7 +28,6 @@ class EnterPinCodeBloc extends Bloc<EnterPinCodeEvent, EnterPinCodeState> {
     required this.localAuth,
     required this.localization,
     required EnterCodeType enterCodeType,
-    required this.authorizationRepository,
     required this.preferencesLocalGateway,
   }) : super(EnterPinCodeState(enterCodeType: enterCodeType)) {
     on<Init>(_init);
@@ -41,7 +40,6 @@ class EnterPinCodeBloc extends Bloc<EnterPinCodeEvent, EnterPinCodeState> {
 
   AppLocalizations localization;
   LocalAuthentication localAuth;
-  AuthorizationRepository authorizationRepository;
   PreferencesLocalGateway preferencesLocalGateway;
 
   int _amountTrying = 0;

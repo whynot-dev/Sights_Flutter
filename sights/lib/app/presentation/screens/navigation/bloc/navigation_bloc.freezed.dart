@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NavigationStateTearOff {
   const _$NavigationStateTearOff();
 
-  _NavigationState call({BlocAction? action, int selectedTabIndex = 0}) {
+  _NavigationState call({BlocAction? action, int selectedTabIndex = 1}) {
     return _NavigationState(
       action: action,
       selectedTabIndex: selectedTabIndex,
@@ -114,11 +114,11 @@ class __$NavigationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NavigationState implements _NavigationState {
-  _$_NavigationState({this.action, this.selectedTabIndex = 0});
+  _$_NavigationState({this.action, this.selectedTabIndex = 1});
 
   @override
   final BlocAction? action;
-  @JsonKey(defaultValue: 0)
+  @JsonKey(defaultValue: 1)
   @override
   final int selectedTabIndex;
 

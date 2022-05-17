@@ -8,8 +8,9 @@ import 'package:sights/core/network/dio_helper.dart';
 import 'package:sights/core/network/network_info.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/data/gateways/remote/authorization_remote_gateway.dart';
-import 'package:sights/data/gateways/remote/profile_remote_gateway.dart';
-import 'package:sights/data/repositories/authorization_repository.dart';
+import 'package:sights/data/gateways/remote/map_remote_gateway.dart';
+import 'package:sights/data/repositories/map_repository.dart';
+
 import 'package:sights/data/repositories/profile_repository.dart';
 import 'package:sights/localization/app_localizations.dart';
 
@@ -30,31 +31,32 @@ Future setUpLocatorWithDependencies({
   injection.registerSingleton<AppLocalizations>(AppLocalizations.of(context));
   injection.registerSingleton<DataConnectionChecker>(DataConnectionChecker());
   injection.registerSingleton<NetworkInfo>(NetworkInfoImpl(injection()));
-  injection.registerSingleton<AuthorizationRemoteGateway>(AuthorizationRemoteGateway(
-    dio: DioHelper.getAuthDio(),
-  ));
+  // injection.registerSingleton<AuthorizationRemoteGateway>(AuthorizationRemoteGateway(
+  //   dio: DioHelper.getAuthDio(),
+  // ));
 
-  injection.registerLazySingleton<AuthorizationRepository>(() => AuthorizationRepository(
-        injection(),
-        authorizationRemoteGateway: injection(),
-      ));
+  // injection.registerLazySingleton<AuthorizationRepository>(() => AuthorizationRepository(
+  //       injection(),
+  //       authorizationRemoteGateway: injection(),
+  //     ));
 
   injection.registerSingleton<Dio>(DioHelper.getDio(
     preferencesLocalGateway: injection(),
-    authorizationRemoteGateway: injection(),
+    // authorizationRemoteGateway: injection(),
     navigatorKey: navigatorKey,
   ));
 
-  // injection.registerLazySingleton<PreferencesLocalGateway>(() => PreferencesLocalGateway(
-  //       flutterSecureStorage: injection(),
-  //     ));
+  injection.registerLazySingleton<MapRemoteGateway>(() => MapRemoteGateway(dio: injection()));
 
-  injection.registerLazySingleton<ProfileRemoteGateway>(() => ProfileRemoteGateway(dio: injection()));
-
-  injection.registerLazySingleton<ProfileRepository>(() => ProfileRepository(
+  injection.registerLazySingleton<MapRepository>(() => MapRepository(
         injection(),
-        profileRemoteGateway: injection(),
+        mapRemoteGateway: injection(),
       ));
 
-
+  // injection.registerLazySingleton<ProfileRemoteGateway>(() => ProfileRemoteGateway(dio: injection()));
+  //
+  // injection.registerLazySingleton<ProfileRepository>(() => ProfileRepository(
+  //       injection(),
+  //       profileRemoteGateway: injection(),
+  //     ));
 }

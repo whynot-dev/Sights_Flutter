@@ -21,14 +21,18 @@ class _$MapStateTearOff {
       bool mapLoaded = false,
       bool isLoading = false,
       CameraPosition cameraPosition = const CameraPosition(
-          target: const LatLng(55.759171, 37.619101), zoom: 15),
-      List<String> sights = const []}) {
+          target: const LatLng(47.222078, 39.720358), zoom: 13),
+      List<Feature> sights = const [],
+      Feature? selectedSightPoint,
+      bool sightInfoIsExpanded = false}) {
     return _MapState(
       action: action,
       mapLoaded: mapLoaded,
       isLoading: isLoading,
       cameraPosition: cameraPosition,
       sights: sights,
+      selectedSightPoint: selectedSightPoint,
+      sightInfoIsExpanded: sightInfoIsExpanded,
     );
   }
 }
@@ -42,7 +46,9 @@ mixin _$MapState {
   bool get mapLoaded => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   CameraPosition get cameraPosition => throw _privateConstructorUsedError;
-  List<String> get sights => throw _privateConstructorUsedError;
+  List<Feature> get sights => throw _privateConstructorUsedError;
+  Feature? get selectedSightPoint => throw _privateConstructorUsedError;
+  bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -58,7 +64,9 @@ abstract class $MapStateCopyWith<$Res> {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<String> sights});
+      List<Feature> sights,
+      Feature? selectedSightPoint,
+      bool sightInfoIsExpanded});
 }
 
 /// @nodoc
@@ -76,6 +84,8 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? isLoading = freezed,
     Object? cameraPosition = freezed,
     Object? sights = freezed,
+    Object? selectedSightPoint = freezed,
+    Object? sightInfoIsExpanded = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
@@ -97,7 +107,15 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
       sights: sights == freezed
           ? _value.sights
           : sights // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Feature>,
+      selectedSightPoint: selectedSightPoint == freezed
+          ? _value.selectedSightPoint
+          : selectedSightPoint // ignore: cast_nullable_to_non_nullable
+              as Feature?,
+      sightInfoIsExpanded: sightInfoIsExpanded == freezed
+          ? _value.sightInfoIsExpanded
+          : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -112,7 +130,9 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<String> sights});
+      List<Feature> sights,
+      Feature? selectedSightPoint,
+      bool sightInfoIsExpanded});
 }
 
 /// @nodoc
@@ -131,6 +151,8 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? cameraPosition = freezed,
     Object? sights = freezed,
+    Object? selectedSightPoint = freezed,
+    Object? sightInfoIsExpanded = freezed,
   }) {
     return _then(_MapState(
       action: action == freezed
@@ -152,7 +174,15 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
       sights: sights == freezed
           ? _value.sights
           : sights // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Feature>,
+      selectedSightPoint: selectedSightPoint == freezed
+          ? _value.selectedSightPoint
+          : selectedSightPoint // ignore: cast_nullable_to_non_nullable
+              as Feature?,
+      sightInfoIsExpanded: sightInfoIsExpanded == freezed
+          ? _value.sightInfoIsExpanded
+          : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -165,8 +195,10 @@ class _$_MapState implements _MapState {
       this.mapLoaded = false,
       this.isLoading = false,
       this.cameraPosition = const CameraPosition(
-          target: const LatLng(55.759171, 37.619101), zoom: 15),
-      this.sights = const []});
+          target: const LatLng(47.222078, 39.720358), zoom: 13),
+      this.sights = const [],
+      this.selectedSightPoint,
+      this.sightInfoIsExpanded = false});
 
   @override
   final BlocAction? action;
@@ -178,16 +210,21 @@ class _$_MapState implements _MapState {
   final bool isLoading;
   @JsonKey(
       defaultValue: const CameraPosition(
-          target: const LatLng(55.759171, 37.619101), zoom: 15))
+          target: const LatLng(47.222078, 39.720358), zoom: 13))
   @override
   final CameraPosition cameraPosition;
   @JsonKey(defaultValue: const [])
   @override
-  final List<String> sights;
+  final List<Feature> sights;
+  @override
+  final Feature? selectedSightPoint;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool sightInfoIsExpanded;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights)';
+    return 'MapState(action: $action, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightInfoIsExpanded: $sightInfoIsExpanded)';
   }
 
   @override
@@ -206,7 +243,13 @@ class _$_MapState implements _MapState {
                 const DeepCollectionEquality()
                     .equals(other.cameraPosition, cameraPosition)) &&
             (identical(other.sights, sights) ||
-                const DeepCollectionEquality().equals(other.sights, sights)));
+                const DeepCollectionEquality().equals(other.sights, sights)) &&
+            (identical(other.selectedSightPoint, selectedSightPoint) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedSightPoint, selectedSightPoint)) &&
+            (identical(other.sightInfoIsExpanded, sightInfoIsExpanded) ||
+                const DeepCollectionEquality()
+                    .equals(other.sightInfoIsExpanded, sightInfoIsExpanded)));
   }
 
   @override
@@ -216,7 +259,9 @@ class _$_MapState implements _MapState {
       const DeepCollectionEquality().hash(mapLoaded) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(cameraPosition) ^
-      const DeepCollectionEquality().hash(sights);
+      const DeepCollectionEquality().hash(sights) ^
+      const DeepCollectionEquality().hash(selectedSightPoint) ^
+      const DeepCollectionEquality().hash(sightInfoIsExpanded);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +275,9 @@ abstract class _MapState implements MapState {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<String> sights}) = _$_MapState;
+      List<Feature> sights,
+      Feature? selectedSightPoint,
+      bool sightInfoIsExpanded}) = _$_MapState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
@@ -241,7 +288,11 @@ abstract class _MapState implements MapState {
   @override
   CameraPosition get cameraPosition => throw _privateConstructorUsedError;
   @override
-  List<String> get sights => throw _privateConstructorUsedError;
+  List<Feature> get sights => throw _privateConstructorUsedError;
+  @override
+  Feature? get selectedSightPoint => throw _privateConstructorUsedError;
+  @override
+  bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>
@@ -268,12 +319,36 @@ class _$MapEventTearOff {
     );
   }
 
+  OnCameraMoveStarted onCameraMoveStarted() {
+    return const OnCameraMoveStarted();
+  }
+
+  GetSights getSights() {
+    return const GetSights();
+  }
+
   OnMapTap onMapTap() {
     return const OnMapTap();
   }
 
   MyLocationClicked myLocationClicked() {
     return const MyLocationClicked();
+  }
+
+  SightClicked sightClicked(Feature sight) {
+    return SightClicked(
+      sight,
+    );
+  }
+
+  SightInfoSlideChanged sightInfoSlideChanged(double position) {
+    return SightInfoSlideChanged(
+      position,
+    );
+  }
+
+  ShowMessageNoGeo showMessageNoGeo() {
+    return const ShowMessageNoGeo();
   }
 }
 
@@ -287,8 +362,13 @@ mixin _$MapEvent {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -296,8 +376,13 @@ mixin _$MapEvent {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -306,8 +391,14 @@ mixin _$MapEvent {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -315,8 +406,13 @@ mixin _$MapEvent {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -377,8 +473,13 @@ class _$Init implements Init {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) {
     return init();
   }
@@ -389,8 +490,13 @@ class _$Init implements Init {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -405,8 +511,14 @@ class _$Init implements Init {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) {
     return init(this);
   }
@@ -417,8 +529,13 @@ class _$Init implements Init {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -500,8 +617,13 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) {
     return onMapCreated(controller);
   }
@@ -512,8 +634,13 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -528,8 +655,14 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) {
     return onMapCreated(this);
   }
@@ -540,8 +673,13 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -628,8 +766,13 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) {
     return onCameraMove(position);
   }
@@ -640,8 +783,13 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -656,8 +804,14 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) {
     return onCameraMove(this);
   }
@@ -668,8 +822,13 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -686,6 +845,241 @@ abstract class OnCameraMove implements MapEvent {
   @JsonKey(ignore: true)
   $OnCameraMoveCopyWith<OnCameraMove> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OnCameraMoveStartedCopyWith<$Res> {
+  factory $OnCameraMoveStartedCopyWith(
+          OnCameraMoveStarted value, $Res Function(OnCameraMoveStarted) then) =
+      _$OnCameraMoveStartedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$OnCameraMoveStartedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements $OnCameraMoveStartedCopyWith<$Res> {
+  _$OnCameraMoveStartedCopyWithImpl(
+      OnCameraMoveStarted _value, $Res Function(OnCameraMoveStarted) _then)
+      : super(_value, (v) => _then(v as OnCameraMoveStarted));
+
+  @override
+  OnCameraMoveStarted get _value => super._value as OnCameraMoveStarted;
+}
+
+/// @nodoc
+
+class _$OnCameraMoveStarted implements OnCameraMoveStarted {
+  const _$OnCameraMoveStarted();
+
+  @override
+  String toString() {
+    return 'MapEvent.onCameraMoveStarted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is OnCameraMoveStarted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+  }) {
+    return onCameraMoveStarted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (onCameraMoveStarted != null) {
+      return onCameraMoveStarted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+  }) {
+    return onCameraMoveStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (onCameraMoveStarted != null) {
+      return onCameraMoveStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnCameraMoveStarted implements MapEvent {
+  const factory OnCameraMoveStarted() = _$OnCameraMoveStarted;
+}
+
+/// @nodoc
+abstract class $GetSightsCopyWith<$Res> {
+  factory $GetSightsCopyWith(GetSights value, $Res Function(GetSights) then) =
+      _$GetSightsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetSightsCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $GetSightsCopyWith<$Res> {
+  _$GetSightsCopyWithImpl(GetSights _value, $Res Function(GetSights) _then)
+      : super(_value, (v) => _then(v as GetSights));
+
+  @override
+  GetSights get _value => super._value as GetSights;
+}
+
+/// @nodoc
+
+class _$GetSights implements GetSights {
+  const _$GetSights();
+
+  @override
+  String toString() {
+    return 'MapEvent.getSights()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is GetSights);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+  }) {
+    return getSights();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (getSights != null) {
+      return getSights();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+  }) {
+    return getSights(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (getSights != null) {
+      return getSights(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSights implements MapEvent {
+  const factory GetSights() = _$GetSights;
 }
 
 /// @nodoc
@@ -728,8 +1122,13 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) {
     return onMapTap();
   }
@@ -740,8 +1139,13 @@ class _$OnMapTap implements OnMapTap {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -756,8 +1160,14 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) {
     return onMapTap(this);
   }
@@ -768,8 +1178,13 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -825,8 +1240,13 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function() init,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
   }) {
     return myLocationClicked();
   }
@@ -837,8 +1257,13 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function()? init,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -853,8 +1278,14 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function(Init value) init,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
   }) {
     return myLocationClicked(this);
   }
@@ -865,8 +1296,13 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(Init value)? init,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -878,4 +1314,422 @@ class _$MyLocationClicked implements MyLocationClicked {
 
 abstract class MyLocationClicked implements MapEvent {
   const factory MyLocationClicked() = _$MyLocationClicked;
+}
+
+/// @nodoc
+abstract class $SightClickedCopyWith<$Res> {
+  factory $SightClickedCopyWith(
+          SightClicked value, $Res Function(SightClicked) then) =
+      _$SightClickedCopyWithImpl<$Res>;
+  $Res call({Feature sight});
+}
+
+/// @nodoc
+class _$SightClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $SightClickedCopyWith<$Res> {
+  _$SightClickedCopyWithImpl(
+      SightClicked _value, $Res Function(SightClicked) _then)
+      : super(_value, (v) => _then(v as SightClicked));
+
+  @override
+  SightClicked get _value => super._value as SightClicked;
+
+  @override
+  $Res call({
+    Object? sight = freezed,
+  }) {
+    return _then(SightClicked(
+      sight == freezed
+          ? _value.sight
+          : sight // ignore: cast_nullable_to_non_nullable
+              as Feature,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SightClicked implements SightClicked {
+  const _$SightClicked(this.sight);
+
+  @override
+  final Feature sight;
+
+  @override
+  String toString() {
+    return 'MapEvent.sightClicked(sight: $sight)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SightClicked &&
+            (identical(other.sight, sight) ||
+                const DeepCollectionEquality().equals(other.sight, sight)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(sight);
+
+  @JsonKey(ignore: true)
+  @override
+  $SightClickedCopyWith<SightClicked> get copyWith =>
+      _$SightClickedCopyWithImpl<SightClicked>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+  }) {
+    return sightClicked(sight);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (sightClicked != null) {
+      return sightClicked(sight);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+  }) {
+    return sightClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (sightClicked != null) {
+      return sightClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SightClicked implements MapEvent {
+  const factory SightClicked(Feature sight) = _$SightClicked;
+
+  Feature get sight => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SightClickedCopyWith<SightClicked> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SightInfoSlideChangedCopyWith<$Res> {
+  factory $SightInfoSlideChangedCopyWith(SightInfoSlideChanged value,
+          $Res Function(SightInfoSlideChanged) then) =
+      _$SightInfoSlideChangedCopyWithImpl<$Res>;
+  $Res call({double position});
+}
+
+/// @nodoc
+class _$SightInfoSlideChangedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements $SightInfoSlideChangedCopyWith<$Res> {
+  _$SightInfoSlideChangedCopyWithImpl(
+      SightInfoSlideChanged _value, $Res Function(SightInfoSlideChanged) _then)
+      : super(_value, (v) => _then(v as SightInfoSlideChanged));
+
+  @override
+  SightInfoSlideChanged get _value => super._value as SightInfoSlideChanged;
+
+  @override
+  $Res call({
+    Object? position = freezed,
+  }) {
+    return _then(SightInfoSlideChanged(
+      position == freezed
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SightInfoSlideChanged implements SightInfoSlideChanged {
+  const _$SightInfoSlideChanged(this.position);
+
+  @override
+  final double position;
+
+  @override
+  String toString() {
+    return 'MapEvent.sightInfoSlideChanged(position: $position)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SightInfoSlideChanged &&
+            (identical(other.position, position) ||
+                const DeepCollectionEquality()
+                    .equals(other.position, position)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(position);
+
+  @JsonKey(ignore: true)
+  @override
+  $SightInfoSlideChangedCopyWith<SightInfoSlideChanged> get copyWith =>
+      _$SightInfoSlideChangedCopyWithImpl<SightInfoSlideChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+  }) {
+    return sightInfoSlideChanged(position);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (sightInfoSlideChanged != null) {
+      return sightInfoSlideChanged(position);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+  }) {
+    return sightInfoSlideChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (sightInfoSlideChanged != null) {
+      return sightInfoSlideChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SightInfoSlideChanged implements MapEvent {
+  const factory SightInfoSlideChanged(double position) =
+      _$SightInfoSlideChanged;
+
+  double get position => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SightInfoSlideChangedCopyWith<SightInfoSlideChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShowMessageNoGeoCopyWith<$Res> {
+  factory $ShowMessageNoGeoCopyWith(
+          ShowMessageNoGeo value, $Res Function(ShowMessageNoGeo) then) =
+      _$ShowMessageNoGeoCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ShowMessageNoGeoCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $ShowMessageNoGeoCopyWith<$Res> {
+  _$ShowMessageNoGeoCopyWithImpl(
+      ShowMessageNoGeo _value, $Res Function(ShowMessageNoGeo) _then)
+      : super(_value, (v) => _then(v as ShowMessageNoGeo));
+
+  @override
+  ShowMessageNoGeo get _value => super._value as ShowMessageNoGeo;
+}
+
+/// @nodoc
+
+class _$ShowMessageNoGeo implements ShowMessageNoGeo {
+  const _$ShowMessageNoGeo();
+
+  @override
+  String toString() {
+    return 'MapEvent.showMessageNoGeo()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ShowMessageNoGeo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+  }) {
+    return showMessageNoGeo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(Feature sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (showMessageNoGeo != null) {
+      return showMessageNoGeo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+  }) {
+    return showMessageNoGeo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    required TResult orElse(),
+  }) {
+    if (showMessageNoGeo != null) {
+      return showMessageNoGeo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowMessageNoGeo implements MapEvent {
+  const factory ShowMessageNoGeo() = _$ShowMessageNoGeo;
 }

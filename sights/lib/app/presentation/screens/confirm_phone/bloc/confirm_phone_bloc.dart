@@ -10,7 +10,7 @@ import 'package:sights/core/enums/message_type.dart';
 import 'package:sights/core/failures.dart';
 import 'package:sights/core/utils/phone_utils/phone_number.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
-import 'package:sights/data/repositories/authorization_repository.dart';
+
 import 'package:sights/domain/enums/enter_code_type.dart';
 import 'package:sights/localization/app_localizations.dart';
 
@@ -21,7 +21,6 @@ part 'confirm_phone_state.dart';
 class ConfirmPhoneBloc extends Bloc<ConfirmPhoneEvent, ConfirmPhoneState> {
   ConfirmPhoneBloc({
     required String phoneNumber,
-    required this.authorizationRepository,
     required this.preferencesLocalGateway,
     required this.localizations,
   }) : super(ConfirmPhoneState(phoneNumber: phoneNumber)) {
@@ -36,7 +35,7 @@ class ConfirmPhoneBloc extends Bloc<ConfirmPhoneEvent, ConfirmPhoneState> {
     this.add(ConfirmPhoneEvent.init());
   }
 
-  AuthorizationRepository authorizationRepository;
+
   PreferencesLocalGateway preferencesLocalGateway;
   AppLocalizations localizations;
 
@@ -123,27 +122,8 @@ class ConfirmPhoneBloc extends Bloc<ConfirmPhoneEvent, ConfirmPhoneState> {
     if (temporaryToken == null) {
       return;
     }
-    var result = await authorizationRepository.checkCode(token: temporaryToken, code: state.code);
-    String? token;
-    String? refreshToken;
-    Failure? error;
-    result.fold(
-      (data) {
-        token = data.token;
-        refreshToken = data.refresh;
-      },
-      (failure) => error = failure,
-    );
 
-    emit(state.copyWith(action: HideLoader()));
-    if (error == null) {
-      await preferencesLocalGateway.setTemporaryToken(null);
-      await preferencesLocalGateway.setToken(token);
-      await preferencesLocalGateway.setRefreshToken(refreshToken);
-      emit(state.copyWith(action: NavigateToEnterPinCode(NavigateType.push, enterCodeType: EnterCodeType.create)));
-    } else {
-      await _handleError(emit,error);
-    }
+
   }
 
   FutureOr<void> _handleError(Emitter<ConfirmPhoneState> emit, Failure? error) async {
@@ -169,6 +149,6 @@ class ConfirmPhoneBloc extends Bloc<ConfirmPhoneEvent, ConfirmPhoneState> {
     if (temporaryToken == null) {
       return;
     }
-    await authorizationRepository.resendCode(token: temporaryToken);
+
   }
 }

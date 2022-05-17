@@ -14,6 +14,7 @@ import 'package:sights/app/presentation/screens/navigation/bloc/navigation_bloc.
 import 'package:sights/app/presentation/screens/navigation/navigation_screen.dart';
 import 'package:sights/app/presentation/screens/profile/bloc/profile_bloc.dart';
 import 'package:sights/app/presentation/screens/routes/bloc/routes_bloc.dart';
+import 'package:sights/app/presentation/screens/webview/webview_screen.dart';
 import 'package:sights/app/widgets/routes/default_page_route_without_animation.dart';
 import 'package:sights/di/injection.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
@@ -36,73 +37,78 @@ class AppNavigator {
     String routeName = action.runtimeType.toString();
     bool _rootNavigator = rootNavigator ?? false;
     action.when(
-      navigateBack: (dynamic result) {},
-      navigateToEnterPhoneNumber: (NavigateType type) {
-        navigateType = type;
-        route = PageRouteWithoutAnimation(
-          settings: RouteSettings(name: routeName),
-          builder: (BuildContext context) => BlocProvider(
-            create: (context) => EnterNumberBloc(
-              authorizationRepository: injection(),
-              preferencesLocalGateway: injection(),
+        navigateBack: (dynamic result) {},
+        navigateToEnterPhoneNumber: (NavigateType type) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => EnterNumberBloc(
+                //authorizationRepository: injection(),
+                preferencesLocalGateway: injection(),
+              ),
+              child: EnterNumberScreen(),
             ),
-            child: EnterNumberScreen(),
-          ),
-        );
-      },
-      navigateToEnterPinCode: (NavigateType type, EnterCodeType enterCodeType) {
-        navigateType = type;
-        route = PageRouteWithoutAnimation(
-          settings: RouteSettings(name: routeName),
-          builder: (BuildContext context) => BlocProvider(
-            create: (context) => EnterPinCodeBloc(
-              localAuth: injection(),
-              enterCodeType: enterCodeType,
-              authorizationRepository: injection(),
-              preferencesLocalGateway: injection(),
-              localization: injection(),
+          );
+        },
+        navigateToEnterPinCode: (NavigateType type, EnterCodeType enterCodeType) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => EnterPinCodeBloc(
+                localAuth: injection(),
+                enterCodeType: enterCodeType,
+                preferencesLocalGateway: injection(),
+                localization: injection(),
+              ),
+              child: EnterPinCodeScreen(),
             ),
-            child: EnterPinCodeScreen(),
-          ),
-        );
-      },
-      navigateToConfirmPhone: (NavigateType type, String phoneNumber) {
-        navigateType = type;
-        route = PageRouteWithoutAnimation(
-          settings: RouteSettings(name: routeName),
-          builder: (BuildContext context) => BlocProvider(
-            create: (context) => ConfirmPhoneBloc(
-              phoneNumber: phoneNumber,
-              authorizationRepository: injection(),
-              preferencesLocalGateway: injection(),
-              localizations: injection(),
+          );
+        },
+        navigateToConfirmPhone: (NavigateType type, String phoneNumber) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => ConfirmPhoneBloc(
+                phoneNumber: phoneNumber,
+                //authorizationRepository: injection(),
+                preferencesLocalGateway: injection(),
+                localizations: injection(),
+              ),
+              child: ConfirmPhoneScreen(),
             ),
-            child: ConfirmPhoneScreen(),
-          ),
-        );
-      },
-      navigateToNavigation: (NavigateType type) {
-        NavigationBloc _navigationBloc = NavigationBloc(
-          preferencesLocalGateway: injection(),
-        );
+          );
+        },
+        navigateToNavigation: (NavigateType type) {
+          NavigationBloc _navigationBloc = NavigationBloc(
+            preferencesLocalGateway: injection(),
+          );
 
-        navigateType = type;
-        route = PageRouteWithoutAnimation(
-          settings: RouteSettings(name: routeName),
-          builder: (BuildContext context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => RoutesBloc()),
-              BlocProvider(create: (context) => MapBloc()),
-              BlocProvider(create: (context) => ProfileBloc()),
-            ],
-            child: BlocProvider(
-              create: (context) => _navigationBloc,
-              child: NavigationScreen(),
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => RoutesBloc()),
+                BlocProvider(create: (context) => MapBloc(mapRepository: injection())),
+                BlocProvider(create: (context) => ProfileBloc()),
+              ],
+              child: BlocProvider(
+                create: (context) => _navigationBloc,
+                child: NavigationScreen(),
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+        navigateToWebView: (NavigateType type, String url) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => WebViewScreen(url: url),
+          );
+        });
     switch (navigateType) {
       case NavigateType.push:
         return await Navigator.of(context, rootNavigator: _rootNavigator).push(route);

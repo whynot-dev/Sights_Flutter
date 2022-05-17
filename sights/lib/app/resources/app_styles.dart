@@ -6,11 +6,13 @@ import 'app_colors.dart';
 class AppStyles {
   static const SystemUiOverlayStyle darkStyle = SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,// Only for Android; Light: light icons; Dark: dark icons;
-    statusBarBrightness: Brightness.dark,// Only for IOS; Dark: light icons; Light: dark icons;
+    statusBarIconBrightness: Brightness.dark,
+    // Only for Android; Light: light icons; Dark: dark icons;
+    statusBarBrightness: Brightness.dark,
+    // Only for IOS; Dark: light icons; Light: dark icons;
     systemNavigationBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Colors.transparent,
-    systemNavigationBarContrastEnforced: true,
+    systemNavigationBarColor: Colors.black,
+    systemNavigationBarContrastEnforced: false,
   );
 
   static const SystemUiOverlayStyle lightStyle = SystemUiOverlayStyle(
@@ -18,7 +20,7 @@ class AppStyles {
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
     systemNavigationBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Colors.transparent,
-    systemNavigationBarContrastEnforced: true,
+    systemNavigationBarColor: Colors.black,
+    systemNavigationBarContrastEnforced: false,
   );
 }
