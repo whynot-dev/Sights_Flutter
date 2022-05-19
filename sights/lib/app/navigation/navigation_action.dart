@@ -25,7 +25,11 @@ class NavigateAction with _$NavigateAction implements BlocAction {
     required String phoneNumber,
   }) = NavigateToConfirmPhone;
 
-  const factory NavigateAction.navigateToNavigation(NavigateType navigateType) = NavigateToNavigation;
+  const factory NavigateAction.navigateToMap(NavigateType navigateType) = NavigateToMap;
+
+  const factory NavigateAction.navigateToRoutes(NavigateType navigateType) = NavigateToRoutes;
+
+  const factory NavigateAction.navigateToBuildingRoute(NavigateType navigateType) = NavigateToBuildingRoute;
 
   const factory NavigateAction.navigateToWebView(NavigateType navigateType, {required String url}) = NavigateToWebView;
 //factory NavigateAction.navigateToNavigation(NavigateType navigateType) = NavigateToNavigation;

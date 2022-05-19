@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sights/app/navigation/navigation_action.dart';
+import 'package:sights/app/navigation/navigation_type.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,6 +14,8 @@ import 'package:sights/data/repositories/map_repository.dart';
 import 'package:sights/domain/entities/feature.dart';
 import 'package:sights/domain/entities/network/request/get_features_body.dart';
 import 'package:sights/domain/entities/network/response/feature_collection_response.dart';
+import 'package:sights/domain/entities/sight_entity.dart';
+import 'package:sights/domain/enums/sight_type.dart';
 
 part 'map_state.dart';
 
@@ -33,6 +37,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<SightClicked>(_sightClicked);
     on<SightInfoSlideChanged>(_sightInfoSlideChanged);
     on<ShowMessageNoGeo>(_showMessageNoGeo);
+    on<RoutesClicked>(_routesClicked);
+    on<RouteButtonClicked>(_routeButtonClicked);
+    on<FilterClicked>(_filterClicked);
+    on<FiltersChanged>(_filtersChanged);
     this.add(MapEvent.init());
   }
 
@@ -75,13 +83,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       latMin: latLngBounds.southwest.latitude,
       latMax: latLngBounds.northeast.latitude,
     );
-    List<Feature> sights = [];
-    Either<FeatureCollectionResponse, Failure> result = await mapRepository.getFeatures(body: getFeaturesBody);
+    Either<List<SightEntity>, Failure> result = await mapRepository.getSights(body: getFeaturesBody);
     result.fold(
       (data) {
-        sights = data.features;
         emit(state.copyWith(sights: []));
-        emit(state.copyWith(sights: sights));
+        emit(state.copyWith(sights: _filtersApply(data)));
       },
       (error) {},
     );
@@ -122,6 +128,26 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     emit(state.copyWith(action: ShowMessage(messageType: MessageType.noGeoPermission)));
   }
 
+  FutureOr<void> _routesClicked(RoutesClicked event, Emitter<MapState> emit) {
+    emit(state.copyWith(action: null));
+    emit(state.copyWith(action: NavigateAction.navigateToRoutes(NavigateType.push)));
+  }
+
+  FutureOr<void> _routeButtonClicked(RouteButtonClicked event, Emitter<MapState> emit) {
+    emit(state.copyWith(action: null));
+    emit(state.copyWith(action: NavigateAction.navigateToBuildingRoute(NavigateType.push)));
+  }
+
+  FutureOr<void> _filterClicked(FilterClicked event, Emitter<MapState> emit) {
+    emit(state.copyWith(action: null));
+    emit(state.copyWith(action: ShowFilterModal()));
+  }
+
+  FutureOr<void> _filtersChanged(FiltersChanged event, Emitter<MapState> emit) {
+    emit(state.copyWith(sightFilters: event.sightFilters));
+    emit(state.copyWith(sights: _filtersApply(state.sights)));
+  }
+
   Future<Position?> _determinePosition(Emitter<MapState> emit) async {
     emit(state.copyWith(action: null));
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -141,5 +167,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       return null;
     }
     return await Geolocator.getCurrentPosition();
+  }
+
+  List<SightEntity> _filtersApply(List<SightEntity> sights) {
+    List<SightEntity> _sights = List.from(sights);
+    _sights.removeWhere((sight) => !state.sightFilters.contains(sight.sightType));
+    return _sights;
   }
 }

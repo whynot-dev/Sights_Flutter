@@ -1,4 +1,0 @@
-enum BannerType {
-  big,
-  small,
-}

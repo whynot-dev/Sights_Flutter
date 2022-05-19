@@ -27,7 +27,7 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    color: backgroundColor,
+        color: backgroundColor,
         height: sizeFromHeight,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -63,33 +63,33 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
         behavior: HitTestBehavior.opaque,
         child: Padding(
           padding: const EdgeInsets.all(16),
-          // child: SvgPicture.asset(
-          //   Assets.images.backArrow,
-          //   height: 32,
-          //   width: 32,
-          //   color: backButtonColor,
-          // ),
+          child: SvgPicture.asset(
+            Assets.images.backArrow,
+            height: 32,
+            width: 32,
+            color: backButtonColor,
+          ),
         ),
       );
 
   Widget _buildTitles() => Padding(
-    padding: const EdgeInsets.symmetric(vertical:8.0),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (title != null) _buildTitle(),
             if (title != null && subtitle != null) const SizedBox(height: 2),
             if (subtitle != null) _buildSubtitle(),
           ],
         ),
-  );
+      );
 
   Widget _buildTitle() => Text(
         title!,
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 17,
-          height:24/17,
+          height: 24 / 17,
           color: AppColors.onBackground,
         ),
       );
@@ -99,9 +99,8 @@ class DefaultAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 13,
-          height: 18/13,
+          height: 18 / 13,
           color: AppColors.onBackground,
         ),
       );
-
 }

@@ -10,6 +10,8 @@ import 'package:sights/core/failures.dart';
 import 'package:sights/data/repositories/map_repository.dart';
 import 'package:sights/domain/entities/feature.dart';
 import 'package:sights/domain/entities/place.dart';
+import 'package:sights/domain/entities/sight_entity.dart';
+import 'package:sights/domain/enums/sight_type.dart';
 
 part 'sight_info_state.dart';
 
@@ -19,9 +21,9 @@ part 'sight_info_bloc.freezed.dart';
 
 class SightInfoBloc extends Bloc<SightInfoEvent, SightInfoState> {
   SightInfoBloc({
-    required Feature feature,
+    required SightEntity sight,
     required this.mapRepository,
-  }) : super(SightInfoState(feature: feature)) {
+  }) : super(SightInfoState(feature: sight.feature, sightType: sight.sightType)) {
     on<Init>(_init);
     on<WikiClicked>(_wikiClicked);
     this.add(SightInfoEvent.init());

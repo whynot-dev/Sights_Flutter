@@ -1,4 +1,0 @@
-enum NotificationType {
-  system,
-  promo
-}

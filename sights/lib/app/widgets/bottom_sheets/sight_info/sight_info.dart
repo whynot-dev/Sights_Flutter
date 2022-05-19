@@ -6,12 +6,15 @@ import 'package:sights/app/resources/app_colors.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/app/navigation/app_navigator.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
+import 'package:sights/core/ui/scroll_behavior/disable_glow_effect_scroll_behavior.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
 import 'package:sights/core/ui/widgets/base_bloc_stateless_widget.dart';
+import 'package:sights/domain/enums/sight_type.dart';
 
 import 'bloc/sight_info_bloc.dart';
 
 class SightInfo extends StatefulWidget {
+
   @override
   State<SightInfo> createState() => _SightInfoState();
 }
@@ -28,11 +31,15 @@ class _SightInfoState extends BaseBlocState<SightInfo, SightInfoBloc> {
             AppNavigator.navigate(context: context, action: action, rootNavigator: true);
           }
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildNameAndDescription(),
-            ],
+        child: ScrollConfiguration(
+          behavior: const DisableGrowEffectScrollBehavior(),
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                _buildNameAndDescription(),
+              ],
+            ),
           ),
         ),
       );
@@ -66,9 +73,20 @@ class _SightInfoState extends BaseBlocState<SightInfo, SightInfoBloc> {
 
   Widget _buildName() => BlocBuilder<SightInfoBloc, SightInfoState>(
         buildWhen: (previous, current) => previous.place?.name != current.place?.name,
-        builder: (context, state) => Text(
-          state.place?.name ?? '',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onAccent),
+        builder: (context, state) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (state.place?.name.isNotEmpty == true)
+              Text(
+                state.place?.name ?? '',
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.onAccent),
+              ),
+            if (state.place?.name.isNotEmpty == true) const SizedBox(height: 5),
+            Text(
+              state.sightType.getName(context),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.gray6),
+            ),
+          ],
         ),
       );
 

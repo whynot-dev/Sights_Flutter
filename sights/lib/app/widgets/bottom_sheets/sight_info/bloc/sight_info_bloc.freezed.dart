@@ -18,11 +18,13 @@ class _$SightInfoStateTearOff {
 
   _SightInfoState call(
       {required Feature feature,
+      required SightType sightType,
       Place? place,
       BlocAction? action,
       bool isLoading = false}) {
     return _SightInfoState(
       feature: feature,
+      sightType: sightType,
       place: place,
       action: action,
       isLoading: isLoading,
@@ -36,6 +38,7 @@ const $SightInfoState = _$SightInfoStateTearOff();
 /// @nodoc
 mixin _$SightInfoState {
   Feature get feature => throw _privateConstructorUsedError;
+  SightType get sightType => throw _privateConstructorUsedError;
   Place? get place => throw _privateConstructorUsedError;
   BlocAction? get action => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -51,7 +54,11 @@ abstract class $SightInfoStateCopyWith<$Res> {
           SightInfoState value, $Res Function(SightInfoState) then) =
       _$SightInfoStateCopyWithImpl<$Res>;
   $Res call(
-      {Feature feature, Place? place, BlocAction? action, bool isLoading});
+      {Feature feature,
+      SightType sightType,
+      Place? place,
+      BlocAction? action,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -66,6 +73,7 @@ class _$SightInfoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? feature = freezed,
+    Object? sightType = freezed,
     Object? place = freezed,
     Object? action = freezed,
     Object? isLoading = freezed,
@@ -75,6 +83,10 @@ class _$SightInfoStateCopyWithImpl<$Res>
           ? _value.feature
           : feature // ignore: cast_nullable_to_non_nullable
               as Feature,
+      sightType: sightType == freezed
+          ? _value.sightType
+          : sightType // ignore: cast_nullable_to_non_nullable
+              as SightType,
       place: place == freezed
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -99,7 +111,11 @@ abstract class _$SightInfoStateCopyWith<$Res>
       __$SightInfoStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Feature feature, Place? place, BlocAction? action, bool isLoading});
+      {Feature feature,
+      SightType sightType,
+      Place? place,
+      BlocAction? action,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -116,6 +132,7 @@ class __$SightInfoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? feature = freezed,
+    Object? sightType = freezed,
     Object? place = freezed,
     Object? action = freezed,
     Object? isLoading = freezed,
@@ -125,6 +142,10 @@ class __$SightInfoStateCopyWithImpl<$Res>
           ? _value.feature
           : feature // ignore: cast_nullable_to_non_nullable
               as Feature,
+      sightType: sightType == freezed
+          ? _value.sightType
+          : sightType // ignore: cast_nullable_to_non_nullable
+              as SightType,
       place: place == freezed
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -145,10 +166,16 @@ class __$SightInfoStateCopyWithImpl<$Res>
 
 class _$_SightInfoState implements _SightInfoState {
   _$_SightInfoState(
-      {required this.feature, this.place, this.action, this.isLoading = false});
+      {required this.feature,
+      required this.sightType,
+      this.place,
+      this.action,
+      this.isLoading = false});
 
   @override
   final Feature feature;
+  @override
+  final SightType sightType;
   @override
   final Place? place;
   @override
@@ -159,7 +186,7 @@ class _$_SightInfoState implements _SightInfoState {
 
   @override
   String toString() {
-    return 'SightInfoState(feature: $feature, place: $place, action: $action, isLoading: $isLoading)';
+    return 'SightInfoState(feature: $feature, sightType: $sightType, place: $place, action: $action, isLoading: $isLoading)';
   }
 
   @override
@@ -169,6 +196,9 @@ class _$_SightInfoState implements _SightInfoState {
             (identical(other.feature, feature) ||
                 const DeepCollectionEquality()
                     .equals(other.feature, feature)) &&
+            (identical(other.sightType, sightType) ||
+                const DeepCollectionEquality()
+                    .equals(other.sightType, sightType)) &&
             (identical(other.place, place) ||
                 const DeepCollectionEquality().equals(other.place, place)) &&
             (identical(other.action, action) ||
@@ -182,6 +212,7 @@ class _$_SightInfoState implements _SightInfoState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(feature) ^
+      const DeepCollectionEquality().hash(sightType) ^
       const DeepCollectionEquality().hash(place) ^
       const DeepCollectionEquality().hash(action) ^
       const DeepCollectionEquality().hash(isLoading);
@@ -195,12 +226,15 @@ class _$_SightInfoState implements _SightInfoState {
 abstract class _SightInfoState implements SightInfoState {
   factory _SightInfoState(
       {required Feature feature,
+      required SightType sightType,
       Place? place,
       BlocAction? action,
       bool isLoading}) = _$_SightInfoState;
 
   @override
   Feature get feature => throw _privateConstructorUsedError;
+  @override
+  SightType get sightType => throw _privateConstructorUsedError;
   @override
   Place? get place => throw _privateConstructorUsedError;
   @override

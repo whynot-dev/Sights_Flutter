@@ -12,12 +12,18 @@ import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/app/resources/app_colors.dart';
 import 'package:sights/app/widgets/bottom_sheets/sight_info/bloc/sight_info_bloc.dart';
 import 'package:sights/app/widgets/bottom_sheets/sight_info/sight_info.dart';
+import 'package:sights/app/widgets/buttons/app_button.dart';
+import 'package:sights/app/widgets/buttons/default_button.dart';
+import 'package:sights/app/widgets/modals/sights_filter_modal.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
 import 'package:sights/core/ui/widgets/dialogs.dart';
 import 'package:sights/di/injection.dart';
 import 'package:sights/domain/entities/feature.dart';
+import 'package:sights/domain/entities/sight_entity.dart';
+import 'package:sights/domain/enums/sight_type.dart';
 import 'package:sights/gen/assets.gen.dart';
+import 'package:sights/localization/app_localizations.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'bloc/map_bloc.dart';
@@ -50,20 +56,16 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
           if (action is ShowMessage) {
             showMessage(context, action: action);
           }
+          if (action is ShowFilterModal) {
+            _showFilterModal(context, sightFilters: state.sightFilters);
+          }
         },
         child: Stack(
           children: [
             Positioned.fill(child: _buildMap()),
             //Positioned.fill(child: Align(alignment: Alignment.centerRight, child: _buildZoomButtons())),
-            //Positioned(child: Align(alignment: Alignment.bottomCenter, child: _buildBottomButtons())),
-
-            // Positioned(
-            //     child: Align(
-            //         alignment: Alignment.center,
-            //         child: const SizedBox(
-            //           height: 300,
-            //         ))),\
-            Positioned(child: Align(alignment: Alignment.bottomRight, child: _buildMyLocationButton())),
+            Positioned(top: 45, right: 16, child: _buildFiltersButton()),
+            Positioned(child: Align(alignment: Alignment.bottomCenter, child: _buildBottomButtons())),
             Positioned(child: Align(child: _buildSightInfoBottomPanel()))
           ],
         ),
@@ -111,7 +113,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
         ),
       );
 
-  Future<Set<Marker>> _generateMarkers(List<Feature> sights) async {
+  Future<Set<Marker>> _generateMarkers(List<SightEntity> sights) async {
     List<Marker> markers = <Marker>[];
     for (final sight in sights) {
       BitmapDescriptor icon;
@@ -119,8 +121,8 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
       icon = BitmapDescriptor.fromBytes(markerIcon);
       markers.add(
         Marker(
-          markerId: MarkerId(sight.id),
-          position: LatLng(sight.geometry.coordinates[1], sight.geometry.coordinates[0]),
+          markerId: MarkerId(sight.feature.id),
+          position: LatLng(sight.feature.geometry.coordinates[1], sight.feature.geometry.coordinates[0]),
           icon: icon,
           onTap: () {
             getBloc(context).add(MapEvent.sightClicked(sight));
@@ -132,14 +134,18 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
     return markers.toSet();
   }
 
-  Widget _buildMyLocationButton() => Padding(
-        padding: EdgeInsets.only(right: 16, bottom: 100 + MediaQuery.of(context).viewPadding.bottom),
-        child: _buildCircleButton(
-          icon: Assets.images.send,
-          onTap: () async {
-            getBloc(context).add(MapEvent.myLocationClicked());
-          },
-        ),
+  Widget _buildMyLocationButton() => _buildCircleButton(
+        icon: Assets.images.send,
+        onTap: () async {
+          getBloc(context).add(MapEvent.myLocationClicked());
+        },
+      );
+
+  Widget _buildFiltersButton() => _buildCircleButton(
+        icon: Assets.images.filter,
+        onTap: () {
+          getBloc(context).add(MapEvent.filterClicked());
+        },
       );
 
   Widget _buildCircleButton({required String icon, VoidCallback? onTap}) => InkWell(
@@ -151,8 +157,8 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
           },
           behavior: HitTestBehavior.translucent,
           child: Container(
-            height: 40,
-            width: 40,
+            height: 42,
+            width: 42,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppColors.white,
@@ -162,6 +168,39 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             child: SvgPicture.asset(icon),
           ),
         ),
+      );
+
+  Widget _buildBottomButtons() => Padding(
+        padding: const EdgeInsets.only(right: 16, left: 16, bottom: 75),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _buildMyLocationButton(),
+            const SizedBox(height: 50),
+            Row(
+              children: [
+                Expanded(child: _buildRoutesButton()),
+                const SizedBox(width: 20),
+                Expanded(child: _buildRouteButton()),
+              ],
+            ),
+          ],
+        ),
+      );
+
+  Widget _buildRoutesButton() => AppButton(
+        text: AppLocalizations.of(context).routes,
+        onPressed: () {
+          getBloc(context).add(MapEvent.routesClicked());
+        },
+      );
+
+  Widget _buildRouteButton() => AppButton(
+        text: AppLocalizations.of(context).createRoute,
+        onPressed: () {
+          getBloc(context).add(MapEvent.routeButtonClicked());
+        },
       );
 
   Widget _buildSightInfoBottomPanel() => BlocBuilder<MapBloc, MapState>(
@@ -178,9 +217,6 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                   minHeight: MediaQuery.of(context).size.height * 0.3,
                   maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top,
                   renderPanelSheet: false,
-                  onPanelSlide: (position) {
-                    getBloc(context).add(MapEvent.sightInfoSlideChanged(position));
-                  },
                   panel: Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Container(
@@ -190,7 +226,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                           boxShadow: [BoxShadow(blurRadius: 5, color: AppColors.black.withOpacity(0.15))]),
                       child: BlocProvider.value(
                         value: SightInfoBloc(
-                          feature: state.selectedSightPoint!,
+                          sight: state.selectedSightPoint!,
                           mapRepository: injection(),
                         ),
                         child: SightInfo(),
@@ -207,5 +243,21 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
     Codec codec = await instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
     FrameInfo fi = await codec.getNextFrame();
     return (await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  void _showFilterModal(BuildContext context, {required List<SightType> sightFilters}) async {
+    dynamic filters = await showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        //insetPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+        backgroundColor: Colors.transparent,
+        child: SightsFilterModal(
+          sightFilters: sightFilters,
+        ),
+      ),
+    );
+    if (filters != null) {
+      getBloc(context).add(MapEvent.filtersChanged(filters));
+    }
   }
 }

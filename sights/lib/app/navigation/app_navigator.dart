@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sights/app/presentation/screens/building_route/bloc/building_route_bloc.dart';
+import 'package:sights/app/presentation/screens/building_route/building_route_screen.dart';
 
 import 'package:sights/app/presentation/screens/confirm_phone/bloc/confirm_phone_bloc.dart';
 import 'package:sights/app/presentation/screens/confirm_phone/confirm_phone_screen.dart';
@@ -10,10 +12,12 @@ import 'package:sights/app/presentation/screens/enter_number/enter_number_screen
 import 'package:sights/app/presentation/screens/enter_pin_code/bloc/enter_pin_code_bloc.dart';
 import 'package:sights/app/presentation/screens/enter_pin_code/enter_pin_code_screen.dart';
 import 'package:sights/app/presentation/screens/map/bloc/map_bloc.dart';
+import 'package:sights/app/presentation/screens/map/map_screen.dart';
 import 'package:sights/app/presentation/screens/navigation/bloc/navigation_bloc.dart';
 import 'package:sights/app/presentation/screens/navigation/navigation_screen.dart';
 import 'package:sights/app/presentation/screens/profile/bloc/profile_bloc.dart';
 import 'package:sights/app/presentation/screens/routes/bloc/routes_bloc.dart';
+import 'package:sights/app/presentation/screens/routes/routes_screen.dart';
 import 'package:sights/app/presentation/screens/webview/webview_screen.dart';
 import 'package:sights/app/widgets/routes/default_page_route_without_animation.dart';
 import 'package:sights/di/injection.dart';
@@ -81,24 +85,35 @@ class AppNavigator {
             ),
           );
         },
-        navigateToNavigation: (NavigateType type) {
-          NavigationBloc _navigationBloc = NavigationBloc(
-            preferencesLocalGateway: injection(),
-          );
-
+        navigateToMap: (NavigateType type) {
           navigateType = type;
           route = PageRouteWithoutAnimation(
             settings: RouteSettings(name: routeName),
-            builder: (BuildContext context) => MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (context) => RoutesBloc()),
-                BlocProvider(create: (context) => MapBloc(mapRepository: injection())),
-                BlocProvider(create: (context) => ProfileBloc()),
-              ],
-              child: BlocProvider(
-                create: (context) => _navigationBloc,
-                child: NavigationScreen(),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => MapBloc(
+                mapRepository: injection(),
               ),
+              child: MapScreen(),
+            ),
+          );
+        },
+        navigateToRoutes: (NavigateType type) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => RoutesBloc(),
+              child: RoutesScreen(),
+            ),
+          );
+        },
+        navigateToBuildingRoute: (NavigateType type) {
+          navigateType = type;
+          route = PageRouteWithoutAnimation(
+            settings: RouteSettings(name: routeName),
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => BuildingRouteBloc(),
+              child: BuildingRouteScreen(),
             ),
           );
         },

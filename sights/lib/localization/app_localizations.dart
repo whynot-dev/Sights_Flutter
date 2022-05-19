@@ -272,6 +272,37 @@ class AppLocalizations {
   String get profile  => _localizedStrings['profile'] ?? '';
   String get routes  => _localizedStrings['routes'] ?? '';
   String get map  => _localizedStrings['map'] ?? '';
+  String get createRoute  => _localizedStrings['createRoute'] ?? '';
+  String get changeRoute  => _localizedStrings['changeRoute'] ?? '';
+
+  String get monument  => _localizedStrings['monument'] ?? '';
+  String get monuments  => _localizedStrings['monuments'] ?? '';
+  String get historicalPlace  => _localizedStrings['historicalPlace'] ?? '';
+  String get historicalPlaces  => _localizedStrings['historicalPlaces'] ?? '';
+  String get religion  => _localizedStrings['religion'] ?? '';
+  String get religions  => _localizedStrings['religions'] ?? '';
+  String get museum  => _localizedStrings['museum'] ?? '';
+  String get museums  => _localizedStrings['museums'] ?? '';
+  String get zoo  => _localizedStrings['zoo'] ?? '';
+  String get zoos  => _localizedStrings['zoos'] ?? '';
+  String get theatre  => _localizedStrings['theatre'] ?? '';
+  String get theatres  => _localizedStrings['theatres'] ?? '';
+  String get square  => _localizedStrings['square'] ?? '';
+  String get squares  => _localizedStrings['squares'] ?? '';
+  String get sculpture  => _localizedStrings['sculpture'] ?? '';
+  String get sculptures  => _localizedStrings['sculptures'] ?? '';
+  String get fountain  => _localizedStrings['fountain'] ?? '';
+  String get fountains  => _localizedStrings['fountains'] ?? '';
+  String get park  => _localizedStrings['park'] ?? '';
+  String get parks  => _localizedStrings['parks'] ?? '';
+  String get natural  => _localizedStrings['natural'] ?? '';
+  String get historicBuilding  => _localizedStrings['historicBuilding'] ?? '';
+  String get historicBuildings  => _localizedStrings['historicBuildings'] ?? '';
+  String get architecture  => _localizedStrings['architecture'] ?? '';
+  String get apply  => _localizedStrings['apply'] ?? '';
+  String get imInterested  => _localizedStrings['imInterested'] ?? '';
+  String get buildingRoute  => _localizedStrings['buildingRoute'] ?? '';
+
 
 }
 

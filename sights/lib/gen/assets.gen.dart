@@ -14,11 +14,15 @@ class $AssetsI18nGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  String get backArrow => 'assets/images/back_arrow.svg';
+  String get filter => 'assets/images/filter.svg';
   String get map => 'assets/images/map.svg';
   AssetGenImage get marker => const AssetGenImage('assets/images/marker.png');
   AssetGenImage get marker2 => const AssetGenImage('assets/images/marker2.png');
+  String get minus => 'assets/images/minus.svg';
   String get navigationProfile => 'assets/images/navigation_profile.svg';
   String get navigationRoutes => 'assets/images/navigation_routes.svg';
+  String get plus => 'assets/images/plus.svg';
   String get send => 'assets/images/send.svg';
 }
 

@@ -13,7 +13,6 @@
   "noFingerprintsRegistered": "Нет зарегистрированных отпечатков пальцев",
   "tryAgainLaterTooManyFailedAttempts": "Попробуйте позже, слишком много неудачных попыток",
   "error": "Ошибка",
-  "cancel": "Отмена",
   "authorizationRequired": "Требуется авторизация",
   "verifyIdentity": "Подтверждение личности",
   "pleaseLogInToBeAbleToUseYourFingerprints": "Пожалуйста, авторизуйтесь, чтобы иметь возможность использовать отпечатки пальцев",
@@ -170,10 +169,38 @@
   "myAddresses": "Мои адреса",
   "addNewAddress": "Добавить новый адрес",
 
-
-
-
+  "cancel": "Отмена",
   "profile": "Профиль",
   "routes": "Маршруты",
-  "map": "Карта"
+  "map": "Карта",
+  "createRoute": "Построить маршрут",
+  "changeRoute": "Изменить маршрут",
+
+  "monument": "Памятник",
+  "monuments": "Памятники",
+  "historicalPlace": "Историческое место",
+  "historicalPlaces": "Исторические места",
+  "religion": "Религиозный объект",
+  "religions": "Религиозные объекты",
+  "museum": "Музей",
+  "museums": "Музеи",
+  "zoo": "Зоопарк",
+  "zoos": "Зоопарки",
+  "theatre": "Театр",
+  "theatres": "Театры",
+  "square": "Площадь",
+  "squares": "Площади",
+  "sculpture": "Скульптура",
+  "sculptures": "Скульптуры",
+  "fountain": "Фонтан",
+  "fountains": "Фонтаны",
+  "park": "Парк",
+  "parks": "Парки",
+  "natural": "Природа",
+  "historicBuilding": "Историческое здание",
+  "historicBuildings": "Исторические здания",
+  "architecture": "Архитектура",
+  "apply": "Применить",
+  "imInterested": "Мне интересны",
+  "buildingRoute": "Построение маршрута"
 }

@@ -22,8 +22,9 @@ class _$MapStateTearOff {
       bool isLoading = false,
       CameraPosition cameraPosition = const CameraPosition(
           target: const LatLng(47.222078, 39.720358), zoom: 13),
-      List<Feature> sights = const [],
-      Feature? selectedSightPoint,
+      List<SightEntity> sights = const [],
+      SightEntity? selectedSightPoint,
+      List<SightType> sightFilters = SightType.values,
       bool sightInfoIsExpanded = false}) {
     return _MapState(
       action: action,
@@ -32,6 +33,7 @@ class _$MapStateTearOff {
       cameraPosition: cameraPosition,
       sights: sights,
       selectedSightPoint: selectedSightPoint,
+      sightFilters: sightFilters,
       sightInfoIsExpanded: sightInfoIsExpanded,
     );
   }
@@ -46,8 +48,9 @@ mixin _$MapState {
   bool get mapLoaded => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   CameraPosition get cameraPosition => throw _privateConstructorUsedError;
-  List<Feature> get sights => throw _privateConstructorUsedError;
-  Feature? get selectedSightPoint => throw _privateConstructorUsedError;
+  List<SightEntity> get sights => throw _privateConstructorUsedError;
+  SightEntity? get selectedSightPoint => throw _privateConstructorUsedError;
+  List<SightType> get sightFilters => throw _privateConstructorUsedError;
   bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -64,8 +67,9 @@ abstract class $MapStateCopyWith<$Res> {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<Feature> sights,
-      Feature? selectedSightPoint,
+      List<SightEntity> sights,
+      SightEntity? selectedSightPoint,
+      List<SightType> sightFilters,
       bool sightInfoIsExpanded});
 }
 
@@ -85,6 +89,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? cameraPosition = freezed,
     Object? sights = freezed,
     Object? selectedSightPoint = freezed,
+    Object? sightFilters = freezed,
     Object? sightInfoIsExpanded = freezed,
   }) {
     return _then(_value.copyWith(
@@ -107,11 +112,15 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
       sights: sights == freezed
           ? _value.sights
           : sights // ignore: cast_nullable_to_non_nullable
-              as List<Feature>,
+              as List<SightEntity>,
       selectedSightPoint: selectedSightPoint == freezed
           ? _value.selectedSightPoint
           : selectedSightPoint // ignore: cast_nullable_to_non_nullable
-              as Feature?,
+              as SightEntity?,
+      sightFilters: sightFilters == freezed
+          ? _value.sightFilters
+          : sightFilters // ignore: cast_nullable_to_non_nullable
+              as List<SightType>,
       sightInfoIsExpanded: sightInfoIsExpanded == freezed
           ? _value.sightInfoIsExpanded
           : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
@@ -130,8 +139,9 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<Feature> sights,
-      Feature? selectedSightPoint,
+      List<SightEntity> sights,
+      SightEntity? selectedSightPoint,
+      List<SightType> sightFilters,
       bool sightInfoIsExpanded});
 }
 
@@ -152,6 +162,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? cameraPosition = freezed,
     Object? sights = freezed,
     Object? selectedSightPoint = freezed,
+    Object? sightFilters = freezed,
     Object? sightInfoIsExpanded = freezed,
   }) {
     return _then(_MapState(
@@ -174,11 +185,15 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
       sights: sights == freezed
           ? _value.sights
           : sights // ignore: cast_nullable_to_non_nullable
-              as List<Feature>,
+              as List<SightEntity>,
       selectedSightPoint: selectedSightPoint == freezed
           ? _value.selectedSightPoint
           : selectedSightPoint // ignore: cast_nullable_to_non_nullable
-              as Feature?,
+              as SightEntity?,
+      sightFilters: sightFilters == freezed
+          ? _value.sightFilters
+          : sightFilters // ignore: cast_nullable_to_non_nullable
+              as List<SightType>,
       sightInfoIsExpanded: sightInfoIsExpanded == freezed
           ? _value.sightInfoIsExpanded
           : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
@@ -198,6 +213,7 @@ class _$_MapState implements _MapState {
           target: const LatLng(47.222078, 39.720358), zoom: 13),
       this.sights = const [],
       this.selectedSightPoint,
+      this.sightFilters = SightType.values,
       this.sightInfoIsExpanded = false});
 
   @override
@@ -215,16 +231,19 @@ class _$_MapState implements _MapState {
   final CameraPosition cameraPosition;
   @JsonKey(defaultValue: const [])
   @override
-  final List<Feature> sights;
+  final List<SightEntity> sights;
   @override
-  final Feature? selectedSightPoint;
+  final SightEntity? selectedSightPoint;
+  @JsonKey(defaultValue: SightType.values)
+  @override
+  final List<SightType> sightFilters;
   @JsonKey(defaultValue: false)
   @override
   final bool sightInfoIsExpanded;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightInfoIsExpanded: $sightInfoIsExpanded)';
+    return 'MapState(action: $action, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded)';
   }
 
   @override
@@ -247,6 +266,9 @@ class _$_MapState implements _MapState {
             (identical(other.selectedSightPoint, selectedSightPoint) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedSightPoint, selectedSightPoint)) &&
+            (identical(other.sightFilters, sightFilters) ||
+                const DeepCollectionEquality()
+                    .equals(other.sightFilters, sightFilters)) &&
             (identical(other.sightInfoIsExpanded, sightInfoIsExpanded) ||
                 const DeepCollectionEquality()
                     .equals(other.sightInfoIsExpanded, sightInfoIsExpanded)));
@@ -261,6 +283,7 @@ class _$_MapState implements _MapState {
       const DeepCollectionEquality().hash(cameraPosition) ^
       const DeepCollectionEquality().hash(sights) ^
       const DeepCollectionEquality().hash(selectedSightPoint) ^
+      const DeepCollectionEquality().hash(sightFilters) ^
       const DeepCollectionEquality().hash(sightInfoIsExpanded);
 
   @JsonKey(ignore: true)
@@ -275,8 +298,9 @@ abstract class _MapState implements MapState {
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
-      List<Feature> sights,
-      Feature? selectedSightPoint,
+      List<SightEntity> sights,
+      SightEntity? selectedSightPoint,
+      List<SightType> sightFilters,
       bool sightInfoIsExpanded}) = _$_MapState;
 
   @override
@@ -288,9 +312,11 @@ abstract class _MapState implements MapState {
   @override
   CameraPosition get cameraPosition => throw _privateConstructorUsedError;
   @override
-  List<Feature> get sights => throw _privateConstructorUsedError;
+  List<SightEntity> get sights => throw _privateConstructorUsedError;
   @override
-  Feature? get selectedSightPoint => throw _privateConstructorUsedError;
+  SightEntity? get selectedSightPoint => throw _privateConstructorUsedError;
+  @override
+  List<SightType> get sightFilters => throw _privateConstructorUsedError;
   @override
   bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
   @override
@@ -335,7 +361,7 @@ class _$MapEventTearOff {
     return const MyLocationClicked();
   }
 
-  SightClicked sightClicked(Feature sight) {
+  SightClicked sightClicked(SightEntity sight) {
     return SightClicked(
       sight,
     );
@@ -349,6 +375,24 @@ class _$MapEventTearOff {
 
   ShowMessageNoGeo showMessageNoGeo() {
     return const ShowMessageNoGeo();
+  }
+
+  RoutesClicked routesClicked() {
+    return const RoutesClicked();
+  }
+
+  RouteButtonClicked routeButtonClicked() {
+    return const RouteButtonClicked();
+  }
+
+  FilterClicked filterClicked() {
+    return const FilterClicked();
+  }
+
+  FiltersChanged filtersChanged(List<SightType> sightFilters) {
+    return FiltersChanged(
+      sightFilters,
+    );
   }
 }
 
@@ -366,9 +410,13 @@ mixin _$MapEvent {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -380,9 +428,13 @@ mixin _$MapEvent {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -399,6 +451,10 @@ mixin _$MapEvent {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -413,6 +469,10 @@ mixin _$MapEvent {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -477,9 +537,13 @@ class _$Init implements Init {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return init();
   }
@@ -494,9 +558,13 @@ class _$Init implements Init {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -519,6 +587,10 @@ class _$Init implements Init {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return init(this);
   }
@@ -536,6 +608,10 @@ class _$Init implements Init {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -621,9 +697,13 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return onMapCreated(controller);
   }
@@ -638,9 +718,13 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -663,6 +747,10 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return onMapCreated(this);
   }
@@ -680,6 +768,10 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -770,9 +862,13 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return onCameraMove(position);
   }
@@ -787,9 +883,13 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -812,6 +912,10 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return onCameraMove(this);
   }
@@ -829,6 +933,10 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -894,9 +1002,13 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return onCameraMoveStarted();
   }
@@ -911,9 +1023,13 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -936,6 +1052,10 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return onCameraMoveStarted(this);
   }
@@ -953,6 +1073,10 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -1010,9 +1134,13 @@ class _$GetSights implements GetSights {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return getSights();
   }
@@ -1027,9 +1155,13 @@ class _$GetSights implements GetSights {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1052,6 +1184,10 @@ class _$GetSights implements GetSights {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return getSights(this);
   }
@@ -1069,6 +1205,10 @@ class _$GetSights implements GetSights {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1126,9 +1266,13 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return onMapTap();
   }
@@ -1143,9 +1287,13 @@ class _$OnMapTap implements OnMapTap {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -1168,6 +1316,10 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return onMapTap(this);
   }
@@ -1185,6 +1337,10 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -1244,9 +1400,13 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return myLocationClicked();
   }
@@ -1261,9 +1421,13 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -1286,6 +1450,10 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return myLocationClicked(this);
   }
@@ -1303,6 +1471,10 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -1321,7 +1493,7 @@ abstract class $SightClickedCopyWith<$Res> {
   factory $SightClickedCopyWith(
           SightClicked value, $Res Function(SightClicked) then) =
       _$SightClickedCopyWithImpl<$Res>;
-  $Res call({Feature sight});
+  $Res call({SightEntity sight});
 }
 
 /// @nodoc
@@ -1342,7 +1514,7 @@ class _$SightClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
       sight == freezed
           ? _value.sight
           : sight // ignore: cast_nullable_to_non_nullable
-              as Feature,
+              as SightEntity,
     ));
   }
 }
@@ -1353,7 +1525,7 @@ class _$SightClicked implements SightClicked {
   const _$SightClicked(this.sight);
 
   @override
-  final Feature sight;
+  final SightEntity sight;
 
   @override
   String toString() {
@@ -1387,9 +1559,13 @@ class _$SightClicked implements SightClicked {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return sightClicked(sight);
   }
@@ -1404,9 +1580,13 @@ class _$SightClicked implements SightClicked {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -1429,6 +1609,10 @@ class _$SightClicked implements SightClicked {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return sightClicked(this);
   }
@@ -1446,6 +1630,10 @@ class _$SightClicked implements SightClicked {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -1456,9 +1644,9 @@ class _$SightClicked implements SightClicked {
 }
 
 abstract class SightClicked implements MapEvent {
-  const factory SightClicked(Feature sight) = _$SightClicked;
+  const factory SightClicked(SightEntity sight) = _$SightClicked;
 
-  Feature get sight => throw _privateConstructorUsedError;
+  SightEntity get sight => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SightClickedCopyWith<SightClicked> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1538,9 +1726,13 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return sightInfoSlideChanged(position);
   }
@@ -1555,9 +1747,13 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -1580,6 +1776,10 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return sightInfoSlideChanged(this);
   }
@@ -1597,6 +1797,10 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -1662,9 +1866,13 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function() getSights,
     required TResult Function() onMapTap,
     required TResult Function() myLocationClicked,
-    required TResult Function(Feature sight) sightClicked,
+    required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
     required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
   }) {
     return showMessageNoGeo();
   }
@@ -1679,9 +1887,13 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function()? getSights,
     TResult Function()? onMapTap,
     TResult Function()? myLocationClicked,
-    TResult Function(Feature sight)? sightClicked,
+    TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
     TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -1704,6 +1916,10 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function(SightInfoSlideChanged value)
         sightInfoSlideChanged,
     required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
   }) {
     return showMessageNoGeo(this);
   }
@@ -1721,6 +1937,10 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function(SightClicked value)? sightClicked,
     TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
     TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -1732,4 +1952,572 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
 
 abstract class ShowMessageNoGeo implements MapEvent {
   const factory ShowMessageNoGeo() = _$ShowMessageNoGeo;
+}
+
+/// @nodoc
+abstract class $RoutesClickedCopyWith<$Res> {
+  factory $RoutesClickedCopyWith(
+          RoutesClicked value, $Res Function(RoutesClicked) then) =
+      _$RoutesClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$RoutesClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $RoutesClickedCopyWith<$Res> {
+  _$RoutesClickedCopyWithImpl(
+      RoutesClicked _value, $Res Function(RoutesClicked) _then)
+      : super(_value, (v) => _then(v as RoutesClicked));
+
+  @override
+  RoutesClicked get _value => super._value as RoutesClicked;
+}
+
+/// @nodoc
+
+class _$RoutesClicked implements RoutesClicked {
+  const _$RoutesClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.routesClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is RoutesClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+  }) {
+    return routesClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (routesClicked != null) {
+      return routesClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+  }) {
+    return routesClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (routesClicked != null) {
+      return routesClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RoutesClicked implements MapEvent {
+  const factory RoutesClicked() = _$RoutesClicked;
+}
+
+/// @nodoc
+abstract class $RouteButtonClickedCopyWith<$Res> {
+  factory $RouteButtonClickedCopyWith(
+          RouteButtonClicked value, $Res Function(RouteButtonClicked) then) =
+      _$RouteButtonClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$RouteButtonClickedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements $RouteButtonClickedCopyWith<$Res> {
+  _$RouteButtonClickedCopyWithImpl(
+      RouteButtonClicked _value, $Res Function(RouteButtonClicked) _then)
+      : super(_value, (v) => _then(v as RouteButtonClicked));
+
+  @override
+  RouteButtonClicked get _value => super._value as RouteButtonClicked;
+}
+
+/// @nodoc
+
+class _$RouteButtonClicked implements RouteButtonClicked {
+  const _$RouteButtonClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.routeButtonClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is RouteButtonClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+  }) {
+    return routeButtonClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (routeButtonClicked != null) {
+      return routeButtonClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+  }) {
+    return routeButtonClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (routeButtonClicked != null) {
+      return routeButtonClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RouteButtonClicked implements MapEvent {
+  const factory RouteButtonClicked() = _$RouteButtonClicked;
+}
+
+/// @nodoc
+abstract class $FilterClickedCopyWith<$Res> {
+  factory $FilterClickedCopyWith(
+          FilterClicked value, $Res Function(FilterClicked) then) =
+      _$FilterClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$FilterClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $FilterClickedCopyWith<$Res> {
+  _$FilterClickedCopyWithImpl(
+      FilterClicked _value, $Res Function(FilterClicked) _then)
+      : super(_value, (v) => _then(v as FilterClicked));
+
+  @override
+  FilterClicked get _value => super._value as FilterClicked;
+}
+
+/// @nodoc
+
+class _$FilterClicked implements FilterClicked {
+  const _$FilterClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.filterClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is FilterClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+  }) {
+    return filterClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (filterClicked != null) {
+      return filterClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+  }) {
+    return filterClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (filterClicked != null) {
+      return filterClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterClicked implements MapEvent {
+  const factory FilterClicked() = _$FilterClicked;
+}
+
+/// @nodoc
+abstract class $FiltersChangedCopyWith<$Res> {
+  factory $FiltersChangedCopyWith(
+          FiltersChanged value, $Res Function(FiltersChanged) then) =
+      _$FiltersChangedCopyWithImpl<$Res>;
+  $Res call({List<SightType> sightFilters});
+}
+
+/// @nodoc
+class _$FiltersChangedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $FiltersChangedCopyWith<$Res> {
+  _$FiltersChangedCopyWithImpl(
+      FiltersChanged _value, $Res Function(FiltersChanged) _then)
+      : super(_value, (v) => _then(v as FiltersChanged));
+
+  @override
+  FiltersChanged get _value => super._value as FiltersChanged;
+
+  @override
+  $Res call({
+    Object? sightFilters = freezed,
+  }) {
+    return _then(FiltersChanged(
+      sightFilters == freezed
+          ? _value.sightFilters
+          : sightFilters // ignore: cast_nullable_to_non_nullable
+              as List<SightType>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FiltersChanged implements FiltersChanged {
+  const _$FiltersChanged(this.sightFilters);
+
+  @override
+  final List<SightType> sightFilters;
+
+  @override
+  String toString() {
+    return 'MapEvent.filtersChanged(sightFilters: $sightFilters)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is FiltersChanged &&
+            (identical(other.sightFilters, sightFilters) ||
+                const DeepCollectionEquality()
+                    .equals(other.sightFilters, sightFilters)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(sightFilters);
+
+  @JsonKey(ignore: true)
+  @override
+  $FiltersChangedCopyWith<FiltersChanged> get copyWith =>
+      _$FiltersChangedCopyWithImpl<FiltersChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() getSights,
+    required TResult Function() onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+  }) {
+    return filtersChanged(sightFilters);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? getSights,
+    TResult Function()? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (filtersChanged != null) {
+      return filtersChanged(sightFilters);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+  }) {
+    return filtersChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    required TResult orElse(),
+  }) {
+    if (filtersChanged != null) {
+      return filtersChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FiltersChanged implements MapEvent {
+  const factory FiltersChanged(List<SightType> sightFilters) = _$FiltersChanged;
+
+  List<SightType> get sightFilters => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FiltersChangedCopyWith<FiltersChanged> get copyWith =>
+      throw _privateConstructorUsedError;
 }
