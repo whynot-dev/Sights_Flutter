@@ -45,9 +45,11 @@ class _$NavigateActionTearOff {
     );
   }
 
-  NavigateToMap navigateToMap(NavigateType navigateType) {
+  NavigateToMap navigateToMap(NavigateType navigateType,
+      {required MapMode mapMode}) {
     return NavigateToMap(
       navigateType,
+      mapMode: mapMode,
     );
   }
 
@@ -87,7 +89,8 @@ mixin _$NavigateAction {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -103,7 +106,7 @@ mixin _$NavigateAction {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -233,7 +236,8 @@ class _$NavigateBack implements NavigateBack {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -252,7 +256,7 @@ class _$NavigateBack implements NavigateBack {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -390,7 +394,8 @@ class _$NavigateToEnterPhoneNumber implements NavigateToEnterPhoneNumber {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -409,7 +414,7 @@ class _$NavigateToEnterPhoneNumber implements NavigateToEnterPhoneNumber {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -559,7 +564,8 @@ class _$NavigateToEnterPinCode implements NavigateToEnterPinCode {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -578,7 +584,7 @@ class _$NavigateToEnterPinCode implements NavigateToEnterPinCode {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -729,7 +735,8 @@ class _$NavigateToConfirmPhone implements NavigateToConfirmPhone {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -748,7 +755,7 @@ class _$NavigateToConfirmPhone implements NavigateToConfirmPhone {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -816,7 +823,7 @@ abstract class $NavigateToMapCopyWith<$Res> {
   factory $NavigateToMapCopyWith(
           NavigateToMap value, $Res Function(NavigateToMap) then) =
       _$NavigateToMapCopyWithImpl<$Res>;
-  $Res call({NavigateType navigateType});
+  $Res call({NavigateType navigateType, MapMode mapMode});
 }
 
 /// @nodoc
@@ -833,12 +840,17 @@ class _$NavigateToMapCopyWithImpl<$Res>
   @override
   $Res call({
     Object? navigateType = freezed,
+    Object? mapMode = freezed,
   }) {
     return _then(NavigateToMap(
       navigateType == freezed
           ? _value.navigateType
           : navigateType // ignore: cast_nullable_to_non_nullable
               as NavigateType,
+      mapMode: mapMode == freezed
+          ? _value.mapMode
+          : mapMode // ignore: cast_nullable_to_non_nullable
+              as MapMode,
     ));
   }
 }
@@ -846,14 +858,16 @@ class _$NavigateToMapCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NavigateToMap implements NavigateToMap {
-  const _$NavigateToMap(this.navigateType);
+  const _$NavigateToMap(this.navigateType, {required this.mapMode});
 
   @override
   final NavigateType navigateType;
+  @override
+  final MapMode mapMode;
 
   @override
   String toString() {
-    return 'NavigateAction.navigateToMap(navigateType: $navigateType)';
+    return 'NavigateAction.navigateToMap(navigateType: $navigateType, mapMode: $mapMode)';
   }
 
   @override
@@ -862,12 +876,16 @@ class _$NavigateToMap implements NavigateToMap {
         (other is NavigateToMap &&
             (identical(other.navigateType, navigateType) ||
                 const DeepCollectionEquality()
-                    .equals(other.navigateType, navigateType)));
+                    .equals(other.navigateType, navigateType)) &&
+            (identical(other.mapMode, mapMode) ||
+                const DeepCollectionEquality().equals(other.mapMode, mapMode)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(navigateType);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(navigateType) ^
+      const DeepCollectionEquality().hash(mapMode);
 
   @JsonKey(ignore: true)
   @override
@@ -885,14 +903,15 @@ class _$NavigateToMap implements NavigateToMap {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
     required TResult Function(NavigateType navigateType, String url)
         navigateToWebView,
   }) {
-    return navigateToMap(navigateType);
+    return navigateToMap(navigateType, mapMode);
   }
 
   @override
@@ -904,14 +923,14 @@ class _$NavigateToMap implements NavigateToMap {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
     required TResult orElse(),
   }) {
     if (navigateToMap != null) {
-      return navigateToMap(navigateType);
+      return navigateToMap(navigateType, mapMode);
     }
     return orElse();
   }
@@ -957,9 +976,11 @@ class _$NavigateToMap implements NavigateToMap {
 }
 
 abstract class NavigateToMap implements NavigateAction {
-  const factory NavigateToMap(NavigateType navigateType) = _$NavigateToMap;
+  const factory NavigateToMap(NavigateType navigateType,
+      {required MapMode mapMode}) = _$NavigateToMap;
 
   NavigateType get navigateType => throw _privateConstructorUsedError;
+  MapMode get mapMode => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NavigateToMapCopyWith<NavigateToMap> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1039,7 +1060,8 @@ class _$NavigateToRoutes implements NavigateToRoutes {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -1058,7 +1080,7 @@ class _$NavigateToRoutes implements NavigateToRoutes {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -1195,7 +1217,8 @@ class _$NavigateToBuildingRoute implements NavigateToBuildingRoute {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -1214,7 +1237,7 @@ class _$NavigateToBuildingRoute implements NavigateToBuildingRoute {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,
@@ -1361,7 +1384,8 @@ class _$NavigateToWebView implements NavigateToWebView {
         navigateToEnterPinCode,
     required TResult Function(NavigateType navigateType, String phoneNumber)
         navigateToConfirmPhone,
-    required TResult Function(NavigateType navigateType) navigateToMap,
+    required TResult Function(NavigateType navigateType, MapMode mapMode)
+        navigateToMap,
     required TResult Function(NavigateType navigateType) navigateToRoutes,
     required TResult Function(NavigateType navigateType)
         navigateToBuildingRoute,
@@ -1380,7 +1404,7 @@ class _$NavigateToWebView implements NavigateToWebView {
         navigateToEnterPinCode,
     TResult Function(NavigateType navigateType, String phoneNumber)?
         navigateToConfirmPhone,
-    TResult Function(NavigateType navigateType)? navigateToMap,
+    TResult Function(NavigateType navigateType, MapMode mapMode)? navigateToMap,
     TResult Function(NavigateType navigateType)? navigateToRoutes,
     TResult Function(NavigateType navigateType)? navigateToBuildingRoute,
     TResult Function(NavigateType navigateType, String url)? navigateToWebView,

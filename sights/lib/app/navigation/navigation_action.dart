@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
+import 'package:sights/domain/enums/map_mode.dart';
 
 import 'navigation_type.dart';
 
@@ -25,7 +26,7 @@ class NavigateAction with _$NavigateAction implements BlocAction {
     required String phoneNumber,
   }) = NavigateToConfirmPhone;
 
-  const factory NavigateAction.navigateToMap(NavigateType navigateType) = NavigateToMap;
+  const factory NavigateAction.navigateToMap(NavigateType navigateType, {required MapMode mapMode}) = NavigateToMap;
 
   const factory NavigateAction.navigateToRoutes(NavigateType navigateType) = NavigateToRoutes;
 

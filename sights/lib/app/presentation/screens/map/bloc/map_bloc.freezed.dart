@@ -18,16 +18,22 @@ class _$MapStateTearOff {
 
   _MapState call(
       {BlocAction? action,
+      required MapMode mapMode,
       bool mapLoaded = false,
       bool isLoading = false,
       CameraPosition cameraPosition = const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 13),
+          target: const LatLng(47.222078, 39.720358), zoom: 14),
       List<SightEntity> sights = const [],
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters = SightType.values,
-      bool sightInfoIsExpanded = false}) {
+      bool sightInfoIsExpanded = false,
+      LatLng? locationMarkerPosition,
+      String? currentAddress,
+      Direction? currentDirection,
+      TransportType selectedTransport = TransportType.walking}) {
     return _MapState(
       action: action,
+      mapMode: mapMode,
       mapLoaded: mapLoaded,
       isLoading: isLoading,
       cameraPosition: cameraPosition,
@@ -35,6 +41,10 @@ class _$MapStateTearOff {
       selectedSightPoint: selectedSightPoint,
       sightFilters: sightFilters,
       sightInfoIsExpanded: sightInfoIsExpanded,
+      locationMarkerPosition: locationMarkerPosition,
+      currentAddress: currentAddress,
+      currentDirection: currentDirection,
+      selectedTransport: selectedTransport,
     );
   }
 }
@@ -45,6 +55,7 @@ const $MapState = _$MapStateTearOff();
 /// @nodoc
 mixin _$MapState {
   BlocAction? get action => throw _privateConstructorUsedError;
+  MapMode get mapMode => throw _privateConstructorUsedError;
   bool get mapLoaded => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   CameraPosition get cameraPosition => throw _privateConstructorUsedError;
@@ -52,6 +63,10 @@ mixin _$MapState {
   SightEntity? get selectedSightPoint => throw _privateConstructorUsedError;
   List<SightType> get sightFilters => throw _privateConstructorUsedError;
   bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
+  LatLng? get locationMarkerPosition => throw _privateConstructorUsedError;
+  String? get currentAddress => throw _privateConstructorUsedError;
+  Direction? get currentDirection => throw _privateConstructorUsedError;
+  TransportType get selectedTransport => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -64,13 +79,18 @@ abstract class $MapStateCopyWith<$Res> {
       _$MapStateCopyWithImpl<$Res>;
   $Res call(
       {BlocAction? action,
+      MapMode mapMode,
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
       List<SightEntity> sights,
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters,
-      bool sightInfoIsExpanded});
+      bool sightInfoIsExpanded,
+      LatLng? locationMarkerPosition,
+      String? currentAddress,
+      Direction? currentDirection,
+      TransportType selectedTransport});
 }
 
 /// @nodoc
@@ -84,6 +104,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
   @override
   $Res call({
     Object? action = freezed,
+    Object? mapMode = freezed,
     Object? mapLoaded = freezed,
     Object? isLoading = freezed,
     Object? cameraPosition = freezed,
@@ -91,12 +112,20 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? selectedSightPoint = freezed,
     Object? sightFilters = freezed,
     Object? sightInfoIsExpanded = freezed,
+    Object? locationMarkerPosition = freezed,
+    Object? currentAddress = freezed,
+    Object? currentDirection = freezed,
+    Object? selectedTransport = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
               as BlocAction?,
+      mapMode: mapMode == freezed
+          ? _value.mapMode
+          : mapMode // ignore: cast_nullable_to_non_nullable
+              as MapMode,
       mapLoaded: mapLoaded == freezed
           ? _value.mapLoaded
           : mapLoaded // ignore: cast_nullable_to_non_nullable
@@ -125,6 +154,22 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.sightInfoIsExpanded
           : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
+      locationMarkerPosition: locationMarkerPosition == freezed
+          ? _value.locationMarkerPosition
+          : locationMarkerPosition // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
+      currentAddress: currentAddress == freezed
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentDirection: currentDirection == freezed
+          ? _value.currentDirection
+          : currentDirection // ignore: cast_nullable_to_non_nullable
+              as Direction?,
+      selectedTransport: selectedTransport == freezed
+          ? _value.selectedTransport
+          : selectedTransport // ignore: cast_nullable_to_non_nullable
+              as TransportType,
     ));
   }
 }
@@ -136,13 +181,18 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
   @override
   $Res call(
       {BlocAction? action,
+      MapMode mapMode,
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
       List<SightEntity> sights,
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters,
-      bool sightInfoIsExpanded});
+      bool sightInfoIsExpanded,
+      LatLng? locationMarkerPosition,
+      String? currentAddress,
+      Direction? currentDirection,
+      TransportType selectedTransport});
 }
 
 /// @nodoc
@@ -157,6 +207,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? action = freezed,
+    Object? mapMode = freezed,
     Object? mapLoaded = freezed,
     Object? isLoading = freezed,
     Object? cameraPosition = freezed,
@@ -164,12 +215,20 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? selectedSightPoint = freezed,
     Object? sightFilters = freezed,
     Object? sightInfoIsExpanded = freezed,
+    Object? locationMarkerPosition = freezed,
+    Object? currentAddress = freezed,
+    Object? currentDirection = freezed,
+    Object? selectedTransport = freezed,
   }) {
     return _then(_MapState(
       action: action == freezed
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
               as BlocAction?,
+      mapMode: mapMode == freezed
+          ? _value.mapMode
+          : mapMode // ignore: cast_nullable_to_non_nullable
+              as MapMode,
       mapLoaded: mapLoaded == freezed
           ? _value.mapLoaded
           : mapLoaded // ignore: cast_nullable_to_non_nullable
@@ -198,6 +257,22 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.sightInfoIsExpanded
           : sightInfoIsExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
+      locationMarkerPosition: locationMarkerPosition == freezed
+          ? _value.locationMarkerPosition
+          : locationMarkerPosition // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
+      currentAddress: currentAddress == freezed
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentDirection: currentDirection == freezed
+          ? _value.currentDirection
+          : currentDirection // ignore: cast_nullable_to_non_nullable
+              as Direction?,
+      selectedTransport: selectedTransport == freezed
+          ? _value.selectedTransport
+          : selectedTransport // ignore: cast_nullable_to_non_nullable
+              as TransportType,
     ));
   }
 }
@@ -207,17 +282,24 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 class _$_MapState implements _MapState {
   _$_MapState(
       {this.action,
+      required this.mapMode,
       this.mapLoaded = false,
       this.isLoading = false,
       this.cameraPosition = const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 13),
+          target: const LatLng(47.222078, 39.720358), zoom: 14),
       this.sights = const [],
       this.selectedSightPoint,
       this.sightFilters = SightType.values,
-      this.sightInfoIsExpanded = false});
+      this.sightInfoIsExpanded = false,
+      this.locationMarkerPosition,
+      this.currentAddress,
+      this.currentDirection,
+      this.selectedTransport = TransportType.walking});
 
   @override
   final BlocAction? action;
+  @override
+  final MapMode mapMode;
   @JsonKey(defaultValue: false)
   @override
   final bool mapLoaded;
@@ -226,7 +308,7 @@ class _$_MapState implements _MapState {
   final bool isLoading;
   @JsonKey(
       defaultValue: const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 13))
+          target: const LatLng(47.222078, 39.720358), zoom: 14))
   @override
   final CameraPosition cameraPosition;
   @JsonKey(defaultValue: const [])
@@ -240,10 +322,19 @@ class _$_MapState implements _MapState {
   @JsonKey(defaultValue: false)
   @override
   final bool sightInfoIsExpanded;
+  @override
+  final LatLng? locationMarkerPosition;
+  @override
+  final String? currentAddress;
+  @override
+  final Direction? currentDirection;
+  @JsonKey(defaultValue: TransportType.walking)
+  @override
+  final TransportType selectedTransport;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded)';
+    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport)';
   }
 
   @override
@@ -252,6 +343,9 @@ class _$_MapState implements _MapState {
         (other is _MapState &&
             (identical(other.action, action) ||
                 const DeepCollectionEquality().equals(other.action, action)) &&
+            (identical(other.mapMode, mapMode) ||
+                const DeepCollectionEquality()
+                    .equals(other.mapMode, mapMode)) &&
             (identical(other.mapLoaded, mapLoaded) ||
                 const DeepCollectionEquality()
                     .equals(other.mapLoaded, mapLoaded)) &&
@@ -271,20 +365,37 @@ class _$_MapState implements _MapState {
                     .equals(other.sightFilters, sightFilters)) &&
             (identical(other.sightInfoIsExpanded, sightInfoIsExpanded) ||
                 const DeepCollectionEquality()
-                    .equals(other.sightInfoIsExpanded, sightInfoIsExpanded)));
+                    .equals(other.sightInfoIsExpanded, sightInfoIsExpanded)) &&
+            (identical(other.locationMarkerPosition, locationMarkerPosition) ||
+                const DeepCollectionEquality().equals(
+                    other.locationMarkerPosition, locationMarkerPosition)) &&
+            (identical(other.currentAddress, currentAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentAddress, currentAddress)) &&
+            (identical(other.currentDirection, currentDirection) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentDirection, currentDirection)) &&
+            (identical(other.selectedTransport, selectedTransport) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedTransport, selectedTransport)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(action) ^
+      const DeepCollectionEquality().hash(mapMode) ^
       const DeepCollectionEquality().hash(mapLoaded) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(cameraPosition) ^
       const DeepCollectionEquality().hash(sights) ^
       const DeepCollectionEquality().hash(selectedSightPoint) ^
       const DeepCollectionEquality().hash(sightFilters) ^
-      const DeepCollectionEquality().hash(sightInfoIsExpanded);
+      const DeepCollectionEquality().hash(sightInfoIsExpanded) ^
+      const DeepCollectionEquality().hash(locationMarkerPosition) ^
+      const DeepCollectionEquality().hash(currentAddress) ^
+      const DeepCollectionEquality().hash(currentDirection) ^
+      const DeepCollectionEquality().hash(selectedTransport);
 
   @JsonKey(ignore: true)
   @override
@@ -295,16 +406,23 @@ class _$_MapState implements _MapState {
 abstract class _MapState implements MapState {
   factory _MapState(
       {BlocAction? action,
+      required MapMode mapMode,
       bool mapLoaded,
       bool isLoading,
       CameraPosition cameraPosition,
       List<SightEntity> sights,
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters,
-      bool sightInfoIsExpanded}) = _$_MapState;
+      bool sightInfoIsExpanded,
+      LatLng? locationMarkerPosition,
+      String? currentAddress,
+      Direction? currentDirection,
+      TransportType selectedTransport}) = _$_MapState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
+  @override
+  MapMode get mapMode => throw _privateConstructorUsedError;
   @override
   bool get mapLoaded => throw _privateConstructorUsedError;
   @override
@@ -320,6 +438,14 @@ abstract class _MapState implements MapState {
   @override
   bool get sightInfoIsExpanded => throw _privateConstructorUsedError;
   @override
+  LatLng? get locationMarkerPosition => throw _privateConstructorUsedError;
+  @override
+  String? get currentAddress => throw _privateConstructorUsedError;
+  @override
+  Direction? get currentDirection => throw _privateConstructorUsedError;
+  @override
+  TransportType get selectedTransport => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -331,6 +457,10 @@ class _$MapEventTearOff {
 
   Init init() {
     return const Init();
+  }
+
+  OnBackClicked onBackClicked() {
+    return const OnBackClicked();
   }
 
   OnMapCreated onMapCreated(GoogleMapController controller) {
@@ -349,12 +479,18 @@ class _$MapEventTearOff {
     return const OnCameraMoveStarted();
   }
 
+  OnCameraIdle onCameraIdle() {
+    return const OnCameraIdle();
+  }
+
   GetSights getSights() {
     return const GetSights();
   }
 
-  OnMapTap onMapTap() {
-    return const OnMapTap();
+  OnMapTap onMapTap(LatLng position) {
+    return OnMapTap(
+      position,
+    );
   }
 
   MyLocationClicked myLocationClicked() {
@@ -394,6 +530,26 @@ class _$MapEventTearOff {
       sightFilters,
     );
   }
+
+  GetCurrentAddress getCurrentAddress() {
+    return const GetCurrentAddress();
+  }
+
+  SelectThisAddressClicked selectThisAddressClicked() {
+    return const SelectThisAddressClicked();
+  }
+
+  DirectionChanged directionChanged(DirectionEntity directionEntity) {
+    return DirectionChanged(
+      directionEntity,
+    );
+  }
+
+  BuildRouteWithSights buildRouteWithSights(List<LatLng> points) {
+    return BuildRouteWithSights(
+      points,
+    );
+  }
 }
 
 /// @nodoc
@@ -404,11 +560,13 @@ mixin _$MapEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -417,16 +575,22 @@ mixin _$MapEvent {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -435,15 +599,21 @@ mixin _$MapEvent {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -455,14 +625,21 @@ mixin _$MapEvent {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -473,6 +650,10 @@ mixin _$MapEvent {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -531,11 +712,13 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -544,6 +727,10 @@ class _$Init implements Init {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return init();
   }
@@ -552,11 +739,13 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -565,6 +754,10 @@ class _$Init implements Init {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -577,9 +770,11 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -591,6 +786,11 @@ class _$Init implements Init {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return init(this);
   }
@@ -599,9 +799,11 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -612,6 +814,10 @@ class _$Init implements Init {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -623,6 +829,165 @@ class _$Init implements Init {
 
 abstract class Init implements MapEvent {
   const factory Init() = _$Init;
+}
+
+/// @nodoc
+abstract class $OnBackClickedCopyWith<$Res> {
+  factory $OnBackClickedCopyWith(
+          OnBackClicked value, $Res Function(OnBackClicked) then) =
+      _$OnBackClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$OnBackClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $OnBackClickedCopyWith<$Res> {
+  _$OnBackClickedCopyWithImpl(
+      OnBackClicked _value, $Res Function(OnBackClicked) _then)
+      : super(_value, (v) => _then(v as OnBackClicked));
+
+  @override
+  OnBackClicked get _value => super._value as OnBackClicked;
+}
+
+/// @nodoc
+
+class _$OnBackClicked implements OnBackClicked {
+  const _$OnBackClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.onBackClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is OnBackClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return onBackClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (onBackClicked != null) {
+      return onBackClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return onBackClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (onBackClicked != null) {
+      return onBackClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnBackClicked implements MapEvent {
+  const factory OnBackClicked() = _$OnBackClicked;
 }
 
 /// @nodoc
@@ -691,11 +1056,13 @@ class _$OnMapCreated implements OnMapCreated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -704,6 +1071,10 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return onMapCreated(controller);
   }
@@ -712,11 +1083,13 @@ class _$OnMapCreated implements OnMapCreated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -725,6 +1098,10 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -737,9 +1114,11 @@ class _$OnMapCreated implements OnMapCreated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -751,6 +1130,11 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return onMapCreated(this);
   }
@@ -759,9 +1143,11 @@ class _$OnMapCreated implements OnMapCreated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -772,6 +1158,10 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -856,11 +1246,13 @@ class _$OnCameraMove implements OnCameraMove {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -869,6 +1261,10 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return onCameraMove(position);
   }
@@ -877,11 +1273,13 @@ class _$OnCameraMove implements OnCameraMove {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -890,6 +1288,10 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -902,9 +1304,11 @@ class _$OnCameraMove implements OnCameraMove {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -916,6 +1320,11 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return onCameraMove(this);
   }
@@ -924,9 +1333,11 @@ class _$OnCameraMove implements OnCameraMove {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -937,6 +1348,10 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -996,11 +1411,13 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1009,6 +1426,10 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return onCameraMoveStarted();
   }
@@ -1017,11 +1438,13 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1030,6 +1453,10 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -1042,9 +1469,11 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1056,6 +1485,11 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return onCameraMoveStarted(this);
   }
@@ -1064,9 +1498,11 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1077,6 +1513,10 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -1088,6 +1528,165 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
 
 abstract class OnCameraMoveStarted implements MapEvent {
   const factory OnCameraMoveStarted() = _$OnCameraMoveStarted;
+}
+
+/// @nodoc
+abstract class $OnCameraIdleCopyWith<$Res> {
+  factory $OnCameraIdleCopyWith(
+          OnCameraIdle value, $Res Function(OnCameraIdle) then) =
+      _$OnCameraIdleCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$OnCameraIdleCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $OnCameraIdleCopyWith<$Res> {
+  _$OnCameraIdleCopyWithImpl(
+      OnCameraIdle _value, $Res Function(OnCameraIdle) _then)
+      : super(_value, (v) => _then(v as OnCameraIdle));
+
+  @override
+  OnCameraIdle get _value => super._value as OnCameraIdle;
+}
+
+/// @nodoc
+
+class _$OnCameraIdle implements OnCameraIdle {
+  const _$OnCameraIdle();
+
+  @override
+  String toString() {
+    return 'MapEvent.onCameraIdle()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is OnCameraIdle);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return onCameraIdle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (onCameraIdle != null) {
+      return onCameraIdle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return onCameraIdle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (onCameraIdle != null) {
+      return onCameraIdle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnCameraIdle implements MapEvent {
+  const factory OnCameraIdle() = _$OnCameraIdle;
 }
 
 /// @nodoc
@@ -1128,11 +1727,13 @@ class _$GetSights implements GetSights {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1141,6 +1742,10 @@ class _$GetSights implements GetSights {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return getSights();
   }
@@ -1149,11 +1754,13 @@ class _$GetSights implements GetSights {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1162,6 +1769,10 @@ class _$GetSights implements GetSights {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1174,9 +1785,11 @@ class _$GetSights implements GetSights {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1188,6 +1801,11 @@ class _$GetSights implements GetSights {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return getSights(this);
   }
@@ -1196,9 +1814,11 @@ class _$GetSights implements GetSights {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1209,6 +1829,10 @@ class _$GetSights implements GetSights {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1226,6 +1850,7 @@ abstract class GetSights implements MapEvent {
 abstract class $OnMapTapCopyWith<$Res> {
   factory $OnMapTapCopyWith(OnMapTap value, $Res Function(OnMapTap) then) =
       _$OnMapTapCopyWithImpl<$Res>;
+  $Res call({LatLng position});
 }
 
 /// @nodoc
@@ -1236,35 +1861,62 @@ class _$OnMapTapCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
 
   @override
   OnMapTap get _value => super._value as OnMapTap;
+
+  @override
+  $Res call({
+    Object? position = freezed,
+  }) {
+    return _then(OnMapTap(
+      position == freezed
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as LatLng,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$OnMapTap implements OnMapTap {
-  const _$OnMapTap();
+  const _$OnMapTap(this.position);
+
+  @override
+  final LatLng position;
 
   @override
   String toString() {
-    return 'MapEvent.onMapTap()';
+    return 'MapEvent.onMapTap(position: $position)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is OnMapTap);
+    return identical(this, other) ||
+        (other is OnMapTap &&
+            (identical(other.position, position) ||
+                const DeepCollectionEquality()
+                    .equals(other.position, position)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(position);
+
+  @JsonKey(ignore: true)
+  @override
+  $OnMapTapCopyWith<OnMapTap> get copyWith =>
+      _$OnMapTapCopyWithImpl<OnMapTap>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1273,19 +1925,25 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
-    return onMapTap();
+    return onMapTap(position);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1294,10 +1952,14 @@ class _$OnMapTap implements OnMapTap {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
-      return onMapTap();
+      return onMapTap(position);
     }
     return orElse();
   }
@@ -1306,9 +1968,11 @@ class _$OnMapTap implements OnMapTap {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1320,6 +1984,11 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return onMapTap(this);
   }
@@ -1328,9 +1997,11 @@ class _$OnMapTap implements OnMapTap {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1341,6 +2012,10 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -1351,7 +2026,12 @@ class _$OnMapTap implements OnMapTap {
 }
 
 abstract class OnMapTap implements MapEvent {
-  const factory OnMapTap() = _$OnMapTap;
+  const factory OnMapTap(LatLng position) = _$OnMapTap;
+
+  LatLng get position => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OnMapTapCopyWith<OnMapTap> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1394,11 +2074,13 @@ class _$MyLocationClicked implements MyLocationClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1407,6 +2089,10 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return myLocationClicked();
   }
@@ -1415,11 +2101,13 @@ class _$MyLocationClicked implements MyLocationClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1428,6 +2116,10 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -1440,9 +2132,11 @@ class _$MyLocationClicked implements MyLocationClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1454,6 +2148,11 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return myLocationClicked(this);
   }
@@ -1462,9 +2161,11 @@ class _$MyLocationClicked implements MyLocationClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1475,6 +2176,10 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -1553,11 +2258,13 @@ class _$SightClicked implements SightClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1566,6 +2273,10 @@ class _$SightClicked implements SightClicked {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return sightClicked(sight);
   }
@@ -1574,11 +2285,13 @@ class _$SightClicked implements SightClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1587,6 +2300,10 @@ class _$SightClicked implements SightClicked {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -1599,9 +2316,11 @@ class _$SightClicked implements SightClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1613,6 +2332,11 @@ class _$SightClicked implements SightClicked {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return sightClicked(this);
   }
@@ -1621,9 +2345,11 @@ class _$SightClicked implements SightClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1634,6 +2360,10 @@ class _$SightClicked implements SightClicked {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -1720,11 +2450,13 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1733,6 +2465,10 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return sightInfoSlideChanged(position);
   }
@@ -1741,11 +2477,13 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1754,6 +2492,10 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -1766,9 +2508,11 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1780,6 +2524,11 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return sightInfoSlideChanged(this);
   }
@@ -1788,9 +2537,11 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1801,6 +2552,10 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -1860,11 +2615,13 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -1873,6 +2630,10 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return showMessageNoGeo();
   }
@@ -1881,11 +2642,13 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -1894,6 +2657,10 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -1906,9 +2673,11 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1920,6 +2689,11 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return showMessageNoGeo(this);
   }
@@ -1928,9 +2702,11 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1941,6 +2717,10 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -1994,11 +2774,13 @@ class _$RoutesClicked implements RoutesClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -2007,6 +2789,10 @@ class _$RoutesClicked implements RoutesClicked {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return routesClicked();
   }
@@ -2015,11 +2801,13 @@ class _$RoutesClicked implements RoutesClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -2028,6 +2816,10 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (routesClicked != null) {
@@ -2040,9 +2832,11 @@ class _$RoutesClicked implements RoutesClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2054,6 +2848,11 @@ class _$RoutesClicked implements RoutesClicked {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return routesClicked(this);
   }
@@ -2062,9 +2861,11 @@ class _$RoutesClicked implements RoutesClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2075,6 +2876,10 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (routesClicked != null) {
@@ -2129,11 +2934,13 @@ class _$RouteButtonClicked implements RouteButtonClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -2142,6 +2949,10 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return routeButtonClicked();
   }
@@ -2150,11 +2961,13 @@ class _$RouteButtonClicked implements RouteButtonClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -2163,6 +2976,10 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (routeButtonClicked != null) {
@@ -2175,9 +2992,11 @@ class _$RouteButtonClicked implements RouteButtonClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2189,6 +3008,11 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return routeButtonClicked(this);
   }
@@ -2197,9 +3021,11 @@ class _$RouteButtonClicked implements RouteButtonClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2210,6 +3036,10 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (routeButtonClicked != null) {
@@ -2263,11 +3093,13 @@ class _$FilterClicked implements FilterClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -2276,6 +3108,10 @@ class _$FilterClicked implements FilterClicked {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return filterClicked();
   }
@@ -2284,11 +3120,13 @@ class _$FilterClicked implements FilterClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -2297,6 +3135,10 @@ class _$FilterClicked implements FilterClicked {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -2309,9 +3151,11 @@ class _$FilterClicked implements FilterClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2323,6 +3167,11 @@ class _$FilterClicked implements FilterClicked {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return filterClicked(this);
   }
@@ -2331,9 +3180,11 @@ class _$FilterClicked implements FilterClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2344,6 +3195,10 @@ class _$FilterClicked implements FilterClicked {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -2423,11 +3278,13 @@ class _$FiltersChanged implements FiltersChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() onBackClicked,
     required TResult Function(GoogleMapController controller) onMapCreated,
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
     required TResult Function() getSights,
-    required TResult Function() onMapTap,
+    required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
     required TResult Function(SightEntity sight) sightClicked,
     required TResult Function(double position) sightInfoSlideChanged,
@@ -2436,6 +3293,10 @@ class _$FiltersChanged implements FiltersChanged {
     required TResult Function() routeButtonClicked,
     required TResult Function() filterClicked,
     required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
   }) {
     return filtersChanged(sightFilters);
   }
@@ -2444,11 +3305,13 @@ class _$FiltersChanged implements FiltersChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? onBackClicked,
     TResult Function(GoogleMapController controller)? onMapCreated,
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
     TResult Function()? getSights,
-    TResult Function()? onMapTap,
+    TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
     TResult Function(SightEntity sight)? sightClicked,
     TResult Function(double position)? sightInfoSlideChanged,
@@ -2457,6 +3320,10 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function()? routeButtonClicked,
     TResult Function()? filterClicked,
     TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (filtersChanged != null) {
@@ -2469,9 +3336,11 @@ class _$FiltersChanged implements FiltersChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
     required TResult Function(OnMapCreated value) onMapCreated,
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2483,6 +3352,11 @@ class _$FiltersChanged implements FiltersChanged {
     required TResult Function(RouteButtonClicked value) routeButtonClicked,
     required TResult Function(FilterClicked value) filterClicked,
     required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
   }) {
     return filtersChanged(this);
   }
@@ -2491,9 +3365,11 @@ class _$FiltersChanged implements FiltersChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
     TResult Function(OnMapCreated value)? onMapCreated,
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2504,6 +3380,10 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function(RouteButtonClicked value)? routeButtonClicked,
     TResult Function(FilterClicked value)? filterClicked,
     TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
     required TResult orElse(),
   }) {
     if (filtersChanged != null) {
@@ -2519,5 +3399,709 @@ abstract class FiltersChanged implements MapEvent {
   List<SightType> get sightFilters => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $FiltersChangedCopyWith<FiltersChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GetCurrentAddressCopyWith<$Res> {
+  factory $GetCurrentAddressCopyWith(
+          GetCurrentAddress value, $Res Function(GetCurrentAddress) then) =
+      _$GetCurrentAddressCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetCurrentAddressCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $GetCurrentAddressCopyWith<$Res> {
+  _$GetCurrentAddressCopyWithImpl(
+      GetCurrentAddress _value, $Res Function(GetCurrentAddress) _then)
+      : super(_value, (v) => _then(v as GetCurrentAddress));
+
+  @override
+  GetCurrentAddress get _value => super._value as GetCurrentAddress;
+}
+
+/// @nodoc
+
+class _$GetCurrentAddress implements GetCurrentAddress {
+  const _$GetCurrentAddress();
+
+  @override
+  String toString() {
+    return 'MapEvent.getCurrentAddress()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is GetCurrentAddress);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return getCurrentAddress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (getCurrentAddress != null) {
+      return getCurrentAddress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return getCurrentAddress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (getCurrentAddress != null) {
+      return getCurrentAddress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetCurrentAddress implements MapEvent {
+  const factory GetCurrentAddress() = _$GetCurrentAddress;
+}
+
+/// @nodoc
+abstract class $SelectThisAddressClickedCopyWith<$Res> {
+  factory $SelectThisAddressClickedCopyWith(SelectThisAddressClicked value,
+          $Res Function(SelectThisAddressClicked) then) =
+      _$SelectThisAddressClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SelectThisAddressClickedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements $SelectThisAddressClickedCopyWith<$Res> {
+  _$SelectThisAddressClickedCopyWithImpl(SelectThisAddressClicked _value,
+      $Res Function(SelectThisAddressClicked) _then)
+      : super(_value, (v) => _then(v as SelectThisAddressClicked));
+
+  @override
+  SelectThisAddressClicked get _value =>
+      super._value as SelectThisAddressClicked;
+}
+
+/// @nodoc
+
+class _$SelectThisAddressClicked implements SelectThisAddressClicked {
+  const _$SelectThisAddressClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.selectThisAddressClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SelectThisAddressClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return selectThisAddressClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (selectThisAddressClicked != null) {
+      return selectThisAddressClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return selectThisAddressClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (selectThisAddressClicked != null) {
+      return selectThisAddressClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectThisAddressClicked implements MapEvent {
+  const factory SelectThisAddressClicked() = _$SelectThisAddressClicked;
+}
+
+/// @nodoc
+abstract class $DirectionChangedCopyWith<$Res> {
+  factory $DirectionChangedCopyWith(
+          DirectionChanged value, $Res Function(DirectionChanged) then) =
+      _$DirectionChangedCopyWithImpl<$Res>;
+  $Res call({DirectionEntity directionEntity});
+}
+
+/// @nodoc
+class _$DirectionChangedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $DirectionChangedCopyWith<$Res> {
+  _$DirectionChangedCopyWithImpl(
+      DirectionChanged _value, $Res Function(DirectionChanged) _then)
+      : super(_value, (v) => _then(v as DirectionChanged));
+
+  @override
+  DirectionChanged get _value => super._value as DirectionChanged;
+
+  @override
+  $Res call({
+    Object? directionEntity = freezed,
+  }) {
+    return _then(DirectionChanged(
+      directionEntity == freezed
+          ? _value.directionEntity
+          : directionEntity // ignore: cast_nullable_to_non_nullable
+              as DirectionEntity,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DirectionChanged implements DirectionChanged {
+  const _$DirectionChanged(this.directionEntity);
+
+  @override
+  final DirectionEntity directionEntity;
+
+  @override
+  String toString() {
+    return 'MapEvent.directionChanged(directionEntity: $directionEntity)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is DirectionChanged &&
+            (identical(other.directionEntity, directionEntity) ||
+                const DeepCollectionEquality()
+                    .equals(other.directionEntity, directionEntity)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(directionEntity);
+
+  @JsonKey(ignore: true)
+  @override
+  $DirectionChangedCopyWith<DirectionChanged> get copyWith =>
+      _$DirectionChangedCopyWithImpl<DirectionChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return directionChanged(directionEntity);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (directionChanged != null) {
+      return directionChanged(directionEntity);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return directionChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (directionChanged != null) {
+      return directionChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DirectionChanged implements MapEvent {
+  const factory DirectionChanged(DirectionEntity directionEntity) =
+      _$DirectionChanged;
+
+  DirectionEntity get directionEntity => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DirectionChangedCopyWith<DirectionChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BuildRouteWithSightsCopyWith<$Res> {
+  factory $BuildRouteWithSightsCopyWith(BuildRouteWithSights value,
+          $Res Function(BuildRouteWithSights) then) =
+      _$BuildRouteWithSightsCopyWithImpl<$Res>;
+  $Res call({List<LatLng> points});
+}
+
+/// @nodoc
+class _$BuildRouteWithSightsCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements $BuildRouteWithSightsCopyWith<$Res> {
+  _$BuildRouteWithSightsCopyWithImpl(
+      BuildRouteWithSights _value, $Res Function(BuildRouteWithSights) _then)
+      : super(_value, (v) => _then(v as BuildRouteWithSights));
+
+  @override
+  BuildRouteWithSights get _value => super._value as BuildRouteWithSights;
+
+  @override
+  $Res call({
+    Object? points = freezed,
+  }) {
+    return _then(BuildRouteWithSights(
+      points == freezed
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as List<LatLng>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BuildRouteWithSights implements BuildRouteWithSights {
+  const _$BuildRouteWithSights(this.points);
+
+  @override
+  final List<LatLng> points;
+
+  @override
+  String toString() {
+    return 'MapEvent.buildRouteWithSights(points: $points)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is BuildRouteWithSights &&
+            (identical(other.points, points) ||
+                const DeepCollectionEquality().equals(other.points, points)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(points);
+
+  @JsonKey(ignore: true)
+  @override
+  $BuildRouteWithSightsCopyWith<BuildRouteWithSights> get copyWith =>
+      _$BuildRouteWithSightsCopyWithImpl<BuildRouteWithSights>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+  }) {
+    return buildRouteWithSights(points);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (buildRouteWithSights != null) {
+      return buildRouteWithSights(points);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+  }) {
+    return buildRouteWithSights(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    required TResult orElse(),
+  }) {
+    if (buildRouteWithSights != null) {
+      return buildRouteWithSights(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BuildRouteWithSights implements MapEvent {
+  const factory BuildRouteWithSights(List<LatLng> points) =
+      _$BuildRouteWithSights;
+
+  List<LatLng> get points => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BuildRouteWithSightsCopyWith<BuildRouteWithSights> get copyWith =>
       throw _privateConstructorUsedError;
 }

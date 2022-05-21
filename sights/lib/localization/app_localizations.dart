@@ -302,7 +302,7 @@ class AppLocalizations {
   String get apply  => _localizedStrings['apply'] ?? '';
   String get imInterested  => _localizedStrings['imInterested'] ?? '';
   String get buildingRoute  => _localizedStrings['buildingRoute'] ?? '';
-
+  String get transport  => _localizedStrings['transport'] ?? '';
 
 }
 

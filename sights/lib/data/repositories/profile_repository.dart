@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:sights/core/enums/gender.dart';
 import 'package:sights/core/failures.dart';
 import 'package:sights/core/network/network_info.dart';

@@ -619,7 +619,7 @@ packages:
     source: hosted
     version: "2.1.5"
   graphs:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: graphs
       url: "https://pub.dartlang.org"
@@ -1442,20 +1442,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  yandex_geocoder:
-    dependency: "direct main"
-    description:
-      name: yandex_geocoder
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
-  yandex_mapkit:
-    dependency: "direct main"
-    description:
-      name: yandex_mapkit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
 sdks:
   dart: ">=2.16.0 <3.0.0"
   flutter: ">=2.8.0"

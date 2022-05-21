@@ -202,5 +202,6 @@
   "architecture": "Архитектура",
   "apply": "Применить",
   "imInterested": "Мне интересны",
-  "buildingRoute": "Построение маршрута"
+  "buildingRoute": "Построение маршрута",
+  "transport": "Транспорт"
 }

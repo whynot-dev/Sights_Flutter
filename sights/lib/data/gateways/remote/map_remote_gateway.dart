@@ -32,4 +32,5 @@ abstract class MapRemoteGateway {
     @Path() required String xid,
     @Query('apikey') String apikey = apikey,
   });
+
 }

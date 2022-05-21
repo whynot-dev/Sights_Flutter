@@ -22,6 +22,7 @@ import 'package:sights/app/presentation/screens/webview/webview_screen.dart';
 import 'package:sights/app/widgets/routes/default_page_route_without_animation.dart';
 import 'package:sights/di/injection.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
+import 'package:sights/domain/enums/map_mode.dart';
 
 import 'navigation_action.dart';
 import 'navigation_type.dart';
@@ -85,13 +86,15 @@ class AppNavigator {
             ),
           );
         },
-        navigateToMap: (NavigateType type) {
+        navigateToMap: (NavigateType type, MapMode mapMode) {
           navigateType = type;
           route = PageRouteWithoutAnimation(
             settings: RouteSettings(name: routeName),
             builder: (BuildContext context) => BlocProvider(
               create: (context) => MapBloc(
+                mapMode: mapMode,
                 mapRepository: injection(),
+                directionsRepository: injection(),
               ),
               child: MapScreen(),
             ),
@@ -112,7 +115,9 @@ class AppNavigator {
           route = PageRouteWithoutAnimation(
             settings: RouteSettings(name: routeName),
             builder: (BuildContext context) => BlocProvider(
-              create: (context) => BuildingRouteBloc(),
+              create: (context) => BuildingRouteBloc(
+                directionsRepository: injection(),
+              ),
               child: BuildingRouteScreen(),
             ),
           );

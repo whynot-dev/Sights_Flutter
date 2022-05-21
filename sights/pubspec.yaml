@@ -169,13 +169,7 @@ dependencies:
   page_transition: ^2.0.5
 
   #https://pub.dev/packages/geocoding
-  geocoding: ^2.0.2
-
-  #https://pub.dev/packages/yandex_mapkit
-  yandex_mapkit: ^2.0.2
-
-  #https://pub.dev/packages/yandex_geocoder
-  yandex_geocoder: 2.0.1
+  geocoding: ^2.0.4
 
   #https://pub.dev/packages/sliding_up_panel
   sliding_up_panel: ^2.0.0+1
@@ -185,6 +179,7 @@ dependencies:
 
   flutter_polyline_points: ^1.0.0
 
+  graphs: ^2.1.0
 
 dev_dependencies:
   retrofit_generator: ^2.0.0
@@ -232,7 +227,7 @@ flutter:
 #  background_image: "assets/images/splash_background.png"
 #  fullscreen: true
 
-#flutter_icons:
-#  image_path: "assets/images/app_icon.png"
-#  android: true
-#  ios: true
+flutter_icons:
+  image_path: "assets/images/app_icon.png"
+  android: true
+  ios: true

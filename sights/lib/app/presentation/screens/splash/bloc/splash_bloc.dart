@@ -8,9 +8,12 @@ import 'package:sights/app/navigation/navigation_type.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/domain/enums/enter_code_type.dart';
+import 'package:sights/domain/enums/map_mode.dart';
 
 part 'splash_bloc.freezed.dart';
+
 part 'splash_event.dart';
+
 part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
@@ -22,15 +25,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   PreferencesLocalGateway preferencesLocalGateway;
 
-
   FutureOr<void> _checkAuthorizationStatus(CheckAuthorizationStatus event, Emitter<SplashState> emit) async {
     emit(state.copyWith(action: null));
-    emit(state.copyWith(action:NavigateAction.navigateToMap(NavigateType.pushReplacement)));
-    // String? token = await preferencesLocalGateway.getToken();
-    // if (token != null ) {
-    //   emit(state.copyWith(action: NavigateToEnterPhoneNumber(NavigateType.pushReplacement)));
-    // }
-
+    emit(state.copyWith(
+      action: NavigateAction.navigateToMap(
+        NavigateType.pushReplacement,
+        mapMode: MapMode.defaultMode,
+      ),
+    ));
   }
-
 }

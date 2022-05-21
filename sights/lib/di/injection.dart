@@ -8,7 +8,9 @@ import 'package:sights/core/network/dio_helper.dart';
 import 'package:sights/core/network/network_info.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/data/gateways/remote/authorization_remote_gateway.dart';
+import 'package:sights/data/gateways/remote/directions_remote_gateway.dart';
 import 'package:sights/data/gateways/remote/map_remote_gateway.dart';
+import 'package:sights/data/repositories/directions_repository.dart';
 import 'package:sights/data/repositories/map_repository.dart';
 
 import 'package:sights/data/repositories/profile_repository.dart';
@@ -51,6 +53,16 @@ Future setUpLocatorWithDependencies({
   injection.registerLazySingleton<MapRepository>(() => MapRepository(
         injection(),
         mapRemoteGateway: injection(),
+      ));
+
+  injection.registerLazySingleton<DirectionsRemoteGateway>(() => DirectionsRemoteGateway(
+        dio: injection(),
+        baseUrl: 'https://api.mapbox.com/directions/v5/',
+      ));
+
+  injection.registerLazySingleton<DirectionsRepository>(() => DirectionsRepository(
+        injection(),
+        directionsRemoteGateway: injection(),
       ));
 
   // injection.registerLazySingleton<ProfileRemoteGateway>(() => ProfileRemoteGateway(dio: injection()));
