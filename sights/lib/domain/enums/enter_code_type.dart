@@ -1,4 +1,0 @@
-enum EnterCodeType {
-  enter,
-  create,
-}

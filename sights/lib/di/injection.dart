@@ -13,7 +13,6 @@ import 'package:sights/data/gateways/remote/map_remote_gateway.dart';
 import 'package:sights/data/repositories/directions_repository.dart';
 import 'package:sights/data/repositories/map_repository.dart';
 
-import 'package:sights/data/repositories/profile_repository.dart';
 import 'package:sights/localization/app_localizations.dart';
 
 GetIt injection = GetIt.I;
@@ -33,18 +32,11 @@ Future setUpLocatorWithDependencies({
   injection.registerSingleton<AppLocalizations>(AppLocalizations.of(context));
   injection.registerSingleton<DataConnectionChecker>(DataConnectionChecker());
   injection.registerSingleton<NetworkInfo>(NetworkInfoImpl(injection()));
-  // injection.registerSingleton<AuthorizationRemoteGateway>(AuthorizationRemoteGateway(
-  //   dio: DioHelper.getAuthDio(),
-  // ));
 
-  // injection.registerLazySingleton<AuthorizationRepository>(() => AuthorizationRepository(
-  //       injection(),
-  //       authorizationRemoteGateway: injection(),
-  //     ));
+
 
   injection.registerSingleton<Dio>(DioHelper.getDio(
     preferencesLocalGateway: injection(),
-    // authorizationRemoteGateway: injection(),
     navigatorKey: navigatorKey,
   ));
 
@@ -65,10 +57,4 @@ Future setUpLocatorWithDependencies({
         directionsRemoteGateway: injection(),
       ));
 
-  // injection.registerLazySingleton<ProfileRemoteGateway>(() => ProfileRemoteGateway(dio: injection()));
-  //
-  // injection.registerLazySingleton<ProfileRepository>(() => ProfileRepository(
-  //       injection(),
-  //       profileRemoteGateway: injection(),
-  //     ));
 }

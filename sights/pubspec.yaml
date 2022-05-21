@@ -200,28 +200,6 @@ flutter:
   assets:
     - assets/images/
     - assets/i18n/
-
-#  fonts:
-#    - family: TTFirsNeue
-#      fonts:
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-ExtraLight.ttf
-#          weight: 100
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Thin.ttf
-#          weight: 200
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Light.ttf
-#          weight: 300
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Regular.ttf
-#          weight: 400
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Medium.ttf
-#          weight: 500
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-DemiBold.ttf
-#          weight: 600
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Bold.ttf
-#          weight: 700
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-ExtraBold.ttf
-#          weight: 800
-#        - asset: assets/fonts/TTFirsNeue/TTFirsNeue-Black.ttf
-#          weight: 900
 #
 #flutter_native_splash:
 #  background_image: "assets/images/splash_background.png"

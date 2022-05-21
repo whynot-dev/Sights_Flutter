@@ -21,8 +21,8 @@ class _$MapStateTearOff {
       required MapMode mapMode,
       bool mapLoaded = false,
       bool isLoading = false,
-      CameraPosition cameraPosition = const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 14),
+      CameraPosition cameraPosition =
+          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14),
       List<SightEntity> sights = const [],
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters = SightType.values,
@@ -285,8 +285,8 @@ class _$_MapState implements _MapState {
       required this.mapMode,
       this.mapLoaded = false,
       this.isLoading = false,
-      this.cameraPosition = const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 14),
+      this.cameraPosition =
+          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14),
       this.sights = const [],
       this.selectedSightPoint,
       this.sightFilters = SightType.values,
@@ -307,8 +307,8 @@ class _$_MapState implements _MapState {
   @override
   final bool isLoading;
   @JsonKey(
-      defaultValue: const CameraPosition(
-          target: const LatLng(47.222078, 39.720358), zoom: 14))
+      defaultValue:
+          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14))
   @override
   final CameraPosition cameraPosition;
   @JsonKey(defaultValue: const [])

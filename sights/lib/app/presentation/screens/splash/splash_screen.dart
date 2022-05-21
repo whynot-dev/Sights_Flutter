@@ -38,7 +38,7 @@ class SplashScreen extends BaseBlocStatelessWidget {
                   Container(height: 1, width: 32, color: AppColors.white40),
                   const SizedBox(height: 16),
                   Text(
-                    AppLocalizations.of(context).useNotPossess,
+                    AppLocalizations.of(context).travelSimply,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,

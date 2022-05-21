@@ -7,7 +7,6 @@ import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/app/navigation/navigation_type.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
-import 'package:sights/domain/enums/enter_code_type.dart';
 import 'package:sights/domain/enums/map_mode.dart';
 
 part 'splash_bloc.freezed.dart';

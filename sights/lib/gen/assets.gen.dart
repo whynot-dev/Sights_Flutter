@@ -14,6 +14,8 @@ class $AssetsI18nGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.png');
   String get backArrow => 'assets/images/back_arrow.svg';
   String get filter => 'assets/images/filter.svg';
   AssetGenImage get location =>

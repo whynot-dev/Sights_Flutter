@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/app/navigation/navigation_type.dart';
-import 'package:sights/app/presentation/screens/enter_number/bloc/enter_number_bloc.dart';
-import 'package:sights/app/presentation/screens/enter_number/enter_number_screen.dart';
 import 'package:sights/data/gateways/local/preferences_local_gateway.dart';
 import 'package:sights/data/gateways/remote/authorization_remote_gateway.dart';
 import 'package:sights/di/injection.dart';
@@ -64,8 +62,6 @@ class DioHelper {
           if (error.response?.statusCode == 401 ||
               (error.response?.data.toString().contains('Unauthenticated') ?? false)) {
             String? refreshToken = await preferencesLocalGateway.getRefreshToken();
-            String routeName =
-                NavigateAction.navigateToEnterPhoneNumber(NavigateType.pushReplacement).runtimeType.toString();
             if (refreshToken != null) {
               try {
                 // HttpResponse<RefreshTokenResponse> newTokenResponse = await authorizationRemoteGateway.refreshToken(
@@ -86,32 +82,8 @@ class DioHelper {
                 if (error.response?.statusCode == 401 ||
                     (error.response?.data.toString().contains('Unauthenticated.') ?? false)) {
                   preferencesLocalGateway.setToken(null);
-                  navigatorKey.currentState!.pushReplacement(
-                    MaterialPageRoute(
-                      settings: RouteSettings(name: routeName),
-                      builder: (BuildContext context) => BlocProvider(
-                        create: (BuildContext context) => EnterNumberBloc(
-                          preferencesLocalGateway: injection(),
-                        ),
-                        child: EnterNumberScreen(),
-                      ),
-                    ),
-                  );
                 }
               }
-            } else {
-              navigatorKey.currentState!.pushReplacement(
-                MaterialPageRoute(
-                  settings: RouteSettings(name: routeName),
-                  builder: (BuildContext context) => BlocProvider(
-                    create: (BuildContext context) => EnterNumberBloc(
-                      //authorizationRepository: injection(),
-                      preferencesLocalGateway: injection(),
-                    ),
-                    child: EnterNumberScreen(),
-                  ),
-                ),
-              );
             }
           } else {
             handler.next(error);
