@@ -4,16 +4,8 @@ import 'package:sights/app/resources/app_colors.dart';
 class DefaultTextButton extends StatelessWidget {
   const DefaultTextButton({
     required this.text,
-    this.textStyle = const TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 17,
-      color: AppColors.onBackground,
-    ),
-    this.textStyleDisabled = const TextStyle(
-      fontWeight: FontWeight.w500,
-      fontSize: 17,
-      color: AppColors.gray3,
-    ),
+    this.textStyle = const TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: AppColors.onBackground),
+    this.textStyleDisabled = const TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: AppColors.gray3),
     this.onPressed,
     this.enabled = true,
   });

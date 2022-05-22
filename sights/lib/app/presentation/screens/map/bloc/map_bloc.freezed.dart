@@ -30,7 +30,8 @@ class _$MapStateTearOff {
       LatLng? locationMarkerPosition,
       String? currentAddress,
       Direction? currentDirection,
-      TransportType selectedTransport = TransportType.walking}) {
+      TransportType selectedTransport = TransportType.walking,
+      int countSightsInRoute = 0}) {
     return _MapState(
       action: action,
       mapMode: mapMode,
@@ -45,6 +46,7 @@ class _$MapStateTearOff {
       currentAddress: currentAddress,
       currentDirection: currentDirection,
       selectedTransport: selectedTransport,
+      countSightsInRoute: countSightsInRoute,
     );
   }
 }
@@ -67,6 +69,7 @@ mixin _$MapState {
   String? get currentAddress => throw _privateConstructorUsedError;
   Direction? get currentDirection => throw _privateConstructorUsedError;
   TransportType get selectedTransport => throw _privateConstructorUsedError;
+  int get countSightsInRoute => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -90,7 +93,8 @@ abstract class $MapStateCopyWith<$Res> {
       LatLng? locationMarkerPosition,
       String? currentAddress,
       Direction? currentDirection,
-      TransportType selectedTransport});
+      TransportType selectedTransport,
+      int countSightsInRoute});
 }
 
 /// @nodoc
@@ -116,6 +120,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? currentAddress = freezed,
     Object? currentDirection = freezed,
     Object? selectedTransport = freezed,
+    Object? countSightsInRoute = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
@@ -170,6 +175,10 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.selectedTransport
           : selectedTransport // ignore: cast_nullable_to_non_nullable
               as TransportType,
+      countSightsInRoute: countSightsInRoute == freezed
+          ? _value.countSightsInRoute
+          : countSightsInRoute // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -192,7 +201,8 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       LatLng? locationMarkerPosition,
       String? currentAddress,
       Direction? currentDirection,
-      TransportType selectedTransport});
+      TransportType selectedTransport,
+      int countSightsInRoute});
 }
 
 /// @nodoc
@@ -219,6 +229,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? currentAddress = freezed,
     Object? currentDirection = freezed,
     Object? selectedTransport = freezed,
+    Object? countSightsInRoute = freezed,
   }) {
     return _then(_MapState(
       action: action == freezed
@@ -273,6 +284,10 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.selectedTransport
           : selectedTransport // ignore: cast_nullable_to_non_nullable
               as TransportType,
+      countSightsInRoute: countSightsInRoute == freezed
+          ? _value.countSightsInRoute
+          : countSightsInRoute // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -294,7 +309,8 @@ class _$_MapState implements _MapState {
       this.locationMarkerPosition,
       this.currentAddress,
       this.currentDirection,
-      this.selectedTransport = TransportType.walking});
+      this.selectedTransport = TransportType.walking,
+      this.countSightsInRoute = 0});
 
   @override
   final BlocAction? action;
@@ -331,10 +347,13 @@ class _$_MapState implements _MapState {
   @JsonKey(defaultValue: TransportType.walking)
   @override
   final TransportType selectedTransport;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int countSightsInRoute;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport)';
+    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport, countSightsInRoute: $countSightsInRoute)';
   }
 
   @override
@@ -377,7 +396,10 @@ class _$_MapState implements _MapState {
                     .equals(other.currentDirection, currentDirection)) &&
             (identical(other.selectedTransport, selectedTransport) ||
                 const DeepCollectionEquality()
-                    .equals(other.selectedTransport, selectedTransport)));
+                    .equals(other.selectedTransport, selectedTransport)) &&
+            (identical(other.countSightsInRoute, countSightsInRoute) ||
+                const DeepCollectionEquality()
+                    .equals(other.countSightsInRoute, countSightsInRoute)));
   }
 
   @override
@@ -395,7 +417,8 @@ class _$_MapState implements _MapState {
       const DeepCollectionEquality().hash(locationMarkerPosition) ^
       const DeepCollectionEquality().hash(currentAddress) ^
       const DeepCollectionEquality().hash(currentDirection) ^
-      const DeepCollectionEquality().hash(selectedTransport);
+      const DeepCollectionEquality().hash(selectedTransport) ^
+      const DeepCollectionEquality().hash(countSightsInRoute);
 
   @JsonKey(ignore: true)
   @override
@@ -417,7 +440,8 @@ abstract class _MapState implements MapState {
       LatLng? locationMarkerPosition,
       String? currentAddress,
       Direction? currentDirection,
-      TransportType selectedTransport}) = _$_MapState;
+      TransportType selectedTransport,
+      int countSightsInRoute}) = _$_MapState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
@@ -445,6 +469,8 @@ abstract class _MapState implements MapState {
   Direction? get currentDirection => throw _privateConstructorUsedError;
   @override
   TransportType get selectedTransport => throw _privateConstructorUsedError;
+  @override
+  int get countSightsInRoute => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>
@@ -550,6 +576,14 @@ class _$MapEventTearOff {
       points,
     );
   }
+
+  SaveRouteClicked saveRouteClicked() {
+    return const SaveRouteClicked();
+  }
+
+  CloseRouteClicked closeRouteClicked() {
+    return const CloseRouteClicked();
+  }
 }
 
 /// @nodoc
@@ -579,6 +613,8 @@ mixin _$MapEvent {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -603,6 +639,8 @@ mixin _$MapEvent {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -630,6 +668,8 @@ mixin _$MapEvent {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -654,6 +694,8 @@ mixin _$MapEvent {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -731,6 +773,8 @@ class _$Init implements Init {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return init();
   }
@@ -758,6 +802,8 @@ class _$Init implements Init {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -791,6 +837,8 @@ class _$Init implements Init {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return init(this);
   }
@@ -818,6 +866,8 @@ class _$Init implements Init {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -890,6 +940,8 @@ class _$OnBackClicked implements OnBackClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onBackClicked();
   }
@@ -917,6 +969,8 @@ class _$OnBackClicked implements OnBackClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onBackClicked != null) {
@@ -950,6 +1004,8 @@ class _$OnBackClicked implements OnBackClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onBackClicked(this);
   }
@@ -977,6 +1033,8 @@ class _$OnBackClicked implements OnBackClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onBackClicked != null) {
@@ -1075,6 +1133,8 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onMapCreated(controller);
   }
@@ -1102,6 +1162,8 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -1135,6 +1197,8 @@ class _$OnMapCreated implements OnMapCreated {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onMapCreated(this);
   }
@@ -1162,6 +1226,8 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onMapCreated != null) {
@@ -1265,6 +1331,8 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onCameraMove(position);
   }
@@ -1292,6 +1360,8 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -1325,6 +1395,8 @@ class _$OnCameraMove implements OnCameraMove {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onCameraMove(this);
   }
@@ -1352,6 +1424,8 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraMove != null) {
@@ -1430,6 +1504,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onCameraMoveStarted();
   }
@@ -1457,6 +1533,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -1490,6 +1568,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onCameraMoveStarted(this);
   }
@@ -1517,6 +1597,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraMoveStarted != null) {
@@ -1589,6 +1671,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onCameraIdle();
   }
@@ -1616,6 +1700,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraIdle != null) {
@@ -1649,6 +1735,8 @@ class _$OnCameraIdle implements OnCameraIdle {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onCameraIdle(this);
   }
@@ -1676,6 +1764,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onCameraIdle != null) {
@@ -1746,6 +1836,8 @@ class _$GetSights implements GetSights {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return getSights();
   }
@@ -1773,6 +1865,8 @@ class _$GetSights implements GetSights {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1806,6 +1900,8 @@ class _$GetSights implements GetSights {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return getSights(this);
   }
@@ -1833,6 +1929,8 @@ class _$GetSights implements GetSights {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (getSights != null) {
@@ -1929,6 +2027,8 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return onMapTap(position);
   }
@@ -1956,6 +2056,8 @@ class _$OnMapTap implements OnMapTap {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -1989,6 +2091,8 @@ class _$OnMapTap implements OnMapTap {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return onMapTap(this);
   }
@@ -2016,6 +2120,8 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (onMapTap != null) {
@@ -2093,6 +2199,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return myLocationClicked();
   }
@@ -2120,6 +2228,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -2153,6 +2263,8 @@ class _$MyLocationClicked implements MyLocationClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return myLocationClicked(this);
   }
@@ -2180,6 +2292,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (myLocationClicked != null) {
@@ -2277,6 +2391,8 @@ class _$SightClicked implements SightClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return sightClicked(sight);
   }
@@ -2304,6 +2420,8 @@ class _$SightClicked implements SightClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -2337,6 +2455,8 @@ class _$SightClicked implements SightClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return sightClicked(this);
   }
@@ -2364,6 +2484,8 @@ class _$SightClicked implements SightClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (sightClicked != null) {
@@ -2469,6 +2591,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return sightInfoSlideChanged(position);
   }
@@ -2496,6 +2620,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -2529,6 +2655,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return sightInfoSlideChanged(this);
   }
@@ -2556,6 +2684,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (sightInfoSlideChanged != null) {
@@ -2634,6 +2764,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return showMessageNoGeo();
   }
@@ -2661,6 +2793,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -2694,6 +2828,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return showMessageNoGeo(this);
   }
@@ -2721,6 +2857,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (showMessageNoGeo != null) {
@@ -2793,6 +2931,8 @@ class _$RoutesClicked implements RoutesClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return routesClicked();
   }
@@ -2820,6 +2960,8 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (routesClicked != null) {
@@ -2853,6 +2995,8 @@ class _$RoutesClicked implements RoutesClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return routesClicked(this);
   }
@@ -2880,6 +3024,8 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (routesClicked != null) {
@@ -2953,6 +3099,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return routeButtonClicked();
   }
@@ -2980,6 +3128,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (routeButtonClicked != null) {
@@ -3013,6 +3163,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return routeButtonClicked(this);
   }
@@ -3040,6 +3192,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (routeButtonClicked != null) {
@@ -3112,6 +3266,8 @@ class _$FilterClicked implements FilterClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return filterClicked();
   }
@@ -3139,6 +3295,8 @@ class _$FilterClicked implements FilterClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -3172,6 +3330,8 @@ class _$FilterClicked implements FilterClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return filterClicked(this);
   }
@@ -3199,6 +3359,8 @@ class _$FilterClicked implements FilterClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -3297,6 +3459,8 @@ class _$FiltersChanged implements FiltersChanged {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return filtersChanged(sightFilters);
   }
@@ -3324,6 +3488,8 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (filtersChanged != null) {
@@ -3357,6 +3523,8 @@ class _$FiltersChanged implements FiltersChanged {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return filtersChanged(this);
   }
@@ -3384,6 +3552,8 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (filtersChanged != null) {
@@ -3461,6 +3631,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return getCurrentAddress();
   }
@@ -3488,6 +3660,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (getCurrentAddress != null) {
@@ -3521,6 +3695,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return getCurrentAddress(this);
   }
@@ -3548,6 +3724,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (getCurrentAddress != null) {
@@ -3622,6 +3800,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return selectThisAddressClicked();
   }
@@ -3649,6 +3829,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (selectThisAddressClicked != null) {
@@ -3682,6 +3864,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return selectThisAddressClicked(this);
   }
@@ -3709,6 +3893,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (selectThisAddressClicked != null) {
@@ -3808,6 +3994,8 @@ class _$DirectionChanged implements DirectionChanged {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return directionChanged(directionEntity);
   }
@@ -3835,6 +4023,8 @@ class _$DirectionChanged implements DirectionChanged {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (directionChanged != null) {
@@ -3868,6 +4058,8 @@ class _$DirectionChanged implements DirectionChanged {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return directionChanged(this);
   }
@@ -3895,6 +4087,8 @@ class _$DirectionChanged implements DirectionChanged {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (directionChanged != null) {
@@ -4000,6 +4194,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     required TResult Function() selectThisAddressClicked,
     required TResult Function(DirectionEntity directionEntity) directionChanged,
     required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
   }) {
     return buildRouteWithSights(points);
   }
@@ -4027,6 +4223,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     TResult Function()? selectThisAddressClicked,
     TResult Function(DirectionEntity directionEntity)? directionChanged,
     TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (buildRouteWithSights != null) {
@@ -4060,6 +4258,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
         selectThisAddressClicked,
     required TResult Function(DirectionChanged value) directionChanged,
     required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
   }) {
     return buildRouteWithSights(this);
   }
@@ -4087,6 +4287,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
     TResult Function(DirectionChanged value)? directionChanged,
     TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
     required TResult orElse(),
   }) {
     if (buildRouteWithSights != null) {
@@ -4104,4 +4306,338 @@ abstract class BuildRouteWithSights implements MapEvent {
   @JsonKey(ignore: true)
   $BuildRouteWithSightsCopyWith<BuildRouteWithSights> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SaveRouteClickedCopyWith<$Res> {
+  factory $SaveRouteClickedCopyWith(
+          SaveRouteClicked value, $Res Function(SaveRouteClicked) then) =
+      _$SaveRouteClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SaveRouteClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $SaveRouteClickedCopyWith<$Res> {
+  _$SaveRouteClickedCopyWithImpl(
+      SaveRouteClicked _value, $Res Function(SaveRouteClicked) _then)
+      : super(_value, (v) => _then(v as SaveRouteClicked));
+
+  @override
+  SaveRouteClicked get _value => super._value as SaveRouteClicked;
+}
+
+/// @nodoc
+
+class _$SaveRouteClicked implements SaveRouteClicked {
+  const _$SaveRouteClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.saveRouteClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SaveRouteClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
+  }) {
+    return saveRouteClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (saveRouteClicked != null) {
+      return saveRouteClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
+  }) {
+    return saveRouteClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (saveRouteClicked != null) {
+      return saveRouteClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SaveRouteClicked implements MapEvent {
+  const factory SaveRouteClicked() = _$SaveRouteClicked;
+}
+
+/// @nodoc
+abstract class $CloseRouteClickedCopyWith<$Res> {
+  factory $CloseRouteClickedCopyWith(
+          CloseRouteClicked value, $Res Function(CloseRouteClicked) then) =
+      _$CloseRouteClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$CloseRouteClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $CloseRouteClickedCopyWith<$Res> {
+  _$CloseRouteClickedCopyWithImpl(
+      CloseRouteClicked _value, $Res Function(CloseRouteClicked) _then)
+      : super(_value, (v) => _then(v as CloseRouteClicked));
+
+  @override
+  CloseRouteClicked get _value => super._value as CloseRouteClicked;
+}
+
+/// @nodoc
+
+class _$CloseRouteClicked implements CloseRouteClicked {
+  const _$CloseRouteClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.closeRouteClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is CloseRouteClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
+  }) {
+    return closeRouteClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (closeRouteClicked != null) {
+      return closeRouteClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
+  }) {
+    return closeRouteClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (closeRouteClicked != null) {
+      return closeRouteClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CloseRouteClicked implements MapEvent {
+  const factory CloseRouteClicked() = _$CloseRouteClicked;
 }

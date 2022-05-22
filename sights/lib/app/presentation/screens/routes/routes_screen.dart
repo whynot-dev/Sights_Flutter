@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sights/app/resources/app_colors.dart';
 import 'package:sights/app/widgets/app_bars/default_appbar.dart';
 import 'package:sights/app/widgets/backgrounds/default_white_background.dart';
 import 'package:sights/app/widgets/backgrounds/white_gradient_background.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/app/navigation/app_navigator.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
+import 'package:sights/core/ui/scroll_behavior/disable_glow_effect_scroll_behavior.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
 import 'package:sights/core/ui/widgets/base_bloc_stateless_widget.dart';
 import 'package:sights/localization/app_localizations.dart';
@@ -36,10 +38,16 @@ class _RoutesScreenState extends BaseBlocState<RoutesScreen, RoutesBloc> {
             AppNavigator.navigate(context: context, action: action);
           }
         },
-        child: Column(
-          children: [
-            _buildAppbar(),
-          ],
+        child: ScrollConfiguration(
+          behavior: const DisableGrowEffectScrollBehavior(),
+          child: Column(
+            children: [
+              _buildAppbar(),
+              Expanded(
+                child: _buildRoutes(),
+              )
+            ],
+          ),
         ),
       );
 
@@ -49,5 +57,21 @@ class _RoutesScreenState extends BaseBlocState<RoutesScreen, RoutesBloc> {
         onBackPressed: () {
           Navigator.pop(context);
         },
+      );
+
+  Widget _buildRoutes() => BlocBuilder<RoutesBloc, RoutesState>(
+        buildWhen: (previous, current) => previous.routes != current.routes,
+        builder: (context, state) => ListView.separated(
+          itemCount: state.routes.length,
+          itemBuilder: (context, index) => _buildRoute(state.routes[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+        ),
+      );
+
+  Widget _buildRoute(String text) => Container(
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: AppColors.onBackground),
+        ),
       );
 }

@@ -22,4 +22,6 @@ class MapEvent with _$MapEvent {
   const factory MapEvent.selectThisAddressClicked() = SelectThisAddressClicked;
   const factory MapEvent.directionChanged(DirectionEntity directionEntity) = DirectionChanged;
   const factory MapEvent.buildRouteWithSights(List<LatLng> points) = BuildRouteWithSights;
+  const factory MapEvent.saveRouteClicked() = SaveRouteClicked;
+  const factory MapEvent.closeRouteClicked() = CloseRouteClicked;
 }

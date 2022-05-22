@@ -16,6 +16,7 @@ class MapState with _$MapState {
     String? currentAddress,
     Direction? currentDirection,
     @Default(TransportType.walking) TransportType selectedTransport,
+    @Default(0) int countSightsInRoute,
   }) = _MapState;
 }
 

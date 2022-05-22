@@ -82,6 +82,8 @@ class AppLocalizations {
   String get imInterested  => _localizedStrings['imInterested'] ?? '';
   String get buildingRoute  => _localizedStrings['buildingRoute'] ?? '';
   String get transport  => _localizedStrings['transport'] ?? '';
+  String get pointDeparture  => _localizedStrings['pointDeparture'] ?? '';
+  String get pointDestination  => _localizedStrings['pointDestination'] ?? '';
 
 }
 

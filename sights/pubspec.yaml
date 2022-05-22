@@ -39,7 +39,9 @@ dependencies:
   equatable: ^2.0.0
 
   #https://pub.dev/packages/hive
-  hive: ^2.0.4
+  hive: ^2.2.1
+
+  hive_flutter: ^1.1.0
 
   #https://pub.dev/packages/flutter_secure_storage
   flutter_secure_storage: ^4.2.0
@@ -181,9 +183,11 @@ dependencies:
 
   graphs: ^2.1.0
 
+
+
 dev_dependencies:
   retrofit_generator: ^2.0.0
-  hive_generator: ^1.1.0
+  hive_generator: ^1.1.3
   build_runner: ^2.0.3
   flutter_gen_runner: ^3.0.1
   json_serializable: ^4.1.2

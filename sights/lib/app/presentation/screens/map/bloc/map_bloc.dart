@@ -61,6 +61,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<SelectThisAddressClicked>(_selectThisAddressClicked);
     on<DirectionChanged>(_directionChanged);
     on<BuildRouteWithSights>(_buildRouteWithSights);
+    on<SaveRouteClicked>(_saveRouteClicked);
+    on<CloseRouteClicked>(_closeRouteClicked);
     this.add(MapEvent.init());
   }
 
@@ -274,9 +276,15 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       (error) {},
     );
     if (direction != null) {
-      emit(state.copyWith(currentDirection: direction));
+      emit(state.copyWith(currentDirection: direction, countSightsInRoute: event.points.length - 2));
       _mapController.animateCamera(CameraUpdate.newLatLng(event.points.first));
     }
+  }
+
+  FutureOr<void> _saveRouteClicked(SaveRouteClicked event, Emitter<MapState> emit) {}
+
+  FutureOr<void> _closeRouteClicked(CloseRouteClicked event, Emitter<MapState> emit) {
+    emit(state.copyWith(currentDirection: null));
   }
 
   void _createGraph(List<LatLng> points) {
@@ -342,14 +350,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           priorityQueue.add(MapEntry<Node, double>(next, distance));
           cameFrom[next] = current.key;
         }
-        // double newCost = costSoFar[current.key]! + graph[current.key]!.firstWhere((item) => item.id == next.id).value;
-        //
-        // if (!costSoFar.containsKey(next) || newCost > costSoFar[next]!) {
-        //   costSoFar[next] = newCost;
-        //   double priority = newCost + _getManhattanDistance(points[next.id], points[goal.id]) * 0.001;
-        //   priorityQueue.add(MapEntry<Node, double>(next, priority));
-        //   cameFrom[next] = current.key;
-        // }
       });
     }
 
@@ -360,8 +360,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   double _getManhattanDistance(LatLng a, LatLng b) {
     return _getPythagorasDistance(a, b) + _getPythagorasDistance(a, b);
-    double distanceInMeters = Geolocator.distanceBetween(a.latitude, a.longitude, b.latitude, b.longitude);
-    return distanceInMeters;
   }
 
   double _getPythagorasDistance(LatLng a, LatLng b) {

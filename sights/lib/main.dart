@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:country_codes/country_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 
 import 'app/app.dart';
 import 'app/resources/app_styles.dart';

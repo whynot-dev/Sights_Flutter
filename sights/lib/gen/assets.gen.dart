@@ -23,8 +23,13 @@ class $AssetsImagesGen {
   String get map => 'assets/images/map.svg';
   AssetGenImage get marker => const AssetGenImage('assets/images/marker.png');
   AssetGenImage get marker2 => const AssetGenImage('assets/images/marker2.png');
+  AssetGenImage get markerFinish =>
+      const AssetGenImage('assets/images/marker_finish.png');
+  AssetGenImage get markerStart =>
+      const AssetGenImage('assets/images/marker_start.png');
   String get minus => 'assets/images/minus.svg';
   String get myMarker => 'assets/images/my_marker.svg';
+  String get myMarker2 => 'assets/images/my_marker_2.svg';
   String get navigationProfile => 'assets/images/navigation_profile.svg';
   String get navigationRoutes => 'assets/images/navigation_routes.svg';
   String get plus => 'assets/images/plus.svg';

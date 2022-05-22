@@ -40,5 +40,7 @@
   "apply": "Применить",
   "imInterested": "Мне интересны",
   "buildingRoute": "Построение маршрута",
-  "transport": "Транспорт"
+  "transport": "Транспорт",
+  "pointDeparture": "Пункт отправления",
+  "pointDestination": "Пункт назначения"
 }

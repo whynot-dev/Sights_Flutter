@@ -15,6 +15,7 @@ import 'package:sights/app/widgets/bottom_sheets/sight_info/sight_info.dart';
 import 'package:sights/app/widgets/buttons/app_button.dart';
 import 'package:sights/app/widgets/buttons/default_button.dart';
 import 'package:sights/app/widgets/modals/sights_filter_modal.dart';
+import 'package:sights/app/widgets/others/direction_info.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
 import 'package:sights/core/ui/widgets/dialogs.dart';
@@ -77,10 +78,11 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
         child: Stack(
           children: [
             Positioned.fill(child: _buildMap()),
+            Positioned(child: Align(alignment: Alignment.topCenter, child: _buildCurrentDirectionInfo())),
             Positioned(top: MediaQuery.of(context).viewPadding.top + 8, left: 16, child: _buildBackButton()),
             Positioned(child: Align(alignment: Alignment.topCenter, child: _buildCurrentAddressWithButton())),
             //Positioned.fill(child: Align(alignment: Alignment.centerRight, child: _buildZoomButtons())),
-            Positioned(top: 45, right: 16, child: _buildFiltersButton()),
+            Positioned(top: MediaQuery.of(context).viewPadding.top + 8, right: 16, child: _buildFiltersButton()),
             Positioned(child: Align(alignment: Alignment.bottomCenter, child: _buildBottomButtons())),
             Positioned(child: Align(alignment: Alignment.center, child: _buildMyMarker())),
             Positioned(child: Align(child: _buildSightInfoBottomPanel()))
@@ -103,7 +105,6 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                   .decodePolyline(state.currentDirection!.geometry)
                   .map((item) => LatLng(item.latitude, item.longitude))
                   .toList();
-
 
               // List<LatLng> sortedLatitudePoints = List.from(points);
               // List<LatLng> sortedLongitudePoints = List.from(points);
@@ -185,7 +186,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
     }
 
     if (direction != null) {
-      markerIcon = await getBytesFromAsset(Assets.images.location.assetName, 100);
+      markerIcon = await getBytesFromAsset(Assets.images.markerStart.assetName, 100);
       icon = BitmapDescriptor.fromBytes(markerIcon);
       List<PointLatLng> points = polylinePoints.decodePolyline(direction.geometry);
       markers.add(
@@ -195,6 +196,8 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
           icon: icon,
         ),
       );
+      markerIcon = await getBytesFromAsset(Assets.images.markerFinish.assetName, 100);
+      icon = BitmapDescriptor.fromBytes(markerIcon);
       markers.add(
         Marker(
           markerId: MarkerId('${sights.length + 2}'),
@@ -219,6 +222,26 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             : const SizedBox(),
       );
 
+  Widget _buildCurrentDirectionInfo() => BlocBuilder<MapBloc, MapState>(
+        buildWhen: (previous, current) =>
+            previous.mapMode != current.mapMode ||
+            previous.countSightsInRoute != current.countSightsInRoute ||
+            previous.currentDirection != current.currentDirection,
+        builder: (context, state) => state.mapMode == MapMode.defaultMode && state.currentDirection != null
+            ? DirectionInfo(
+                direction: state.currentDirection!,
+                transportType: state.selectedTransport,
+                countSightsInRoute: state.countSightsInRoute,
+                closeClicked: () {
+                  getBloc(context).add(MapEvent.closeRouteClicked());
+                },
+                saveClicked: () {
+                  getBloc(context).add(MapEvent.saveRouteClicked());
+                },
+              )
+            : const SizedBox(),
+      );
+
   Widget _buildMyLocationButton() => _buildCircleButton(
         icon: Assets.images.send,
         onTap: () async {
@@ -226,11 +249,18 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
         },
       );
 
-  Widget _buildFiltersButton() => _buildCircleButton(
-        icon: Assets.images.filter,
-        onTap: () {
-          getBloc(context).add(MapEvent.filterClicked());
-        },
+  Widget _buildFiltersButton() => BlocBuilder<MapBloc, MapState>(
+        buildWhen: (previous, current) => previous.currentDirection != current.currentDirection,
+        builder: (context, state) => AnimatedPadding(
+          duration: const Duration(milliseconds: 250),
+          padding: EdgeInsets.only(top: state.currentDirection != null ? 76 : 0),
+          child: _buildCircleButton(
+            icon: Assets.images.filter,
+            onTap: () {
+              getBloc(context).add(MapEvent.filterClicked());
+            },
+          ),
+        ),
       );
 
   Widget _buildCircleButton({required String icon, VoidCallback? onTap}) => InkWell(
@@ -306,7 +336,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                     AnimatedPositioned(
                       duration: const Duration(milliseconds: 250),
                       bottom: MediaQuery.of(context).size.height / 2,
-                      child: SvgPicture.asset(Assets.images.myMarker),
+                      child: SvgPicture.asset(Assets.images.myMarker2, width: 36, height: 36, color: AppColors.red),
                     ),
                   ],
                 ),
