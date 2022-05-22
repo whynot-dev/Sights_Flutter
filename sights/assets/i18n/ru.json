@@ -43,5 +43,8 @@
   "transport": "Транспорт",
   "pointDeparture": "Пункт отправления",
   "pointDestination": "Пункт назначения",
-  "delete": "Удалить"
+  "delete": "Удалить",
+  "shorter": "Короче",
+  "moreInteresting": "Интереснее"
+
 }

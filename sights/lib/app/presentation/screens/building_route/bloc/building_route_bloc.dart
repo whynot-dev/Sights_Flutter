@@ -30,6 +30,7 @@ class BuildingRouteBloc extends Bloc<BuildingRouteEvent, BuildingRouteState> {
     on<RoutePointPicked>(_routePointPicked);
     on<BuildRouteClicked>(_buildRouteClicked);
     on<TransportChanged>(_transportChanged);
+    on<RouteInterestChanged>(_routeInterestChanged);
   }
 
   final DirectionsRepository directionsRepository;
@@ -72,7 +73,7 @@ class BuildingRouteBloc extends Bloc<BuildingRouteEvent, BuildingRouteState> {
         emit(state.copyWith(intermediatePoints: intermediatePoints));
         break;
     }
-    if(state.departure != null && state.destination != null){
+    if (state.departure != null && state.destination != null) {
       emit(state.copyWith(buttonEnabled: true));
     }
   }
@@ -96,11 +97,32 @@ class BuildingRouteBloc extends Bloc<BuildingRouteEvent, BuildingRouteState> {
       );
       if (direction != null) {
         emit(state.copyWith(action: null));
+        double valueInterest = 0.625;
+        switch (state.routeInterestValue.toInt()) {
+          case 0:
+            valueInterest = 0.225;
+            break;
+          case 1:
+            valueInterest = 0.425;
+            break;
+          case 2:
+            valueInterest = 0.625;
+            break;
+          case 3:
+            valueInterest = 0.825;
+            break;
+        }
+
         emit(
           state.copyWith(
-              action: NavigateAction.navigateBack(
-            result: DirectionEntity(direction: direction!, transportType: state.selectedTransport),
-          )),
+            action: NavigateAction.navigateBack(
+              result: DirectionEntity(
+                direction: direction!,
+                transportType: state.selectedTransport,
+                routeInterestValue: valueInterest,
+              ),
+            ),
+          ),
         );
       }
     }
@@ -108,5 +130,9 @@ class BuildingRouteBloc extends Bloc<BuildingRouteEvent, BuildingRouteState> {
 
   FutureOr<void> _transportChanged(TransportChanged event, Emitter<BuildingRouteState> emit) {
     emit(state.copyWith(selectedTransport: event.transportType));
+  }
+
+  FutureOr<void> _routeInterestChanged(RouteInterestChanged event, Emitter<BuildingRouteState> emit) {
+    emit(state.copyWith(routeInterestValue: event.value));
   }
 }

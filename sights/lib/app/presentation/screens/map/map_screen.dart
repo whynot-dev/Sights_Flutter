@@ -70,7 +70,12 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             }
             if (result != null && result is SaveRouteEntity) {
               getBloc(context).add(MapEvent.directionChanged(
-                DirectionEntity(direction: result.direction, transportType: result.transportType, isSaved: true),
+                DirectionEntity(
+                  direction: result.direction,
+                  transportType: result.transportType,
+                  countSights: result.countSights,
+                  isSaved: true,
+                ),
               ));
             }
           }
@@ -86,8 +91,8 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             Positioned.fill(child: _buildMap()),
             Positioned(child: Align(alignment: Alignment.topCenter, child: _buildCurrentDirectionInfo())),
             Positioned(top: MediaQuery.of(context).viewPadding.top + 8, left: 16, child: _buildBackButton()),
-            Positioned(child: Align(alignment: Alignment.topCenter, child: _buildCurrentAddressWithButton())),
-            //Positioned.fill(child: Align(alignment: Alignment.centerRight, child: _buildZoomButtons())),
+            Positioned(child: Align(alignment: Alignment.topCenter, child: _buildCurrentAddress())),
+            Positioned.fill(child: Align(alignment: Alignment.centerRight, child: _buildZoomButtons())),
             Positioned(top: MediaQuery.of(context).viewPadding.top + 8, right: 16, child: _buildFiltersButton()),
             Positioned(child: Align(alignment: Alignment.bottomCenter, child: _buildBottomButtons())),
             Positioned(child: Align(alignment: Alignment.center, child: _buildMyMarker())),
@@ -271,29 +276,26 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
         ),
       );
 
-  Widget _buildCircleButton({required String icon, VoidCallback? onTap}) => InkWell(
-        highlightColor: AppColors.black,
-        hoverColor: AppColors.black,
-        child: GestureDetector(
+  Widget _buildCircleButton({required String icon, VoidCallback? onTap}) => Material(
+        borderRadius: BorderRadius.circular(100),
+        elevation: 5,
+        color: Colors.white,
+        child: InkWell(
+          overlayColor: MaterialStateProperty.all<Color>(Colors.grey),
+          borderRadius: BorderRadius.circular(100),
           onTap: () {
             onTap?.call();
           },
-          behavior: HitTestBehavior.translucent,
           child: Container(
             height: 42,
             width: 42,
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              shape: BoxShape.circle,
-              boxShadow: [BoxShadow(offset: Offset(0, 4), blurRadius: 16, color: AppColors.black.withOpacity(0.15))],
-            ),
             child: SvgPicture.asset(icon),
           ),
         ),
       );
 
-  Widget _buildCurrentAddressWithButton() => BlocBuilder<MapBloc, MapState>(
+  Widget _buildCurrentAddress() => BlocBuilder<MapBloc, MapState>(
         buildWhen: (previous, current) =>
             previous.selectedSightPoint != current.selectedSightPoint || previous.mapMode != current.mapMode,
         builder: (context, state) => state.selectedSightPoint == null && state.mapMode == MapMode.selectPoint
@@ -305,7 +307,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                 ),
                 child: Column(
                   children: [
-                    _buildCurrentAddress(),
+                    _buildCurrentAddressText(),
                     const SizedBox(height: 24),
                   ],
                 ),
@@ -313,7 +315,58 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             : const SizedBox(),
       );
 
-  Widget _buildCurrentAddress() => BlocBuilder<MapBloc, MapState>(
+  Widget _buildZoomButtons() => Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: Container(
+          width: 40,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [BoxShadow(offset: Offset(0, 4), blurRadius: 16, color: AppColors.black.withOpacity(0.15))],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildZoomButton(
+                icon: Assets.images.plus,
+                isPlus: true,
+                onTap: () {
+                  getBloc(context).add(MapEvent.zoomPlusClicked());
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Container(height: 1, color: AppColors.gray2.withOpacity(0.4)),
+              ),
+              _buildZoomButton(
+                icon: Assets.images.minus,
+                onTap: () {
+                  getBloc(context).add(MapEvent.zoomMinusClicked());
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildZoomButton({required String icon, VoidCallback? onTap, bool isPlus = false}) => Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: isPlus
+              ? BorderRadius.vertical(top: Radius.circular(16))
+              : BorderRadius.vertical(bottom: Radius.circular(16)),
+          onTap: () {
+            onTap?.call();
+          },
+          overlayColor: MaterialStateProperty.all<Color>(Colors.grey),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: SvgPicture.asset(icon),
+          ),
+        ),
+      );
+
+  Widget _buildCurrentAddressText() => BlocBuilder<MapBloc, MapState>(
         buildWhen: (previous, current) => previous.currentAddress != current.currentAddress,
         builder: (context, state) => Text(
           state.currentAddress?.isNotEmpty == true ? state.currentAddress! : ' ',

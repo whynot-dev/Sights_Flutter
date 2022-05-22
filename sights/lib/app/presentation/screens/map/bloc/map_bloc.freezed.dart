@@ -32,7 +32,8 @@ class _$MapStateTearOff {
       Direction? currentDirection,
       TransportType selectedTransport = TransportType.walking,
       int countSightsInRoute = 0,
-      bool currentDirectionIsSaved = false}) {
+      bool currentDirectionIsSaved = false,
+      double routeInterestValue = 0.625}) {
     return _MapState(
       action: action,
       mapMode: mapMode,
@@ -49,6 +50,7 @@ class _$MapStateTearOff {
       selectedTransport: selectedTransport,
       countSightsInRoute: countSightsInRoute,
       currentDirectionIsSaved: currentDirectionIsSaved,
+      routeInterestValue: routeInterestValue,
     );
   }
 }
@@ -73,6 +75,7 @@ mixin _$MapState {
   TransportType get selectedTransport => throw _privateConstructorUsedError;
   int get countSightsInRoute => throw _privateConstructorUsedError;
   bool get currentDirectionIsSaved => throw _privateConstructorUsedError;
+  double get routeInterestValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -98,7 +101,8 @@ abstract class $MapStateCopyWith<$Res> {
       Direction? currentDirection,
       TransportType selectedTransport,
       int countSightsInRoute,
-      bool currentDirectionIsSaved});
+      bool currentDirectionIsSaved,
+      double routeInterestValue});
 }
 
 /// @nodoc
@@ -126,6 +130,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? selectedTransport = freezed,
     Object? countSightsInRoute = freezed,
     Object? currentDirectionIsSaved = freezed,
+    Object? routeInterestValue = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
@@ -188,6 +193,10 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.currentDirectionIsSaved
           : currentDirectionIsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      routeInterestValue: routeInterestValue == freezed
+          ? _value.routeInterestValue
+          : routeInterestValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -212,7 +221,8 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       Direction? currentDirection,
       TransportType selectedTransport,
       int countSightsInRoute,
-      bool currentDirectionIsSaved});
+      bool currentDirectionIsSaved,
+      double routeInterestValue});
 }
 
 /// @nodoc
@@ -241,6 +251,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? selectedTransport = freezed,
     Object? countSightsInRoute = freezed,
     Object? currentDirectionIsSaved = freezed,
+    Object? routeInterestValue = freezed,
   }) {
     return _then(_MapState(
       action: action == freezed
@@ -303,6 +314,10 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.currentDirectionIsSaved
           : currentDirectionIsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      routeInterestValue: routeInterestValue == freezed
+          ? _value.routeInterestValue
+          : routeInterestValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -326,7 +341,8 @@ class _$_MapState implements _MapState {
       this.currentDirection,
       this.selectedTransport = TransportType.walking,
       this.countSightsInRoute = 0,
-      this.currentDirectionIsSaved = false});
+      this.currentDirectionIsSaved = false,
+      this.routeInterestValue = 0.625});
 
   @override
   final BlocAction? action;
@@ -369,10 +385,13 @@ class _$_MapState implements _MapState {
   @JsonKey(defaultValue: false)
   @override
   final bool currentDirectionIsSaved;
+  @JsonKey(defaultValue: 0.625)
+  @override
+  final double routeInterestValue;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport, countSightsInRoute: $countSightsInRoute, currentDirectionIsSaved: $currentDirectionIsSaved)';
+    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport, countSightsInRoute: $countSightsInRoute, currentDirectionIsSaved: $currentDirectionIsSaved, routeInterestValue: $routeInterestValue)';
   }
 
   @override
@@ -422,7 +441,10 @@ class _$_MapState implements _MapState {
             (identical(
                     other.currentDirectionIsSaved, currentDirectionIsSaved) ||
                 const DeepCollectionEquality().equals(
-                    other.currentDirectionIsSaved, currentDirectionIsSaved)));
+                    other.currentDirectionIsSaved, currentDirectionIsSaved)) &&
+            (identical(other.routeInterestValue, routeInterestValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.routeInterestValue, routeInterestValue)));
   }
 
   @override
@@ -442,7 +464,8 @@ class _$_MapState implements _MapState {
       const DeepCollectionEquality().hash(currentDirection) ^
       const DeepCollectionEquality().hash(selectedTransport) ^
       const DeepCollectionEquality().hash(countSightsInRoute) ^
-      const DeepCollectionEquality().hash(currentDirectionIsSaved);
+      const DeepCollectionEquality().hash(currentDirectionIsSaved) ^
+      const DeepCollectionEquality().hash(routeInterestValue);
 
   @JsonKey(ignore: true)
   @override
@@ -466,7 +489,8 @@ abstract class _MapState implements MapState {
       Direction? currentDirection,
       TransportType selectedTransport,
       int countSightsInRoute,
-      bool currentDirectionIsSaved}) = _$_MapState;
+      bool currentDirectionIsSaved,
+      double routeInterestValue}) = _$_MapState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
@@ -498,6 +522,8 @@ abstract class _MapState implements MapState {
   int get countSightsInRoute => throw _privateConstructorUsedError;
   @override
   bool get currentDirectionIsSaved => throw _privateConstructorUsedError;
+  @override
+  double get routeInterestValue => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>
@@ -534,6 +560,14 @@ class _$MapEventTearOff {
 
   OnCameraIdle onCameraIdle() {
     return const OnCameraIdle();
+  }
+
+  ZoomPlusClicked zoomPlusClicked() {
+    return const ZoomPlusClicked();
+  }
+
+  ZoomMinusClicked zoomMinusClicked() {
+    return const ZoomMinusClicked();
   }
 
   GetSights getSights() {
@@ -626,6 +660,8 @@ mixin _$MapEvent {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -652,6 +688,8 @@ mixin _$MapEvent {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -679,6 +717,8 @@ mixin _$MapEvent {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -707,6 +747,8 @@ mixin _$MapEvent {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -786,6 +828,8 @@ class _$Init implements Init {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -815,6 +859,8 @@ class _$Init implements Init {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -848,6 +894,8 @@ class _$Init implements Init {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -879,6 +927,8 @@ class _$Init implements Init {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -953,6 +1003,8 @@ class _$OnBackClicked implements OnBackClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -982,6 +1034,8 @@ class _$OnBackClicked implements OnBackClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1015,6 +1069,8 @@ class _$OnBackClicked implements OnBackClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1046,6 +1102,8 @@ class _$OnBackClicked implements OnBackClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1146,6 +1204,8 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -1175,6 +1235,8 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1208,6 +1270,8 @@ class _$OnMapCreated implements OnMapCreated {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1239,6 +1303,8 @@ class _$OnMapCreated implements OnMapCreated {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1344,6 +1410,8 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -1373,6 +1441,8 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1406,6 +1476,8 @@ class _$OnCameraMove implements OnCameraMove {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1437,6 +1509,8 @@ class _$OnCameraMove implements OnCameraMove {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1517,6 +1591,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -1546,6 +1622,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1579,6 +1657,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1610,6 +1690,8 @@ class _$OnCameraMoveStarted implements OnCameraMoveStarted {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1684,6 +1766,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -1713,6 +1797,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1746,6 +1832,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1777,6 +1865,8 @@ class _$OnCameraIdle implements OnCameraIdle {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -1804,6 +1894,356 @@ class _$OnCameraIdle implements OnCameraIdle {
 
 abstract class OnCameraIdle implements MapEvent {
   const factory OnCameraIdle() = _$OnCameraIdle;
+}
+
+/// @nodoc
+abstract class $ZoomPlusClickedCopyWith<$Res> {
+  factory $ZoomPlusClickedCopyWith(
+          ZoomPlusClicked value, $Res Function(ZoomPlusClicked) then) =
+      _$ZoomPlusClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ZoomPlusClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $ZoomPlusClickedCopyWith<$Res> {
+  _$ZoomPlusClickedCopyWithImpl(
+      ZoomPlusClicked _value, $Res Function(ZoomPlusClicked) _then)
+      : super(_value, (v) => _then(v as ZoomPlusClicked));
+
+  @override
+  ZoomPlusClicked get _value => super._value as ZoomPlusClicked;
+}
+
+/// @nodoc
+
+class _$ZoomPlusClicked implements ZoomPlusClicked {
+  const _$ZoomPlusClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.zoomPlusClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ZoomPlusClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
+  }) {
+    return zoomPlusClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (zoomPlusClicked != null) {
+      return zoomPlusClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
+  }) {
+    return zoomPlusClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (zoomPlusClicked != null) {
+      return zoomPlusClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ZoomPlusClicked implements MapEvent {
+  const factory ZoomPlusClicked() = _$ZoomPlusClicked;
+}
+
+/// @nodoc
+abstract class $ZoomMinusClickedCopyWith<$Res> {
+  factory $ZoomMinusClickedCopyWith(
+          ZoomMinusClicked value, $Res Function(ZoomMinusClicked) then) =
+      _$ZoomMinusClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ZoomMinusClickedCopyWithImpl<$Res> extends _$MapEventCopyWithImpl<$Res>
+    implements $ZoomMinusClickedCopyWith<$Res> {
+  _$ZoomMinusClickedCopyWithImpl(
+      ZoomMinusClicked _value, $Res Function(ZoomMinusClicked) _then)
+      : super(_value, (v) => _then(v as ZoomMinusClicked));
+
+  @override
+  ZoomMinusClicked get _value => super._value as ZoomMinusClicked;
+}
+
+/// @nodoc
+
+class _$ZoomMinusClicked implements ZoomMinusClicked {
+  const _$ZoomMinusClicked();
+
+  @override
+  String toString() {
+    return 'MapEvent.zoomMinusClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ZoomMinusClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() onBackClicked,
+    required TResult Function(GoogleMapController controller) onMapCreated,
+    required TResult Function(CameraPosition position) onCameraMove,
+    required TResult Function() onCameraMoveStarted,
+    required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
+    required TResult Function() getSights,
+    required TResult Function(LatLng position) onMapTap,
+    required TResult Function() myLocationClicked,
+    required TResult Function(SightEntity sight) sightClicked,
+    required TResult Function(double position) sightInfoSlideChanged,
+    required TResult Function() showMessageNoGeo,
+    required TResult Function() routesClicked,
+    required TResult Function() routeButtonClicked,
+    required TResult Function() filterClicked,
+    required TResult Function(List<SightType> sightFilters) filtersChanged,
+    required TResult Function() getCurrentAddress,
+    required TResult Function() selectThisAddressClicked,
+    required TResult Function(DirectionEntity directionEntity) directionChanged,
+    required TResult Function(List<LatLng> points) buildRouteWithSights,
+    required TResult Function() saveRouteClicked,
+    required TResult Function() closeRouteClicked,
+  }) {
+    return zoomMinusClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? onBackClicked,
+    TResult Function(GoogleMapController controller)? onMapCreated,
+    TResult Function(CameraPosition position)? onCameraMove,
+    TResult Function()? onCameraMoveStarted,
+    TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
+    TResult Function()? getSights,
+    TResult Function(LatLng position)? onMapTap,
+    TResult Function()? myLocationClicked,
+    TResult Function(SightEntity sight)? sightClicked,
+    TResult Function(double position)? sightInfoSlideChanged,
+    TResult Function()? showMessageNoGeo,
+    TResult Function()? routesClicked,
+    TResult Function()? routeButtonClicked,
+    TResult Function()? filterClicked,
+    TResult Function(List<SightType> sightFilters)? filtersChanged,
+    TResult Function()? getCurrentAddress,
+    TResult Function()? selectThisAddressClicked,
+    TResult Function(DirectionEntity directionEntity)? directionChanged,
+    TResult Function(List<LatLng> points)? buildRouteWithSights,
+    TResult Function()? saveRouteClicked,
+    TResult Function()? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (zoomMinusClicked != null) {
+      return zoomMinusClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(OnBackClicked value) onBackClicked,
+    required TResult Function(OnMapCreated value) onMapCreated,
+    required TResult Function(OnCameraMove value) onCameraMove,
+    required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
+    required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
+    required TResult Function(GetSights value) getSights,
+    required TResult Function(OnMapTap value) onMapTap,
+    required TResult Function(MyLocationClicked value) myLocationClicked,
+    required TResult Function(SightClicked value) sightClicked,
+    required TResult Function(SightInfoSlideChanged value)
+        sightInfoSlideChanged,
+    required TResult Function(ShowMessageNoGeo value) showMessageNoGeo,
+    required TResult Function(RoutesClicked value) routesClicked,
+    required TResult Function(RouteButtonClicked value) routeButtonClicked,
+    required TResult Function(FilterClicked value) filterClicked,
+    required TResult Function(FiltersChanged value) filtersChanged,
+    required TResult Function(GetCurrentAddress value) getCurrentAddress,
+    required TResult Function(SelectThisAddressClicked value)
+        selectThisAddressClicked,
+    required TResult Function(DirectionChanged value) directionChanged,
+    required TResult Function(BuildRouteWithSights value) buildRouteWithSights,
+    required TResult Function(SaveRouteClicked value) saveRouteClicked,
+    required TResult Function(CloseRouteClicked value) closeRouteClicked,
+  }) {
+    return zoomMinusClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(OnBackClicked value)? onBackClicked,
+    TResult Function(OnMapCreated value)? onMapCreated,
+    TResult Function(OnCameraMove value)? onCameraMove,
+    TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
+    TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
+    TResult Function(GetSights value)? getSights,
+    TResult Function(OnMapTap value)? onMapTap,
+    TResult Function(MyLocationClicked value)? myLocationClicked,
+    TResult Function(SightClicked value)? sightClicked,
+    TResult Function(SightInfoSlideChanged value)? sightInfoSlideChanged,
+    TResult Function(ShowMessageNoGeo value)? showMessageNoGeo,
+    TResult Function(RoutesClicked value)? routesClicked,
+    TResult Function(RouteButtonClicked value)? routeButtonClicked,
+    TResult Function(FilterClicked value)? filterClicked,
+    TResult Function(FiltersChanged value)? filtersChanged,
+    TResult Function(GetCurrentAddress value)? getCurrentAddress,
+    TResult Function(SelectThisAddressClicked value)? selectThisAddressClicked,
+    TResult Function(DirectionChanged value)? directionChanged,
+    TResult Function(BuildRouteWithSights value)? buildRouteWithSights,
+    TResult Function(SaveRouteClicked value)? saveRouteClicked,
+    TResult Function(CloseRouteClicked value)? closeRouteClicked,
+    required TResult orElse(),
+  }) {
+    if (zoomMinusClicked != null) {
+      return zoomMinusClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ZoomMinusClicked implements MapEvent {
+  const factory ZoomMinusClicked() = _$ZoomMinusClicked;
 }
 
 /// @nodoc
@@ -1849,6 +2289,8 @@ class _$GetSights implements GetSights {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -1878,6 +2320,8 @@ class _$GetSights implements GetSights {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -1911,6 +2355,8 @@ class _$GetSights implements GetSights {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -1942,6 +2388,8 @@ class _$GetSights implements GetSights {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2040,6 +2488,8 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2069,6 +2519,8 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -2102,6 +2554,8 @@ class _$OnMapTap implements OnMapTap {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2133,6 +2587,8 @@ class _$OnMapTap implements OnMapTap {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2212,6 +2668,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2241,6 +2699,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -2274,6 +2734,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2305,6 +2767,8 @@ class _$MyLocationClicked implements MyLocationClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2404,6 +2868,8 @@ class _$SightClicked implements SightClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2433,6 +2899,8 @@ class _$SightClicked implements SightClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -2466,6 +2934,8 @@ class _$SightClicked implements SightClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2497,6 +2967,8 @@ class _$SightClicked implements SightClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2604,6 +3076,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2633,6 +3107,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -2666,6 +3142,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2697,6 +3175,8 @@ class _$SightInfoSlideChanged implements SightInfoSlideChanged {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2777,6 +3257,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2806,6 +3288,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -2839,6 +3323,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -2870,6 +3356,8 @@ class _$ShowMessageNoGeo implements ShowMessageNoGeo {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -2944,6 +3432,8 @@ class _$RoutesClicked implements RoutesClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -2973,6 +3463,8 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3006,6 +3498,8 @@ class _$RoutesClicked implements RoutesClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3037,6 +3531,8 @@ class _$RoutesClicked implements RoutesClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -3112,6 +3608,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -3141,6 +3639,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3174,6 +3674,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3205,6 +3707,8 @@ class _$RouteButtonClicked implements RouteButtonClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -3279,6 +3783,8 @@ class _$FilterClicked implements FilterClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -3308,6 +3814,8 @@ class _$FilterClicked implements FilterClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3341,6 +3849,8 @@ class _$FilterClicked implements FilterClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3372,6 +3882,8 @@ class _$FilterClicked implements FilterClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -3472,6 +3984,8 @@ class _$FiltersChanged implements FiltersChanged {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -3501,6 +4015,8 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3534,6 +4050,8 @@ class _$FiltersChanged implements FiltersChanged {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3565,6 +4083,8 @@ class _$FiltersChanged implements FiltersChanged {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -3644,6 +4164,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -3673,6 +4195,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3706,6 +4230,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3737,6 +4263,8 @@ class _$GetCurrentAddress implements GetCurrentAddress {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -3813,6 +4341,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -3842,6 +4372,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -3875,6 +4407,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -3906,6 +4440,8 @@ class _$SelectThisAddressClicked implements SelectThisAddressClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -4007,6 +4543,8 @@ class _$DirectionChanged implements DirectionChanged {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -4036,6 +4574,8 @@ class _$DirectionChanged implements DirectionChanged {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -4069,6 +4609,8 @@ class _$DirectionChanged implements DirectionChanged {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -4100,6 +4642,8 @@ class _$DirectionChanged implements DirectionChanged {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -4207,6 +4751,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -4236,6 +4782,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -4269,6 +4817,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -4300,6 +4850,8 @@ class _$BuildRouteWithSights implements BuildRouteWithSights {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -4380,6 +4932,8 @@ class _$SaveRouteClicked implements SaveRouteClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -4409,6 +4963,8 @@ class _$SaveRouteClicked implements SaveRouteClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -4442,6 +4998,8 @@ class _$SaveRouteClicked implements SaveRouteClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -4473,6 +5031,8 @@ class _$SaveRouteClicked implements SaveRouteClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,
@@ -4547,6 +5107,8 @@ class _$CloseRouteClicked implements CloseRouteClicked {
     required TResult Function(CameraPosition position) onCameraMove,
     required TResult Function() onCameraMoveStarted,
     required TResult Function() onCameraIdle,
+    required TResult Function() zoomPlusClicked,
+    required TResult Function() zoomMinusClicked,
     required TResult Function() getSights,
     required TResult Function(LatLng position) onMapTap,
     required TResult Function() myLocationClicked,
@@ -4576,6 +5138,8 @@ class _$CloseRouteClicked implements CloseRouteClicked {
     TResult Function(CameraPosition position)? onCameraMove,
     TResult Function()? onCameraMoveStarted,
     TResult Function()? onCameraIdle,
+    TResult Function()? zoomPlusClicked,
+    TResult Function()? zoomMinusClicked,
     TResult Function()? getSights,
     TResult Function(LatLng position)? onMapTap,
     TResult Function()? myLocationClicked,
@@ -4609,6 +5173,8 @@ class _$CloseRouteClicked implements CloseRouteClicked {
     required TResult Function(OnCameraMove value) onCameraMove,
     required TResult Function(OnCameraMoveStarted value) onCameraMoveStarted,
     required TResult Function(OnCameraIdle value) onCameraIdle,
+    required TResult Function(ZoomPlusClicked value) zoomPlusClicked,
+    required TResult Function(ZoomMinusClicked value) zoomMinusClicked,
     required TResult Function(GetSights value) getSights,
     required TResult Function(OnMapTap value) onMapTap,
     required TResult Function(MyLocationClicked value) myLocationClicked,
@@ -4640,6 +5206,8 @@ class _$CloseRouteClicked implements CloseRouteClicked {
     TResult Function(OnCameraMove value)? onCameraMove,
     TResult Function(OnCameraMoveStarted value)? onCameraMoveStarted,
     TResult Function(OnCameraIdle value)? onCameraIdle,
+    TResult Function(ZoomPlusClicked value)? zoomPlusClicked,
+    TResult Function(ZoomMinusClicked value)? zoomMinusClicked,
     TResult Function(GetSights value)? getSights,
     TResult Function(OnMapTap value)? onMapTap,
     TResult Function(MyLocationClicked value)? myLocationClicked,

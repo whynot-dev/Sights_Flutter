@@ -16,4 +16,6 @@ class BuildingRouteEvent with _$BuildingRouteEvent {
   const factory BuildingRouteEvent.buildRouteClicked() = BuildRouteClicked;
 
   const factory BuildingRouteEvent.transportChanged(TransportType transportType) = TransportChanged;
+
+  const factory BuildingRouteEvent.routeInterestChanged(double value) = RouteInterestChanged;
 }

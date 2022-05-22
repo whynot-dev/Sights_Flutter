@@ -48,6 +48,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnCameraMove>(_onCameraMove);
     on<OnCameraMoveStarted>(_onCameraMoveStarted);
     on<OnCameraIdle>(_onCameraIdle);
+    on<ZoomPlusClicked>(_zoomPlusClicked);
+    on<ZoomMinusClicked>(_zoomMinusClicked);
     on<GetSights>(_getSights);
     on<OnMapTap>(_onMapTap);
     on<MyLocationClicked>(_myLocationClicked);
@@ -96,12 +98,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   FutureOr<void> _onCameraMove(OnCameraMove event, Emitter<MapState> emit) async {
-    // if (_timer?.isActive ?? false) {
-    //   _timer?.cancel();
-    // }
-    // _timer = Timer(Duration(milliseconds: 300), () async {
-    //   this.add(MapEvent.getSights());
-    // });
     emit(state.copyWith(cameraPosition: event.position));
   }
 
@@ -119,13 +115,20 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         _timer?.cancel();
       }
       _timer = Timer(Duration(milliseconds: 300), () async {
+        if (state.mapMode == MapMode.selectPoint) {
+          this.add(MapEvent.getCurrentAddress());
+        }
         this.add(MapEvent.getSights());
       });
     }
+  }
 
-    if (state.mapMode == MapMode.selectPoint) {
-      this.add(MapEvent.getCurrentAddress());
-    }
+  FutureOr<void> _zoomPlusClicked(ZoomPlusClicked event, Emitter<MapState> emit) {
+    _mapController.animateCamera(CameraUpdate.zoomIn());
+  }
+
+  FutureOr<void> _zoomMinusClicked(ZoomMinusClicked event, Emitter<MapState> emit) {
+    _mapController.animateCamera(CameraUpdate.zoomOut());
   }
 
   FutureOr<void> _getSights(GetSights event, Emitter<MapState> emit) async {
@@ -236,6 +239,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     emit(state.copyWith(
       selectedTransport: event.directionEntity.transportType,
       currentDirectionIsSaved: event.directionEntity.isSaved,
+      routeInterestValue: event.directionEntity.routeInterestValue,
+      countSightsInRoute: event.directionEntity.countSights,
     ));
 
     List<LatLng> points = _polylinePoints
@@ -268,10 +273,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           pointsForGraph.add(points.last);
           _createGraph(pointsForGraph);
         } else {
-          emit(state.copyWith(
-            currentDirection: event.directionEntity.direction,
-            countSightsInRoute: points.length - 2,
-          ));
+          emit(state.copyWith(currentDirection: event.directionEntity.direction));
           _mapController.animateCamera(CameraUpdate.newLatLng(points.first));
         }
       },
@@ -380,7 +382,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     Map<Node, Node> cameFrom = Map<Node, Node>();
     Map<Node, double> costSoFar = Map<Node, double>();
 
-    const double coefficientCurrentLengthToFinish = 1 / 1.6;
+    double coefficientCurrentLengthToFinish = state.routeInterestValue;
 
     PriorityQueue<MapEntry<Node, double>> priorityQueue =
         PriorityQueue<MapEntry<Node, double>>((min, max) => min.value.compareTo(max.value));

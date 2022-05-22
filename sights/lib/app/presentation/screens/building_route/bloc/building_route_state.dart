@@ -9,6 +9,7 @@ class BuildingRouteState with _$BuildingRouteState {
     RoutePointEntity? destination,
     @Default(TransportType.walking) TransportType selectedTransport,
     @Default(false) bool buttonEnabled,
+    @Default(1) double routeInterestValue,
   }) = _BuildingRouteState;
 }
 

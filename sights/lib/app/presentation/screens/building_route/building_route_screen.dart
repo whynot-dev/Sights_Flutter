@@ -54,6 +54,9 @@ class _BuildingRouteScreenState extends BaseBlocState<BuildingRouteScreen, Build
             children: [
               _buildAppbar(),
               _buildRoutePoints(),
+              const SizedBox(height: 16),
+              _buildSelectorInterest(),
+              _buildTransportSelector(),
               Expanded(child: _buildIntermediatePoints()),
               _buildBuildRouteButton(),
             ],
@@ -74,7 +77,6 @@ class _BuildingRouteScreenState extends BaseBlocState<BuildingRouteScreen, Build
         children: [
           _buildDeparturePoint(),
           _buildDestination(),
-          _buildTransportSelector(),
         ],
       );
 
@@ -142,6 +144,39 @@ class _BuildingRouteScreenState extends BaseBlocState<BuildingRouteScreen, Build
         ),
       );
 
+  Widget _buildSelectorInterest() => BlocBuilder<BuildingRouteBloc, BuildingRouteState>(
+        buildWhen: (previous, current) => previous.routeInterestValue != current.routeInterestValue,
+        builder: (context, state) => Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).shorter,
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: AppColors.onBackground),
+                  ),
+                  Text(
+                    AppLocalizations.of(context).moreInteresting,
+                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 17, color: AppColors.onBackground),
+                  ),
+                ],
+              ),
+            ),
+            Slider(
+              min: 0,
+              max: 3,
+              divisions: 3,
+              value: state.routeInterestValue,
+              onChanged: (value) {
+                getBloc(context).add(BuildingRouteEvent.routeInterestChanged(value));
+              },
+            ),
+          ],
+        ),
+      );
+
   Widget _buildTransportSelector() => BlocBuilder<BuildingRouteBloc, BuildingRouteState>(
         buildWhen: (previous, current) => previous.selectedTransport != current.selectedTransport,
         builder: (context, state) => Padding(
@@ -155,6 +190,7 @@ class _BuildingRouteScreenState extends BaseBlocState<BuildingRouteScreen, Build
               const SizedBox(width: 10),
               DropdownButton<TransportType>(
                 value: state.selectedTransport,
+                borderRadius: BorderRadius.circular(16),
                 items: [
                   DropdownMenuItem(
                     value: TransportType.driving,

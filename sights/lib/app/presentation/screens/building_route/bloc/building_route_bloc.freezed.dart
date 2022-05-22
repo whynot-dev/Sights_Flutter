@@ -22,7 +22,8 @@ class _$BuildingRouteStateTearOff {
       List<RoutePointEntity> intermediatePoints = const [],
       RoutePointEntity? destination,
       TransportType selectedTransport = TransportType.walking,
-      bool buttonEnabled = false}) {
+      bool buttonEnabled = false,
+      double routeInterestValue = 1}) {
     return _BuildingRouteState(
       action: action,
       departure: departure,
@@ -30,6 +31,7 @@ class _$BuildingRouteStateTearOff {
       destination: destination,
       selectedTransport: selectedTransport,
       buttonEnabled: buttonEnabled,
+      routeInterestValue: routeInterestValue,
     );
   }
 }
@@ -46,6 +48,7 @@ mixin _$BuildingRouteState {
   RoutePointEntity? get destination => throw _privateConstructorUsedError;
   TransportType get selectedTransport => throw _privateConstructorUsedError;
   bool get buttonEnabled => throw _privateConstructorUsedError;
+  double get routeInterestValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BuildingRouteStateCopyWith<BuildingRouteState> get copyWith =>
@@ -63,7 +66,8 @@ abstract class $BuildingRouteStateCopyWith<$Res> {
       List<RoutePointEntity> intermediatePoints,
       RoutePointEntity? destination,
       TransportType selectedTransport,
-      bool buttonEnabled});
+      bool buttonEnabled,
+      double routeInterestValue});
 }
 
 /// @nodoc
@@ -83,6 +87,7 @@ class _$BuildingRouteStateCopyWithImpl<$Res>
     Object? destination = freezed,
     Object? selectedTransport = freezed,
     Object? buttonEnabled = freezed,
+    Object? routeInterestValue = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
@@ -109,6 +114,10 @@ class _$BuildingRouteStateCopyWithImpl<$Res>
           ? _value.buttonEnabled
           : buttonEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      routeInterestValue: routeInterestValue == freezed
+          ? _value.routeInterestValue
+          : routeInterestValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -126,7 +135,8 @@ abstract class _$BuildingRouteStateCopyWith<$Res>
       List<RoutePointEntity> intermediatePoints,
       RoutePointEntity? destination,
       TransportType selectedTransport,
-      bool buttonEnabled});
+      bool buttonEnabled,
+      double routeInterestValue});
 }
 
 /// @nodoc
@@ -148,6 +158,7 @@ class __$BuildingRouteStateCopyWithImpl<$Res>
     Object? destination = freezed,
     Object? selectedTransport = freezed,
     Object? buttonEnabled = freezed,
+    Object? routeInterestValue = freezed,
   }) {
     return _then(_BuildingRouteState(
       action: action == freezed
@@ -174,6 +185,10 @@ class __$BuildingRouteStateCopyWithImpl<$Res>
           ? _value.buttonEnabled
           : buttonEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      routeInterestValue: routeInterestValue == freezed
+          ? _value.routeInterestValue
+          : routeInterestValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -187,7 +202,8 @@ class _$_BuildingRouteState implements _BuildingRouteState {
       this.intermediatePoints = const [],
       this.destination,
       this.selectedTransport = TransportType.walking,
-      this.buttonEnabled = false});
+      this.buttonEnabled = false,
+      this.routeInterestValue = 1});
 
   @override
   final BlocAction? action;
@@ -204,10 +220,13 @@ class _$_BuildingRouteState implements _BuildingRouteState {
   @JsonKey(defaultValue: false)
   @override
   final bool buttonEnabled;
+  @JsonKey(defaultValue: 1)
+  @override
+  final double routeInterestValue;
 
   @override
   String toString() {
-    return 'BuildingRouteState(action: $action, departure: $departure, intermediatePoints: $intermediatePoints, destination: $destination, selectedTransport: $selectedTransport, buttonEnabled: $buttonEnabled)';
+    return 'BuildingRouteState(action: $action, departure: $departure, intermediatePoints: $intermediatePoints, destination: $destination, selectedTransport: $selectedTransport, buttonEnabled: $buttonEnabled, routeInterestValue: $routeInterestValue)';
   }
 
   @override
@@ -230,7 +249,10 @@ class _$_BuildingRouteState implements _BuildingRouteState {
                     .equals(other.selectedTransport, selectedTransport)) &&
             (identical(other.buttonEnabled, buttonEnabled) ||
                 const DeepCollectionEquality()
-                    .equals(other.buttonEnabled, buttonEnabled)));
+                    .equals(other.buttonEnabled, buttonEnabled)) &&
+            (identical(other.routeInterestValue, routeInterestValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.routeInterestValue, routeInterestValue)));
   }
 
   @override
@@ -241,7 +263,8 @@ class _$_BuildingRouteState implements _BuildingRouteState {
       const DeepCollectionEquality().hash(intermediatePoints) ^
       const DeepCollectionEquality().hash(destination) ^
       const DeepCollectionEquality().hash(selectedTransport) ^
-      const DeepCollectionEquality().hash(buttonEnabled);
+      const DeepCollectionEquality().hash(buttonEnabled) ^
+      const DeepCollectionEquality().hash(routeInterestValue);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +279,8 @@ abstract class _BuildingRouteState implements BuildingRouteState {
       List<RoutePointEntity> intermediatePoints,
       RoutePointEntity? destination,
       TransportType selectedTransport,
-      bool buttonEnabled}) = _$_BuildingRouteState;
+      bool buttonEnabled,
+      double routeInterestValue}) = _$_BuildingRouteState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
@@ -271,6 +295,8 @@ abstract class _BuildingRouteState implements BuildingRouteState {
   TransportType get selectedTransport => throw _privateConstructorUsedError;
   @override
   bool get buttonEnabled => throw _privateConstructorUsedError;
+  @override
+  double get routeInterestValue => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BuildingRouteStateCopyWith<_BuildingRouteState> get copyWith =>
@@ -310,6 +336,12 @@ class _$BuildingRouteEventTearOff {
       transportType,
     );
   }
+
+  RouteInterestChanged routeInterestChanged(double value) {
+    return RouteInterestChanged(
+      value,
+    );
+  }
 }
 
 /// @nodoc
@@ -327,6 +359,7 @@ mixin _$BuildingRouteEvent {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -339,6 +372,7 @@ mixin _$BuildingRouteEvent {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -350,6 +384,7 @@ mixin _$BuildingRouteEvent {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -360,6 +395,7 @@ mixin _$BuildingRouteEvent {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -427,6 +463,7 @@ class _$Init implements Init {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return init();
   }
@@ -442,6 +479,7 @@ class _$Init implements Init {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -459,6 +497,7 @@ class _$Init implements Init {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return init(this);
   }
@@ -472,6 +511,7 @@ class _$Init implements Init {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -533,6 +573,7 @@ class _$DepartureClicked implements DepartureClicked {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return departureClicked();
   }
@@ -548,6 +589,7 @@ class _$DepartureClicked implements DepartureClicked {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (departureClicked != null) {
@@ -565,6 +607,7 @@ class _$DepartureClicked implements DepartureClicked {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return departureClicked(this);
   }
@@ -578,6 +621,7 @@ class _$DepartureClicked implements DepartureClicked {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (departureClicked != null) {
@@ -639,6 +683,7 @@ class _$DestinationClicked implements DestinationClicked {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return destinationClicked();
   }
@@ -654,6 +699,7 @@ class _$DestinationClicked implements DestinationClicked {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (destinationClicked != null) {
@@ -671,6 +717,7 @@ class _$DestinationClicked implements DestinationClicked {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return destinationClicked(this);
   }
@@ -684,6 +731,7 @@ class _$DestinationClicked implements DestinationClicked {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (destinationClicked != null) {
@@ -783,6 +831,7 @@ class _$RoutePointPicked implements RoutePointPicked {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return routePointPicked(routePoint, selectPointType);
   }
@@ -798,6 +847,7 @@ class _$RoutePointPicked implements RoutePointPicked {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (routePointPicked != null) {
@@ -815,6 +865,7 @@ class _$RoutePointPicked implements RoutePointPicked {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return routePointPicked(this);
   }
@@ -828,6 +879,7 @@ class _$RoutePointPicked implements RoutePointPicked {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (routePointPicked != null) {
@@ -897,6 +949,7 @@ class _$BuildRouteClicked implements BuildRouteClicked {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return buildRouteClicked();
   }
@@ -912,6 +965,7 @@ class _$BuildRouteClicked implements BuildRouteClicked {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (buildRouteClicked != null) {
@@ -929,6 +983,7 @@ class _$BuildRouteClicked implements BuildRouteClicked {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return buildRouteClicked(this);
   }
@@ -942,6 +997,7 @@ class _$BuildRouteClicked implements BuildRouteClicked {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (buildRouteClicked != null) {
@@ -1029,6 +1085,7 @@ class _$TransportChanged implements TransportChanged {
         routePointPicked,
     required TResult Function() buildRouteClicked,
     required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
   }) {
     return transportChanged(transportType);
   }
@@ -1044,6 +1101,7 @@ class _$TransportChanged implements TransportChanged {
         routePointPicked,
     TResult Function()? buildRouteClicked,
     TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (transportChanged != null) {
@@ -1061,6 +1119,7 @@ class _$TransportChanged implements TransportChanged {
     required TResult Function(RoutePointPicked value) routePointPicked,
     required TResult Function(BuildRouteClicked value) buildRouteClicked,
     required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
   }) {
     return transportChanged(this);
   }
@@ -1074,6 +1133,7 @@ class _$TransportChanged implements TransportChanged {
     TResult Function(RoutePointPicked value)? routePointPicked,
     TResult Function(BuildRouteClicked value)? buildRouteClicked,
     TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
     required TResult orElse(),
   }) {
     if (transportChanged != null) {
@@ -1090,5 +1150,146 @@ abstract class TransportChanged implements BuildingRouteEvent {
   TransportType get transportType => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransportChangedCopyWith<TransportChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RouteInterestChangedCopyWith<$Res> {
+  factory $RouteInterestChangedCopyWith(RouteInterestChanged value,
+          $Res Function(RouteInterestChanged) then) =
+      _$RouteInterestChangedCopyWithImpl<$Res>;
+  $Res call({double value});
+}
+
+/// @nodoc
+class _$RouteInterestChangedCopyWithImpl<$Res>
+    extends _$BuildingRouteEventCopyWithImpl<$Res>
+    implements $RouteInterestChangedCopyWith<$Res> {
+  _$RouteInterestChangedCopyWithImpl(
+      RouteInterestChanged _value, $Res Function(RouteInterestChanged) _then)
+      : super(_value, (v) => _then(v as RouteInterestChanged));
+
+  @override
+  RouteInterestChanged get _value => super._value as RouteInterestChanged;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(RouteInterestChanged(
+      value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RouteInterestChanged implements RouteInterestChanged {
+  const _$RouteInterestChanged(this.value);
+
+  @override
+  final double value;
+
+  @override
+  String toString() {
+    return 'BuildingRouteEvent.routeInterestChanged(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is RouteInterestChanged &&
+            (identical(other.value, value) ||
+                const DeepCollectionEquality().equals(other.value, value)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(value);
+
+  @JsonKey(ignore: true)
+  @override
+  $RouteInterestChangedCopyWith<RouteInterestChanged> get copyWith =>
+      _$RouteInterestChangedCopyWithImpl<RouteInterestChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() departureClicked,
+    required TResult Function() destinationClicked,
+    required TResult Function(
+            RoutePointEntity routePoint, SelectPointType selectPointType)
+        routePointPicked,
+    required TResult Function() buildRouteClicked,
+    required TResult Function(TransportType transportType) transportChanged,
+    required TResult Function(double value) routeInterestChanged,
+  }) {
+    return routeInterestChanged(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? departureClicked,
+    TResult Function()? destinationClicked,
+    TResult Function(
+            RoutePointEntity routePoint, SelectPointType selectPointType)?
+        routePointPicked,
+    TResult Function()? buildRouteClicked,
+    TResult Function(TransportType transportType)? transportChanged,
+    TResult Function(double value)? routeInterestChanged,
+    required TResult orElse(),
+  }) {
+    if (routeInterestChanged != null) {
+      return routeInterestChanged(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(DepartureClicked value) departureClicked,
+    required TResult Function(DestinationClicked value) destinationClicked,
+    required TResult Function(RoutePointPicked value) routePointPicked,
+    required TResult Function(BuildRouteClicked value) buildRouteClicked,
+    required TResult Function(TransportChanged value) transportChanged,
+    required TResult Function(RouteInterestChanged value) routeInterestChanged,
+  }) {
+    return routeInterestChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(DepartureClicked value)? departureClicked,
+    TResult Function(DestinationClicked value)? destinationClicked,
+    TResult Function(RoutePointPicked value)? routePointPicked,
+    TResult Function(BuildRouteClicked value)? buildRouteClicked,
+    TResult Function(TransportChanged value)? transportChanged,
+    TResult Function(RouteInterestChanged value)? routeInterestChanged,
+    required TResult orElse(),
+  }) {
+    if (routeInterestChanged != null) {
+      return routeInterestChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RouteInterestChanged implements BuildingRouteEvent {
+  const factory RouteInterestChanged(double value) = _$RouteInterestChanged;
+
+  double get value => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RouteInterestChangedCopyWith<RouteInterestChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }

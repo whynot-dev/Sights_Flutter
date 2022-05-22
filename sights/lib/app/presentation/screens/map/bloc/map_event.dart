@@ -8,6 +8,8 @@ class MapEvent with _$MapEvent {
   const factory MapEvent.onCameraMove(CameraPosition position) = OnCameraMove;
   const factory MapEvent.onCameraMoveStarted() = OnCameraMoveStarted;
   const factory MapEvent.onCameraIdle() = OnCameraIdle;
+  const factory MapEvent.zoomPlusClicked() = ZoomPlusClicked;
+  const factory MapEvent.zoomMinusClicked() = ZoomMinusClicked;
   const factory MapEvent.getSights() = GetSights;
   const factory MapEvent.onMapTap(LatLng position) = OnMapTap;
   const factory MapEvent.myLocationClicked() = MyLocationClicked;
