@@ -23,6 +23,7 @@ import 'package:sights/di/injection.dart';
 import 'package:sights/domain/entities/direction.dart';
 import 'package:sights/domain/entities/direction_entity.dart';
 import 'package:sights/domain/entities/feature.dart';
+import 'package:sights/domain/entities/save_route_entity.dart';
 import 'package:sights/domain/entities/sight_entity.dart';
 import 'package:sights/domain/enums/map_mode.dart';
 import 'package:sights/domain/enums/sight_type.dart';
@@ -66,6 +67,11 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
             dynamic result = await AppNavigator.navigate(context: context, action: action);
             if (result != null && result is DirectionEntity) {
               getBloc(context).add(MapEvent.directionChanged(result));
+            }
+            if (result != null && result is SaveRouteEntity) {
+              getBloc(context).add(MapEvent.directionChanged(
+                DirectionEntity(direction: result.direction, transportType: result.transportType, isSaved: true),
+              ));
             }
           }
           if (action is ShowMessage) {
@@ -225,6 +231,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
   Widget _buildCurrentDirectionInfo() => BlocBuilder<MapBloc, MapState>(
         buildWhen: (previous, current) =>
             previous.mapMode != current.mapMode ||
+            previous.currentDirectionIsSaved != current.currentDirectionIsSaved ||
             previous.countSightsInRoute != current.countSightsInRoute ||
             previous.currentDirection != current.currentDirection,
         builder: (context, state) => state.mapMode == MapMode.defaultMode && state.currentDirection != null
@@ -232,6 +239,7 @@ class _MapScreenState extends BaseBlocState<MapScreen, MapBloc> {
                 direction: state.currentDirection!,
                 transportType: state.selectedTransport,
                 countSightsInRoute: state.countSightsInRoute,
+                isSaved: state.currentDirectionIsSaved,
                 closeClicked: () {
                   getBloc(context).add(MapEvent.closeRouteClicked());
                 },

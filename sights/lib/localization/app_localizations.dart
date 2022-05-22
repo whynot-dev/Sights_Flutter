@@ -84,6 +84,7 @@ class AppLocalizations {
   String get transport  => _localizedStrings['transport'] ?? '';
   String get pointDeparture  => _localizedStrings['pointDeparture'] ?? '';
   String get pointDestination  => _localizedStrings['pointDestination'] ?? '';
+  String get delete  => _localizedStrings['delete'] ?? '';
 
 }
 

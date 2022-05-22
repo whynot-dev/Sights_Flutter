@@ -42,5 +42,6 @@
   "buildingRoute": "Построение маршрута",
   "transport": "Транспорт",
   "pointDeparture": "Пункт отправления",
-  "pointDestination": "Пункт назначения"
+  "pointDestination": "Пункт назначения",
+  "delete": "Удалить"
 }

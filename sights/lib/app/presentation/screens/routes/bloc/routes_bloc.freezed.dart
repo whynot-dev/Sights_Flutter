@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RoutesStateTearOff {
   const _$RoutesStateTearOff();
 
-  _RoutesState call({BlocAction? action, List<String> routes = const []}) {
+  _RoutesState call(
+      {BlocAction? action, List<SaveRouteEntity> routes = const []}) {
     return _RoutesState(
       action: action,
       routes: routes,
@@ -30,7 +31,7 @@ const $RoutesState = _$RoutesStateTearOff();
 /// @nodoc
 mixin _$RoutesState {
   BlocAction? get action => throw _privateConstructorUsedError;
-  List<String> get routes => throw _privateConstructorUsedError;
+  List<SaveRouteEntity> get routes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RoutesStateCopyWith<RoutesState> get copyWith =>
@@ -42,7 +43,7 @@ abstract class $RoutesStateCopyWith<$Res> {
   factory $RoutesStateCopyWith(
           RoutesState value, $Res Function(RoutesState) then) =
       _$RoutesStateCopyWithImpl<$Res>;
-  $Res call({BlocAction? action, List<String> routes});
+  $Res call({BlocAction? action, List<SaveRouteEntity> routes});
 }
 
 /// @nodoc
@@ -66,7 +67,7 @@ class _$RoutesStateCopyWithImpl<$Res> implements $RoutesStateCopyWith<$Res> {
       routes: routes == freezed
           ? _value.routes
           : routes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<SaveRouteEntity>,
     ));
   }
 }
@@ -78,7 +79,7 @@ abstract class _$RoutesStateCopyWith<$Res>
           _RoutesState value, $Res Function(_RoutesState) then) =
       __$RoutesStateCopyWithImpl<$Res>;
   @override
-  $Res call({BlocAction? action, List<String> routes});
+  $Res call({BlocAction? action, List<SaveRouteEntity> routes});
 }
 
 /// @nodoc
@@ -104,7 +105,7 @@ class __$RoutesStateCopyWithImpl<$Res> extends _$RoutesStateCopyWithImpl<$Res>
       routes: routes == freezed
           ? _value.routes
           : routes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<SaveRouteEntity>,
     ));
   }
 }
@@ -118,7 +119,7 @@ class _$_RoutesState implements _RoutesState {
   final BlocAction? action;
   @JsonKey(defaultValue: const [])
   @override
-  final List<String> routes;
+  final List<SaveRouteEntity> routes;
 
   @override
   String toString() {
@@ -148,13 +149,13 @@ class _$_RoutesState implements _RoutesState {
 }
 
 abstract class _RoutesState implements RoutesState {
-  factory _RoutesState({BlocAction? action, List<String> routes}) =
+  factory _RoutesState({BlocAction? action, List<SaveRouteEntity> routes}) =
       _$_RoutesState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
   @override
-  List<String> get routes => throw _privateConstructorUsedError;
+  List<SaveRouteEntity> get routes => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RoutesStateCopyWith<_RoutesState> get copyWith =>
@@ -169,12 +170,16 @@ class _$RoutesEventTearOff {
     return const Init();
   }
 
-  RouteClicked routeClicked() {
-    return const RouteClicked();
+  RouteClicked routeClicked(int index) {
+    return RouteClicked(
+      index,
+    );
   }
 
-  RouteDeleteClicked routeDeleteClicked() {
-    return const RouteDeleteClicked();
+  RouteDeleteClicked routeDeleteClicked(int index) {
+    return RouteDeleteClicked(
+      index,
+    );
   }
 }
 
@@ -186,15 +191,15 @@ mixin _$RoutesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() routeClicked,
-    required TResult Function() routeDeleteClicked,
+    required TResult Function(int index) routeClicked,
+    required TResult Function(int index) routeDeleteClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? routeClicked,
-    TResult Function()? routeDeleteClicked,
+    TResult Function(int index)? routeClicked,
+    TResult Function(int index)? routeDeleteClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -269,8 +274,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() routeClicked,
-    required TResult Function() routeDeleteClicked,
+    required TResult Function(int index) routeClicked,
+    required TResult Function(int index) routeDeleteClicked,
   }) {
     return init();
   }
@@ -279,8 +284,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? routeClicked,
-    TResult Function()? routeDeleteClicked,
+    TResult Function(int index)? routeClicked,
+    TResult Function(int index)? routeDeleteClicked,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -323,6 +328,7 @@ abstract class $RouteClickedCopyWith<$Res> {
   factory $RouteClickedCopyWith(
           RouteClicked value, $Res Function(RouteClicked) then) =
       _$RouteClickedCopyWithImpl<$Res>;
+  $Res call({int index});
 }
 
 /// @nodoc
@@ -334,46 +340,70 @@ class _$RouteClickedCopyWithImpl<$Res> extends _$RoutesEventCopyWithImpl<$Res>
 
   @override
   RouteClicked get _value => super._value as RouteClicked;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(RouteClicked(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$RouteClicked implements RouteClicked {
-  const _$RouteClicked();
+  const _$RouteClicked(this.index);
+
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'RoutesEvent.routeClicked()';
+    return 'RoutesEvent.routeClicked(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is RouteClicked);
+    return identical(this, other) ||
+        (other is RouteClicked &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  $RouteClickedCopyWith<RouteClicked> get copyWith =>
+      _$RouteClickedCopyWithImpl<RouteClicked>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() routeClicked,
-    required TResult Function() routeDeleteClicked,
+    required TResult Function(int index) routeClicked,
+    required TResult Function(int index) routeDeleteClicked,
   }) {
-    return routeClicked();
+    return routeClicked(index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? routeClicked,
-    TResult Function()? routeDeleteClicked,
+    TResult Function(int index)? routeClicked,
+    TResult Function(int index)? routeDeleteClicked,
     required TResult orElse(),
   }) {
     if (routeClicked != null) {
-      return routeClicked();
+      return routeClicked(index);
     }
     return orElse();
   }
@@ -404,7 +434,12 @@ class _$RouteClicked implements RouteClicked {
 }
 
 abstract class RouteClicked implements RoutesEvent {
-  const factory RouteClicked() = _$RouteClicked;
+  const factory RouteClicked(int index) = _$RouteClicked;
+
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RouteClickedCopyWith<RouteClicked> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -412,6 +447,7 @@ abstract class $RouteDeleteClickedCopyWith<$Res> {
   factory $RouteDeleteClickedCopyWith(
           RouteDeleteClicked value, $Res Function(RouteDeleteClicked) then) =
       _$RouteDeleteClickedCopyWithImpl<$Res>;
+  $Res call({int index});
 }
 
 /// @nodoc
@@ -424,46 +460,70 @@ class _$RouteDeleteClickedCopyWithImpl<$Res>
 
   @override
   RouteDeleteClicked get _value => super._value as RouteDeleteClicked;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(RouteDeleteClicked(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$RouteDeleteClicked implements RouteDeleteClicked {
-  const _$RouteDeleteClicked();
+  const _$RouteDeleteClicked(this.index);
+
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'RoutesEvent.routeDeleteClicked()';
+    return 'RoutesEvent.routeDeleteClicked(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is RouteDeleteClicked);
+    return identical(this, other) ||
+        (other is RouteDeleteClicked &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  $RouteDeleteClickedCopyWith<RouteDeleteClicked> get copyWith =>
+      _$RouteDeleteClickedCopyWithImpl<RouteDeleteClicked>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function() routeClicked,
-    required TResult Function() routeDeleteClicked,
+    required TResult Function(int index) routeClicked,
+    required TResult Function(int index) routeDeleteClicked,
   }) {
-    return routeDeleteClicked();
+    return routeDeleteClicked(index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function()? routeClicked,
-    TResult Function()? routeDeleteClicked,
+    TResult Function(int index)? routeClicked,
+    TResult Function(int index)? routeDeleteClicked,
     required TResult orElse(),
   }) {
     if (routeDeleteClicked != null) {
-      return routeDeleteClicked();
+      return routeDeleteClicked(index);
     }
     return orElse();
   }
@@ -494,5 +554,10 @@ class _$RouteDeleteClicked implements RouteDeleteClicked {
 }
 
 abstract class RouteDeleteClicked implements RoutesEvent {
-  const factory RouteDeleteClicked() = _$RouteDeleteClicked;
+  const factory RouteDeleteClicked(int index) = _$RouteDeleteClicked;
+
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RouteDeleteClickedCopyWith<RouteDeleteClicked> get copyWith =>
+      throw _privateConstructorUsedError;
 }

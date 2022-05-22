@@ -5,12 +5,14 @@ import 'package:sights/app/resources/app_colors.dart';
 import 'package:sights/app/widgets/app_bars/default_appbar.dart';
 import 'package:sights/app/widgets/backgrounds/default_white_background.dart';
 import 'package:sights/app/widgets/backgrounds/white_gradient_background.dart';
+import 'package:sights/app/widgets/lists/route_item.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
 import 'package:sights/app/navigation/app_navigator.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/core/ui/scroll_behavior/disable_glow_effect_scroll_behavior.dart';
 import 'package:sights/core/ui/widgets/base_bloc_state.dart';
 import 'package:sights/core/ui/widgets/base_bloc_stateless_widget.dart';
+import 'package:sights/domain/entities/save_route_entity.dart';
 import 'package:sights/localization/app_localizations.dart';
 
 import 'bloc/routes_bloc.dart';
@@ -62,16 +64,18 @@ class _RoutesScreenState extends BaseBlocState<RoutesScreen, RoutesBloc> {
   Widget _buildRoutes() => BlocBuilder<RoutesBloc, RoutesState>(
         buildWhen: (previous, current) => previous.routes != current.routes,
         builder: (context, state) => ListView.separated(
+          padding: const EdgeInsets.all(16),
           itemCount: state.routes.length,
-          itemBuilder: (context, index) => _buildRoute(state.routes[index]),
+          itemBuilder: (context, index) => RouteItem(
+            route: state.routes[index],
+            routeClicked: () {
+              getBloc(context).add(RoutesEvent.routeClicked(index));
+            },
+            deleteRouteClicked: () {
+              getBloc(context).add(RoutesEvent.routeDeleteClicked(index));
+            },
+          ),
           separatorBuilder: (context, index) => const SizedBox(height: 16),
-        ),
-      );
-
-  Widget _buildRoute(String text) => Container(
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: AppColors.onBackground),
         ),
       );
 }

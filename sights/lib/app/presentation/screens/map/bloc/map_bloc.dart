@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:sights/app/navigation/navigation_action.dart';
 import 'package:sights/app/navigation/navigation_type.dart';
 import 'package:sights/core/bloc/bloc_action.dart';
@@ -17,17 +18,17 @@ import 'package:sights/core/failures.dart';
 import 'package:sights/data/repositories/directions_repository.dart';
 import 'package:sights/domain/entities/direction.dart';
 import 'package:sights/domain/entities/direction_entity.dart';
+import 'package:sights/domain/entities/node.dart';
 import 'package:sights/domain/entities/route_point_entity.dart';
+import 'package:sights/domain/entities/save_route_entity.dart';
 import 'package:sights/domain/enums/transport_type.dart';
 import 'package:sights/data/repositories/map_repository.dart';
-import 'package:sights/domain/entities/feature.dart';
 import 'package:sights/domain/entities/network/request/get_features_body.dart';
-import 'package:sights/domain/entities/network/response/feature_collection_response.dart';
 import 'package:sights/domain/entities/sight_entity.dart';
 import 'package:sights/domain/enums/map_mode.dart';
 import 'package:sights/domain/enums/sight_type.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:graphs/graphs.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
 part 'map_state.dart';
 
@@ -69,11 +70,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final MapRepository mapRepository;
   final DirectionsRepository directionsRepository;
   late GoogleMapController _mapController;
+  late Box<SaveRouteEntity> _box;
+
   Timer? _timer;
   bool _isMarkerTap = false;
   PolylinePoints _polylinePoints = PolylinePoints();
 
-  FutureOr<void> _init(Init event, Emitter<MapState> emit) {}
+  FutureOr<void> _init(Init event, Emitter<MapState> emit) async {
+    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+    _box = await Hive.openBox('routes', path: directory.path);
+  }
 
   FutureOr<void> _onBackClicked(OnBackClicked event, Emitter<MapState> emit) {
     emit(state.copyWith(action: null));
@@ -227,7 +233,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   FutureOr<void> _directionChanged(DirectionChanged event, Emitter<MapState> emit) async {
-    emit(state.copyWith(selectedTransport: event.directionEntity.transportType));
+    emit(state.copyWith(
+      selectedTransport: event.directionEntity.transportType,
+      currentDirectionIsSaved: event.directionEntity.isSaved,
+    ));
 
     List<LatLng> points = _polylinePoints
         .decodePolyline(event.directionEntity.direction.geometry)
@@ -250,13 +259,21 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       (data) {
         emit(state.copyWith(sights: []));
         emit(state.copyWith(sights: _filtersApply(data)));
-        List<LatLng> pointsForGraph = [];
-        pointsForGraph.add(points.first);
-        pointsForGraph.addAll(state.sights.map(
-          (item) => LatLng(item.feature.geometry.coordinates[1], item.feature.geometry.coordinates[0]),
-        ));
-        pointsForGraph.add(points.last);
-        _createGraph(pointsForGraph);
+        if (!event.directionEntity.isSaved) {
+          List<LatLng> pointsForGraph = [];
+          pointsForGraph.add(points.first);
+          pointsForGraph.addAll(state.sights.map(
+            (item) => LatLng(item.feature.geometry.coordinates[1], item.feature.geometry.coordinates[0]),
+          ));
+          pointsForGraph.add(points.last);
+          _createGraph(pointsForGraph);
+        } else {
+          emit(state.copyWith(
+            currentDirection: event.directionEntity.direction,
+            countSightsInRoute: points.length - 2,
+          ));
+          _mapController.animateCamera(CameraUpdate.newLatLng(points.first));
+        }
       },
       (error) {},
     );
@@ -281,10 +298,52 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     }
   }
 
-  FutureOr<void> _saveRouteClicked(SaveRouteClicked event, Emitter<MapState> emit) {}
+  FutureOr<void> _saveRouteClicked(SaveRouteClicked event, Emitter<MapState> emit) async {
+    if (!state.currentDirectionIsSaved && state.currentDirection != null) {
+      var points = _polylinePoints.decodePolyline(state.currentDirection!.geometry);
+      String startAddress = '';
+      String finishAddress = '';
+
+      List<Placemark> placeMarksStart = await placemarkFromCoordinates(
+        points.first.latitude,
+        points.first.longitude,
+        localeIdentifier: 'ru',
+      );
+
+      if (placeMarksStart.isNotEmpty) {
+        startAddress = placeMarksStart.first.street ?? '';
+        if (placeMarksStart.first.subThoroughfare?.isNotEmpty == true) {
+          startAddress += ", ${placeMarksStart.first.subThoroughfare}";
+        }
+      }
+
+      List<Placemark> placeMarksFinish = await placemarkFromCoordinates(
+        points.last.latitude,
+        points.last.longitude,
+        localeIdentifier: 'ru',
+      );
+
+      if (placeMarksFinish.isNotEmpty) {
+        finishAddress = placeMarksFinish.first.street ?? '';
+        if (placeMarksFinish.first.subThoroughfare?.isNotEmpty == true) {
+          finishAddress += ", ${placeMarksFinish.first.subThoroughfare}";
+        }
+      }
+
+      _box.add(SaveRouteEntity(
+        direction: state.currentDirection!,
+        transportType: state.selectedTransport,
+        startAddress: startAddress,
+        finishAddress: finishAddress,
+        countSights: state.countSightsInRoute,
+      ));
+      emit(state.copyWith(currentDirectionIsSaved: true));
+    }
+  }
 
   FutureOr<void> _closeRouteClicked(CloseRouteClicked event, Emitter<MapState> emit) {
     emit(state.copyWith(currentDirection: null));
+    this.add(MapEvent.getSights());
   }
 
   void _createGraph(List<LatLng> points) {
@@ -409,20 +468,4 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     return coordinates;
   }
-}
-
-class Node {
-  final int id;
-  final double value;
-
-  Node(this.id, this.value);
-
-  @override
-  bool operator ==(Object other) => other is Node && other.id == id;
-
-  @override
-  int get hashCode => id.hashCode;
-
-  @override
-  String toString() => '<$id -> $value>';
 }

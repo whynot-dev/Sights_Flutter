@@ -17,6 +17,7 @@ class MapState with _$MapState {
     Direction? currentDirection,
     @Default(TransportType.walking) TransportType selectedTransport,
     @Default(0) int countSightsInRoute,
+    @Default(false) bool currentDirectionIsSaved,
   }) = _MapState;
 }
 

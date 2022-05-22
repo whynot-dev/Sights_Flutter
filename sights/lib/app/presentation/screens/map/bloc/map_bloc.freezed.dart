@@ -21,8 +21,8 @@ class _$MapStateTearOff {
       required MapMode mapMode,
       bool mapLoaded = false,
       bool isLoading = false,
-      CameraPosition cameraPosition =
-          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14),
+      CameraPosition cameraPosition = const CameraPosition(
+          target: const LatLng(47.222078, 39.720358), zoom: 14),
       List<SightEntity> sights = const [],
       SightEntity? selectedSightPoint,
       List<SightType> sightFilters = SightType.values,
@@ -31,7 +31,8 @@ class _$MapStateTearOff {
       String? currentAddress,
       Direction? currentDirection,
       TransportType selectedTransport = TransportType.walking,
-      int countSightsInRoute = 0}) {
+      int countSightsInRoute = 0,
+      bool currentDirectionIsSaved = false}) {
     return _MapState(
       action: action,
       mapMode: mapMode,
@@ -47,6 +48,7 @@ class _$MapStateTearOff {
       currentDirection: currentDirection,
       selectedTransport: selectedTransport,
       countSightsInRoute: countSightsInRoute,
+      currentDirectionIsSaved: currentDirectionIsSaved,
     );
   }
 }
@@ -70,6 +72,7 @@ mixin _$MapState {
   Direction? get currentDirection => throw _privateConstructorUsedError;
   TransportType get selectedTransport => throw _privateConstructorUsedError;
   int get countSightsInRoute => throw _privateConstructorUsedError;
+  bool get currentDirectionIsSaved => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapStateCopyWith<MapState> get copyWith =>
@@ -94,7 +97,8 @@ abstract class $MapStateCopyWith<$Res> {
       String? currentAddress,
       Direction? currentDirection,
       TransportType selectedTransport,
-      int countSightsInRoute});
+      int countSightsInRoute,
+      bool currentDirectionIsSaved});
 }
 
 /// @nodoc
@@ -121,6 +125,7 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
     Object? currentDirection = freezed,
     Object? selectedTransport = freezed,
     Object? countSightsInRoute = freezed,
+    Object? currentDirectionIsSaved = freezed,
   }) {
     return _then(_value.copyWith(
       action: action == freezed
@@ -179,6 +184,10 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.countSightsInRoute
           : countSightsInRoute // ignore: cast_nullable_to_non_nullable
               as int,
+      currentDirectionIsSaved: currentDirectionIsSaved == freezed
+          ? _value.currentDirectionIsSaved
+          : currentDirectionIsSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -202,7 +211,8 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       String? currentAddress,
       Direction? currentDirection,
       TransportType selectedTransport,
-      int countSightsInRoute});
+      int countSightsInRoute,
+      bool currentDirectionIsSaved});
 }
 
 /// @nodoc
@@ -230,6 +240,7 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
     Object? currentDirection = freezed,
     Object? selectedTransport = freezed,
     Object? countSightsInRoute = freezed,
+    Object? currentDirectionIsSaved = freezed,
   }) {
     return _then(_MapState(
       action: action == freezed
@@ -288,6 +299,10 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.countSightsInRoute
           : countSightsInRoute // ignore: cast_nullable_to_non_nullable
               as int,
+      currentDirectionIsSaved: currentDirectionIsSaved == freezed
+          ? _value.currentDirectionIsSaved
+          : currentDirectionIsSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -300,8 +315,8 @@ class _$_MapState implements _MapState {
       required this.mapMode,
       this.mapLoaded = false,
       this.isLoading = false,
-      this.cameraPosition =
-          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14),
+      this.cameraPosition = const CameraPosition(
+          target: const LatLng(47.222078, 39.720358), zoom: 14),
       this.sights = const [],
       this.selectedSightPoint,
       this.sightFilters = SightType.values,
@@ -310,7 +325,8 @@ class _$_MapState implements _MapState {
       this.currentAddress,
       this.currentDirection,
       this.selectedTransport = TransportType.walking,
-      this.countSightsInRoute = 0});
+      this.countSightsInRoute = 0,
+      this.currentDirectionIsSaved = false});
 
   @override
   final BlocAction? action;
@@ -323,8 +339,8 @@ class _$_MapState implements _MapState {
   @override
   final bool isLoading;
   @JsonKey(
-      defaultValue:
-          const CameraPosition(target: LatLng(47.222078, 39.720358), zoom: 14))
+      defaultValue: const CameraPosition(
+          target: const LatLng(47.222078, 39.720358), zoom: 14))
   @override
   final CameraPosition cameraPosition;
   @JsonKey(defaultValue: const [])
@@ -350,10 +366,13 @@ class _$_MapState implements _MapState {
   @JsonKey(defaultValue: 0)
   @override
   final int countSightsInRoute;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool currentDirectionIsSaved;
 
   @override
   String toString() {
-    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport, countSightsInRoute: $countSightsInRoute)';
+    return 'MapState(action: $action, mapMode: $mapMode, mapLoaded: $mapLoaded, isLoading: $isLoading, cameraPosition: $cameraPosition, sights: $sights, selectedSightPoint: $selectedSightPoint, sightFilters: $sightFilters, sightInfoIsExpanded: $sightInfoIsExpanded, locationMarkerPosition: $locationMarkerPosition, currentAddress: $currentAddress, currentDirection: $currentDirection, selectedTransport: $selectedTransport, countSightsInRoute: $countSightsInRoute, currentDirectionIsSaved: $currentDirectionIsSaved)';
   }
 
   @override
@@ -399,7 +418,11 @@ class _$_MapState implements _MapState {
                     .equals(other.selectedTransport, selectedTransport)) &&
             (identical(other.countSightsInRoute, countSightsInRoute) ||
                 const DeepCollectionEquality()
-                    .equals(other.countSightsInRoute, countSightsInRoute)));
+                    .equals(other.countSightsInRoute, countSightsInRoute)) &&
+            (identical(
+                    other.currentDirectionIsSaved, currentDirectionIsSaved) ||
+                const DeepCollectionEquality().equals(
+                    other.currentDirectionIsSaved, currentDirectionIsSaved)));
   }
 
   @override
@@ -418,7 +441,8 @@ class _$_MapState implements _MapState {
       const DeepCollectionEquality().hash(currentAddress) ^
       const DeepCollectionEquality().hash(currentDirection) ^
       const DeepCollectionEquality().hash(selectedTransport) ^
-      const DeepCollectionEquality().hash(countSightsInRoute);
+      const DeepCollectionEquality().hash(countSightsInRoute) ^
+      const DeepCollectionEquality().hash(currentDirectionIsSaved);
 
   @JsonKey(ignore: true)
   @override
@@ -441,7 +465,8 @@ abstract class _MapState implements MapState {
       String? currentAddress,
       Direction? currentDirection,
       TransportType selectedTransport,
-      int countSightsInRoute}) = _$_MapState;
+      int countSightsInRoute,
+      bool currentDirectionIsSaved}) = _$_MapState;
 
   @override
   BlocAction? get action => throw _privateConstructorUsedError;
@@ -471,6 +496,8 @@ abstract class _MapState implements MapState {
   TransportType get selectedTransport => throw _privateConstructorUsedError;
   @override
   int get countSightsInRoute => throw _privateConstructorUsedError;
+  @override
+  bool get currentDirectionIsSaved => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MapStateCopyWith<_MapState> get copyWith =>

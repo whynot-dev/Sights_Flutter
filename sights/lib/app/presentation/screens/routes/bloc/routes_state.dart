@@ -4,6 +4,6 @@ part of 'routes_bloc.dart';
 class RoutesState with _$RoutesState {
   factory RoutesState({
     BlocAction? action,
-    @Default([]) List<String> routes,
+    @Default([]) List<SaveRouteEntity> routes,
   }) = _RoutesState;
 }

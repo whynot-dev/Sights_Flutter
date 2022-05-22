@@ -9,12 +9,14 @@ class DirectionInfo extends StatelessWidget {
     required this.direction,
     required this.countSightsInRoute,
     required this.transportType,
+    this.isSaved = false,
     this.saveClicked,
     this.closeClicked,
   });
 
   final Direction direction;
   final int countSightsInRoute;
+  final bool isSaved;
   final TransportType transportType;
   final VoidCallback? saveClicked;
   final VoidCallback? closeClicked;
@@ -47,8 +49,8 @@ class DirectionInfo extends StatelessWidget {
   Widget _buildLengthRoute() => _buildIconAndText(_getTransportIcon(), '${direction.distance.toInt()} м');
 
   Widget _buildSaveButton() => GestureDetector(
-        onTap: () {},
-        child: _buildIcon(Icons.save),
+        onTap: saveClicked,
+        child: isSaved ? _buildIcon(Icons.check, Colors.green) : _buildIcon(Icons.save),
       );
 
   Widget _buildCloseButton() => GestureDetector(
@@ -68,9 +70,10 @@ class DirectionInfo extends StatelessWidget {
         ],
       );
 
-  Widget _buildIcon(IconData icon) => Icon(
+  Widget _buildIcon(IconData icon, [Color? color]) => Icon(
         icon,
         size: 24,
+        color: color,
       );
 
   IconData _getTransportIcon() {

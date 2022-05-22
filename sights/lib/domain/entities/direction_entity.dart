@@ -5,8 +5,10 @@ class DirectionEntity {
   DirectionEntity({
     required this.direction,
     required this.transportType,
+    this.isSaved = false,
   });
 
   Direction direction;
   TransportType transportType;
+  bool isSaved;
 }
